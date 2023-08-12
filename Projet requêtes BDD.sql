@@ -10,10 +10,10 @@ USE MyComics;
 
 
 -- INSERTIONS ----------------------------------------------
--- Insertion d'une collection
-INSERT INTO collections (collection_nom)
+-- Insertion d'un profil
+INSERT INTO profils (profil_nom)
 VALUES
-    ('Collection 2') -- collection_id 2
+    ('Philibert') -- collection_id 2
 ;
 
 -- Insertion d'un editeur
@@ -36,14 +36,14 @@ VALUES
 ;
 
 -- Insertion d'un tome
-INSERT INTO tomes (tome_numero, tome_titre, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_isbn, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id)
+INSERT INTO tomes (tome_numero, tome_titre, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_isbn, tome_image, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id)
 VALUES
-    (3, '7 jours pour mourir', 8.50, 0, 199404, '2803603160', 0, 0, '', 4)-- tome_id 18
+    (3, '7 jours pour mourir', 8.50, 0, 199404, '2803603160', './images/test.jpg', 0, 0, '', 4)-- tome_id 18
 ;
 
 -- ASSOCIATIONS ----------------------------------------------
--- lier tome et collection
-INSERT INTO contenir (tome_id, collection_id)
+-- lier tome et profil
+INSERT INTO detenir (tome_id, profil_id)
 VALUES
     (18, 1)
 ;
@@ -62,10 +62,10 @@ VALUES
 ;
 
 -- MODIFICATIONS SIMPLES--------------------------------------
--- Modification d'une collection : "collection 2" renommée en "Seconde collection"
-UPDATE collections
-SET collection_nom = 'Seconde collection'
-WHERE collection_id = 2;
+-- Modification d'un profil : "Philibert" renommée en "Pacôme Hégésippe Adélard Ladislas De Champignac"
+UPDATE profils
+SET profil_nom = 'Pacôme Hégésippe Adélard Ladislas De Champignac'
+WHERE profil_id = 2;
 
 -- Modification d'un editeur : "Soleil" renommé en "Soleil Editions"
 UPDATE editeurs
@@ -83,7 +83,7 @@ SET auteur_nom = 'De Groot'
 WHERE auteur_id = 7;
 
 -- Modification d'un tome : ici changement du prix
-UPDATE tome
+UPDATE tomes
 SET tome_prix_achat = 9.50
 WHERE tome_id = 18;
 
@@ -98,7 +98,7 @@ WHERE tome_id = 18;
 
 
 -- SUPPRESSIONS --------------------------------------------------
--- Suppression d'une collection
+-- Suppression d'un profil
 
 -- Suppression d'un editeur
 
@@ -108,7 +108,7 @@ WHERE tome_id = 18;
 
 -- Suppression d'un tome
 
--- Suppression de la collection d'un tome
+-- Suppression de l'association du profil et d'un tome
 
 -- Suppression de la série d'un tome
 
@@ -116,11 +116,9 @@ WHERE tome_id = 18;
 
 -- Suppression de l'éditeur d'un tome
 
--- Suppression de la collection d'un tome
-
 
 -- AFFICHAGE SIMPLE ----------------------------------------------
--- Affichage d'une collection
+-- Affichage d'un profil
 
 -- Affichage d'un editeur
 
@@ -132,7 +130,8 @@ WHERE tome_id = 18;
 
 
 -- AFFICHAGE D'ASSOCIATIONS TOMES --------------------------------
--- Affichage des tomes d'une collection
+-- A CHAQUE FOIS AVEC LE PROFIL COMME REFERENCE
+-- Affichage des tomes de la collection
 
 -- Affichage des tomes d'un éditeur
 
@@ -163,18 +162,3 @@ WHERE tome_id = 18;
 -- Affichage des séries d'un auteur
 
 -- Affichage des séries d'un editeur
-
-
-
-
--- Table editer pour lier tomes et editeurs.
-INSERT INTO editer (tome_id, editeur_id)
-VALUES
-    (1, 1)-- Lanfeust
-;
-
--- Table ecrire pour lier tomes et auteurs.
-INSERT INTO ecrire (tome_id, auteur_id)
-VALUES
-    (1, 1)-- Lanfeust
-;

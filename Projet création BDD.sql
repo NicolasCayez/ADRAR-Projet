@@ -16,10 +16,10 @@ USE MyComics;
 -- ---------------------------------------------------------
 -- Création des tables
 -- ---------------------------------------------------------
-CREATE TABLE IF NOT EXISTS collections(
-	collection_id INT AUTO_INCREMENT NOT NULL,
-	collection_nom VARCHAR(50),
-	PRIMARY KEY(collection_id)
+CREATE TABLE IF NOT EXISTS profils(
+	profil_id INT AUTO_INCREMENT NOT NULL,
+	profil_nom VARCHAR(50),
+	PRIMARY KEY(profil_id)
 ) Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS editeurs(
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS auteurs(
 	auteur_nom VARCHAR(50),
 	auteur_prenom VARCHAR(50),
 	auteur_pseudo VARCHAR(50),
-	auteur_photo VARCHAR(50),
+	auteur_photo VARCHAR(100),
 	PRIMARY KEY(auteur_id)
 ) Engine=InnoDB;
 
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS tomes(
 	tome_valeur_connue DECIMAL(5,2),
     tome_date_edition DATE,
     tome_isbn VARCHAR(13) NOT NULL,
+     tome_image VARCHAR(100),
 	tome_dedicace BOOLEAN,
 	tome_edition_speciale BOOLEAN,
 	tome_edition_speciale_libelle VARCHAR(50) ,
@@ -59,12 +60,12 @@ CREATE TABLE IF NOT EXISTS tomes(
 	FOREIGN KEY(serie_id) REFERENCES series(serie_id)
 ) Engine=InnoDB;
 
-CREATE TABLE IF NOT EXISTS contenir(
+CREATE TABLE IF NOT EXISTS detenir(
 	tome_id INT,
-	collection_id INT,
-	PRIMARY KEY(tome_id, collection_id),
+	profil_id INT,
+	PRIMARY KEY(tome_id, profil_id),
 	FOREIGN KEY(tome_id) REFERENCES tomes(tome_id),
-    FOREIGN KEY(collection_id) REFERENCES collections(collection_id)
+    FOREIGN KEY(profil_id) REFERENCES profils(profil_id)
 ) Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS editer(

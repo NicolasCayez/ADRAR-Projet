@@ -8,9 +8,10 @@ USE MyComics;
 -- ---------------------------------------------------------
 
 -- Table collections
-INSERT INTO collections (collection_nom)
+INSERT INTO profils (profil_nom)
 VALUES
-    ('Collection 1') -- collection_id 1
+	-- ('profil_nom');
+    ('Nicolas') -- collection_id 1
 ;
 
 -- Table editeurs
@@ -25,11 +26,11 @@ VALUES
 INSERT INTO auteurs (auteur_nom, auteur_prenom, auteur_pseudo, auteur_photo)
 VALUES
     -- ('auteur_nom', 'auteur_prenom', 'auteur_pseudo', 'auteur_photo');
-    ('', '', 'Arleston', ''), -- auteur_id 1
-	('', '', 'Tarquin', ''),-- auteur_id 2
-    ('Morvan', 'Jean David', 'Morvan', ''),-- auteur_id 3
-    ('Buchet', 'Philippe', 'Buchet', ''),-- auteur_id 4
-    ('', '', 'Mourier', '')-- auteur_id 5
+    ('', '', 'Arleston', './images/test.jpg'), -- auteur_id 1
+	('', '', 'Tarquin', './images/test.jpg'),-- auteur_id 2
+    ('Morvan', 'Jean David', 'Morvan', './images/test.jpg'),-- auteur_id 3
+    ('Buchet', 'Philippe', 'Buchet', './images/test.jpg'),-- auteur_id 4
+    ('', '', 'Mourier', './images/test.jpg')-- auteur_id 5
 ;
 
 
@@ -42,33 +43,33 @@ VALUES
     ('Trolls de Troy')-- serie_id 3
 ;
 
--- Table tomes
-INSERT INTO tomes (tome_numero, tome_titre, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_isbn, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id)
+-- Table tomes -- Warning lors de l'écriture car les dates sont saisies en YYYYMM et non pas YYYYMMDD
+INSERT INTO tomes (tome_numero, tome_titre, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_isbn, tome_image, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id)
 VALUES
-	-- ('tome_numero', 'tome_titre', 'tome_prix_achat', 'tome_valeur_connue', 'tome_date_edition', 'tome_isbn', 'tome_dedicace', 'tome_edition_speciale' , 'tome_edition_speciale_libelle' , 'serie_id');
-    (1, 'L\'ivoire du Magohamoth', 8.50, 0, 199610, '2877642577', 0, 0, '', 1),-- tome_id 1
-    (2, 'thanos l\'incongru', 8.50, 0, 199610, '2877673069', 0, 0, '', 1),-- tome_id 2
-    (3, 'Castel Or-Azur', 8.50, 0, 199610, '2877643948', 0, 0, '', 1),-- tome_id 3
-    (4, 'Le paladin d\'Eckmül', 8.50, 0, 199611, '2877645665', 0, 0, '', 1),-- tome_id 4
-    (5, 'Le frisson de l\'haruspice', 8.50, 0, 199710, '2877646467', 0, 0, '', 1),-- tome_id 5
-    (6, 'Cixi Impératrice', 8.50, 0, 199810, '2877647951', 0, 0, '', 1),-- tome_id 6
-    (7, 'Les pétaures se cachent pour mourir', 8.50, 0, 199910, '2877649237', 0, 0, '', 1),-- tome_id 7
-	(7, 'Les pétaures se cachent pour mourir', 8.50, 60.00, 199912, '287764989X', '0', '1', 'Edition du 31 décembre 1999 Bronze', '1'),-- tome_id 8
-	(8, 'La bête fabuleuse', 8.50, 0, 200012, '2845650337', 0, 0, '', 1),-- tome_id 9
-    (1, 'A feu et à cendres', 10.50, 0, 199802, '2840551772', 0, 0, '', 2),-- tome_id 10
-    (2, 'Collection privée', 10.50, 0, 199905, '2840552604', 0, 0, '', 2),-- tome_id 11
-    (3, 'Engrenages', 10.50, 0, 200008, '2840554488', 0, 0, '', 2),-- tome_id 12
-    (4, 'Le signe des démons', 10.50, 0, 200109, '2840556707', 0, 0, '', 2),-- tome_id 13
-    (1, 'Histoires trolles', 8.50, 0, 199706, '2877645916', 0, 0, '', 3),-- tome_id 14
-    (2, 'Le scalp du vénérable', 8.50, 0, 199806, '2877647129', 0, 0, '', 3),-- tome_id 15
-    (3, 'Comme un vol de pétaures', 8.50, 0, 199906, '2877648494', 0, 0, '', 3),-- tome_id 16
-    (4, 'Le feu occulte', 8.50, 0, 200006, '2845650000', 0, 0, '', 3)-- tome_id 17
+	-- (tome_numero, 'tome_titre', tome_prix_achat, tome_valeur_connue, tome_date_edition, 'tome_isbn', 'tome_image', tome_dedicace, tome_edition_speciale , 'tome_edition_speciale_libelle' , serie_id);
+    (1, 'L\'ivoire du Magohamoth', 8.50, 0, 199610, '2877642577', './images/test.jpg', 0, 0, '', 1),-- tome_id 1
+    (2, 'thanos l\'incongru', 8.50, 0, 199610, '2877673069', './images/test.jpg', 0, 0, '', 1),-- tome_id 2
+    (3, 'Castel Or-Azur', 8.50, 0, 199610, '2877643948', './images/test.jpg', 0, 0, '', 1),-- tome_id 3
+    (4, 'Le paladin d\'Eckmül', 8.50, 0, 199611, '2877645665', './images/test.jpg', 0, 0, '', 1),-- tome_id 4
+    (5, 'Le frisson de l\'haruspice', 8.50, 0, 199710, '2877646467', './images/test.jpg', 0, 0, '', 1),-- tome_id 5
+    (6, 'Cixi Impératrice', 8.50, 0, 199810, '2877647951', './images/test.jpg', 0, 0, '', 1),-- tome_id 6
+    (7, 'Les pétaures se cachent pour mourir', 8.50, 0, 199910, '2877649237', './images/test.jpg', 0, 0, '', 1),-- tome_id 7
+	(7, 'Les pétaures se cachent pour mourir', 8.50, 60.00, 199912, '287764989X', './images/test.jpg', '0', '1', 'Edition du 31 décembre 1999 Bronze', '1'),-- tome_id 8
+	(8, 'La bête fabuleuse', 8.50, 0, 200012, '2845650337', './images/test.jpg', 0, 0, '', 1),-- tome_id 9
+    (1, 'A feu et à cendres', 10.50, 0, 199802, '2840551772', './images/test.jpg', 0, 0, '', 2),-- tome_id 10
+    (2, 'Collection privée', 10.50, 0, 199905, '2840552604', './images/test.jpg', 0, 0, '', 2),-- tome_id 11
+    (3, 'Engrenages', 10.50, 0, 200008, '2840554488', './images/test.jpg', 0, 0, '', 2),-- tome_id 12
+    (4, 'Le signe des démons', 10.50, 0, 200109, '2840556707', './images/test.jpg', 0, 0, '', 2),-- tome_id 13
+    (1, 'Histoires trolles', 8.50, 0, 199706, '2877645916', './images/test.jpg', 0, 0, '', 3),-- tome_id 14
+    (2, 'Le scalp du vénérable', 8.50, 0, 199806, '2877647129', './images/test.jpg', 0, 0, '', 3),-- tome_id 15
+    (3, 'Comme un vol de pétaures', 8.50, 0, 199906, '2877648494', './images/test.jpg', 0, 0, '', 3),-- tome_id 16
+    (4, 'Le feu occulte', 8.50, 0, 200006, '2845650000', './images/test.jpg', 0, 0, '', 3)-- tome_id 17
 ;
 
--- Table contenir pour lier collection et tomes. Ici une seule collection
-INSERT INTO contenir (tome_id, collection_id)
+-- Table contenir pour lier profil et tomes. Ici un seul profil
+INSERT INTO detenir (tome_id, profil_id)
 VALUES
-	-- ('tome_id', 'collection_id');
+	-- (tome_id, profil_id);
     (1, 1),-- Lanfeust
 	(2, 1),-- Lanfeust
     (3, 1),-- Lanfeust
@@ -91,7 +92,7 @@ VALUES
 -- Table editer pour lier tomes et editeurs.
 INSERT INTO editer (tome_id, editeur_id)
 VALUES
-	-- ('tome_id', 'editeur_id');
+	-- (tome_id, editeur_id);
     (1, 1),-- Lanfeust
 	(2, 1),-- Lanfeust
     (3, 1),-- Lanfeust
@@ -114,7 +115,7 @@ VALUES
 -- Table ecrire pour lier tomes et auteurs.
 INSERT INTO ecrire (tome_id, auteur_id)
 VALUES
-	-- ('tome_id', 'auteur_id');
+	-- (tome_id, auteur_id);
     (1, 1),-- Lanfeust
     (1, 2),-- Lanfeust
 	(2, 1),-- Lanfeust
