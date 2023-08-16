@@ -8,7 +8,7 @@ USE MyComics;
 -- RECHERCHE------------------------------------------------
 -- ---------------------------------------------------------
 -- Création de la variable pour la recherche----------------
-SET @search = '%an%';
+SET @search = '%a%';
 
 -- Requête de recherche-------------------------------------
 SELECT 'Tome' AS 'Type', T.tome_id AS 'Id', S.serie_nom AS 'Série', T.tome_numero AS 'N°', T.tome_titre AS 'Nom', T.tome_isbn
@@ -40,5 +40,5 @@ WHERE A.auteur_id IN(
 	OR A.auteur_prenom like @search
 	OR A.auteur_pseudo like @search
 )
-ORDER BY TYPE
+ORDER BY Type, Série, N°, Nom
 ;
