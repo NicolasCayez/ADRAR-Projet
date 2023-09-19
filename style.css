@@ -1,8 +1,4 @@
-/* a virer cadres pour dev */
-header, body, footer{
-    border: chartreuse 5px solid;
-}
-
+/* Intégration des polices */
 @font-face {
     font-family: "komika";
     src: url(font/KOMIKAX_.ttf);
@@ -12,116 +8,97 @@ header, body, footer{
     src: url(font/KRONIKA_.ttf);
 }
 
-header, body, footer{
+/* ----------------- Paramètres généraux ----------------- */
+#header, #footer {
+    font-family: "kronika";
+    width: 100%;
+    background-color: #275f74;
+    color: #f2dcc2;
+}
+#footer {
+    margin-top: auto;
+}
+body {
     background-color: #f2dcc2;
     font-family: "kronika";
     color: #275f74;
     width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+a {
+    text-decoration: none;
 }
 
-header, footer {
-    height: 60px;
+/* ----------------- paramètres header (navbar, logo, titre et menu) ----------------- */
+#header {
+    height: 100px;
 }
-
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .logo {
-    max-width: 80px;
+    min-width: 120px;
+    max-width: 120px;
+    position: absolute;
+    top:0%;
+    left: 20px;
 }
-
-.titreMyComics {
+.navbar > div {
+    flex-direction: column;
+}
+/* Titre */
+#titreMyComics {
     font-family: "komika";
+    text-align: center;
 }
 
+/* Menu */
+#menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
+.btnMenu {
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #f2dcc2;
+    color: #275f74;
+    margin-inline: 15px;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+.btnMenu:hover {
+    background-color: #afdff3;
+}
+
+/* ----------------- MEDIA QUERIES ----------------- */
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
-    #menuPc{
-        display: none;
-    }
-    #menuTel{
-        display:inline;
-    }
-    /* Menu Hamburger */
-    .menuHamburger {
-        height: 300px;
-        width: 100%;
-        position: fixed;
-        z-index: 1;
-        top: -300px;
-        left: 0;
-        background-color: #e8e8e8;
-        padding-top: 60px;
-        transition: top 0.5s ease;
-    }
 
-    /* Menu Hamburger links */
-    .menuHamburger a {
-        padding: 8px 8px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-    }
-
-    /* Active class */
-    .menuHamburger.active {
-        top: 0;
-    }
-
-    /* Close btn */
-    .menuHamburger .close {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-    }
-
-    /* Icône burger */
-    .iconeHamburger span {
-        display: block;
-        width: 35px;
-        height: 5px;
-        background-color: #275f74;
-        border-radius: 10px;
-        margin: 6px 0;
-    }
 }
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 481px) and (max-width: 767px) {
-    #menuPc{
-        display: inline;
-    }
-    #menuTel, #menuHamburger {
-        display: none;
-    }
+
 }
-    
+
 /* Media Query for Tablets Ipads portrait mode */
 @media (min-width: 768px) and (max-width: 1024px){
-    #menuPc{
-        display: inline;
-    }
-    #menuTel, #menuHamburger {
-        display: none;
-    }
+
 }
-    
+
 /* Media Query for Laptops and Desktops */
 @media (min-width: 1025px) and (max-width: 1280px){
-    #menuPc{
-        display: inline;
-    }
-    #menuTel, #menuHamburger {
-        display: none;
-    }
+
 }
-    
+
 /* Media Query for Large screens */
 @media (min-width: 1281px) {
-    #menuPc{
-        display: inline;
-    }
-    #menuTel, #menuHamburger {
-        display: none;
-    }
+
 }
