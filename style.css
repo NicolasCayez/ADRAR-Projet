@@ -64,7 +64,7 @@ a {
     justify-content: center;
 }
 /* Liens du menu style boutons */
-.btnMenu {
+.btnMenu, .btnMenuLateral {
     display: inline-block;
     border-radius: 10px;
     background-color: #f2dcc2;
@@ -75,7 +75,7 @@ a {
     text-align: center;
     padding: 5px;
 }
-.btnMenu:hover {
+.btnMenu:hover, .btnMenuLateral:hover {
     background-color: #afdff3;
 }
 
@@ -90,9 +90,25 @@ order: 2;
 display: flex;
 }
 /* liste des liens sans puces */
-.menu-elements li {
+.menu-elements li, .menu-lateral-elements li {
 list-style: none;
 }
+
+/* ----------------- Menu lateral ----------------- */
+#menuLateral {
+    background-color: #275f74;
+    color:#f2dcc2;
+    width: 200px;
+    height: 100vh;
+    padding-top: 30px;
+    
+}
+.btnMenuLateral {
+    font-size: small;
+    margin:auto;
+    margin-bottom: 1.5rem;
+}
+
 
 /* ----------------- MEDIA QUERIES ----------------- */
 /* Media Query for Mobile Devices */
@@ -213,3 +229,5 @@ list-style: none;
 @media (min-width: 1281px) {
 
 }
+
+

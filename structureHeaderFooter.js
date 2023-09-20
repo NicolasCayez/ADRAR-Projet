@@ -1,66 +1,5 @@
 // Recherche de l'id #header
 const divHeader = document.getElementById("header");
-// // Création navbar
-//     let headerNav = document.createElement("nav");
-//     headerNav.classList.add("navbar");
-//     // intégration navbar dans le header
-//     divHeader.append(headerNav);
-//         // Création logo
-//         let logo = document.createElement("img");
-//         logo.src = "./img/logoBeige.png";
-//         logo.alt = "logoBeige";
-//         logo.classList.add("logo")
-//         headerNav.appendChild(logo);
-//         // Création div titre et menu
-//         let divTitreMenu = document.createElement("div");
-//         divTitreMenu.classList.add("col")
-//         headerNav.appendChild(divTitreMenu);
-//             // Création titre
-//             let titre = document.createElement("h1");
-//             titre.innerText = "MyComics";
-//             titre.classList.add("fs-3");
-//             titre.classList.add("pb-2");
-//             titre.id = "titreMyComics";
-//             divTitreMenu.appendChild(titre);
-//             // Création Menu
-//             let menuClassique = document.createElement("div");
-//             menuClassique.id = "menu";
-//             menuClassique.classList.add("btnContainer");
-//             divTitreMenu.appendChild(menuClassique);
-//                 //Bouton Accueil
-//                 let btnAccueil = document.createElement("a");
-//                 btnAccueil.classList.add("btnMenu");
-//                 btnAccueil.id = "btnAccueil";
-//                 btnAccueil.href = "./index.html"
-//                 btnAccueil.innerText = "Accueil"
-//                 menuClassique.appendChild(btnAccueil);
-//                 //Bouton Presentation
-//                 let btnPresentation = document.createElement("a");
-//                 btnPresentation.classList.add("btnMenu");
-//                 btnPresentation.id = "btnPresentation";
-//                 btnPresentation.href = "./presentation.html"
-//                 btnPresentation.innerText = "Présentation"
-//                 menuClassique.appendChild(btnPresentation);
-//                 //Bouton Fonctionnalités
-//                 let btnFonctionnalites = document.createElement("a");
-//                 btnFonctionnalites.classList.add("btnMenu");
-//                 btnFonctionnalites.id = "btnFonctionnalites";
-//                 btnFonctionnalites.href = "./fonctionnalites.html"
-//                 btnFonctionnalites.innerText = "Fonctionnalités"
-//                 menuClassique.appendChild(btnFonctionnalites);
-//                 //Bouton Structure
-//                 let btnStructure = document.createElement("a");
-//                 btnStructure.classList.add("btnMenu");
-//                 btnStructure.id = "btnStructure";
-//                 btnStructure.href = "./structure.html"
-//                 btnStructure.innerText = "Structure"
-//                 menuClassique.appendChild(btnStructure);
-//         // Création div menu Hamburger
-//         let divMenuHamburger = document.createElement("div");
-//         divMenuHamburger.classList.add("col")
-//         headerNav.appendChild(divMenuHamburger);
-//             //Création menu Hamburger
-
 // Création navbar
 let navbar = document.createElement("nav");
 navbar.classList.add("navbar");
@@ -112,8 +51,8 @@ divHeader.append(navbar);
             let btnAccueil = document.createElement("a");
             btnAccueil.classList.add("btnMenu");
             btnAccueil.id = "btnAccueil";
-            btnAccueil.href = "./index.html"
-            btnAccueil.innerText = "Accueil"
+            btnAccueil.href = "./index.html";
+            btnAccueil.innerText = "Accueil";
             liAccueil.appendChild(btnAccueil);
             //Bouton Presentation
             let liPresentation = document.createElement("li");
@@ -121,8 +60,8 @@ divHeader.append(navbar);
             let btnPresentation = document.createElement("a");
             btnPresentation.classList.add("btnMenu");
             btnPresentation.id = "btnPresentation";
-            btnPresentation.href = "./presentation.html"
-            btnPresentation.innerText = "Présentation"
+            btnPresentation.href = "./presentation.html";
+            btnPresentation.innerText = "Présentation";
             liPresentation.appendChild(btnPresentation);
             //Bouton Fonctionnalités
             let liFonctionnalites = document.createElement("li");
@@ -130,8 +69,8 @@ divHeader.append(navbar);
             let btnFonctionnalites = document.createElement("a");
             btnFonctionnalites.classList.add("btnMenu");
             btnFonctionnalites.id = "btnFonctionnalites";
-            btnFonctionnalites.href = "./fonctionnalites.html"
-            btnFonctionnalites.innerText = "Fonctionnalités"
+            btnFonctionnalites.href = "./fonctionnalites.html";
+            btnFonctionnalites.innerText = "Fonctionnalités";
             liFonctionnalites.appendChild(btnFonctionnalites);
             //Bouton Structure
             let liStructure = document.createElement("li");
@@ -139,8 +78,8 @@ divHeader.append(navbar);
             let btnStructure = document.createElement("a");
             btnStructure.classList.add("btnMenu");
             btnStructure.id = "btnStructure";
-            btnStructure.href = "./structure.html"
-            btnStructure.innerText = "Structure"
+            btnStructure.href = "./structure.html";
+            btnStructure.innerText = "Structure";
             liStructure.appendChild(btnStructure);
 
 
