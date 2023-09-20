@@ -8,7 +8,7 @@
     src: url(font/KRONIKA_.ttf);
 }
 
-/* ----------------- Paramètres généraux ----------------- */
+/* ----------------- Paramètres généraux de la page ----------------- */
 #header, #footer {
     font-family: "kronika";
     width: 100%;
@@ -32,44 +32,45 @@ a {
 }
 
 /* ----------------- paramètres header (navbar, logo, titre et menu) ----------------- */
-#header {
-    height: 100px;
-}
+/* Navbar largeur 100% */
 .navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100px;
+    z-index: 12;
 }
+/* Logo  en haut a gauche taille fixe */
 .logo {
     min-width: 120px;
     max-width: 120px;
     position: absolute;
     top:0%;
-    left: 20px;
+    left: 10px;
 }
+/* div contenant le titre et le menu */
 .navbar > div {
     flex-direction: column;
 }
-/* Titre */
+/* Titre : police et centré */
 #titreMyComics {
     font-family: "komika";
     text-align: center;
 }
-
-/* Menu */
+/* Menu version PC */
 #menu{
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-
+/* Liens du menu style boutons */
 .btnMenu {
     display: inline-block;
     border-radius: 10px;
     background-color: #f2dcc2;
     color: #275f74;
-    margin-inline: 15px;
-    width: 120px;
+    margin-inline: 10px;
+    width: 130px;
     height: 30px;
     text-align: center;
     padding: 5px;
@@ -78,14 +79,124 @@ a {
     background-color: #afdff3;
 }
 
+/* checkbox cachée en version PC */
+.navbar input[type="checkbox"],
+.navbar .hamburger-lines {
+display: none;
+}
+/* Container liens du menu*/
+.menu-elements {
+order: 2;
+display: flex;
+}
+/* liste des liens sans puces */
+.menu-elements li {
+list-style: none;
+}
+
 /* ----------------- MEDIA QUERIES ----------------- */
 /* Media Query for Mobile Devices */
-@media (max-width: 480px) {
-
-}
-/* Media Query for low resolution  Tablets, Ipads */
-@media (min-width: 481px) and (max-width: 767px) {
-
+@media (max-width: 767px) {
+    /* Navbar moins épaisse */
+    .navbar {
+    height: 50px;
+    }
+    /* Menu Hamburger visible et checkbok pour le piloter */
+    .navbar-container input[type="checkbox"],
+    .navbar-container .hamburger-lines {
+    display: block;
+    }
+    .navbar-container {
+    height: 100%;
+    }
+    .navbar-container input[type="checkbox"] {
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 30px;
+    top: 15px;
+    right: 20px;
+    z-index: 5;
+    opacity: 0;
+    }
+    /* aspect du hamburger */
+    .navbar-container .hamburger-lines {
+    display: block;
+    height: 23px;
+    width: 35px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    }
+    /* aspect des lignes du hamburger */
+    .navbar-container .hamburger-lines .line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: #f2dcc2;
+    }
+    /* animation des lignes du hamburger: durée et point de départ */
+    .navbar-container .hamburger-lines .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+    }
+    .navbar-container .hamburger-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+    }
+    .navbar-container .hamburger-lines .line3 {
+    transform-origin: 00% 100%;
+    transition: transform 0.4s ease-in-out;
+    }
+    /* aspect des liens qualnd le menu hamburger est ouvert */
+    .navbar .menu-elements {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 45px;
+    padding-top: 20px;
+    padding-left: 0px;
+    background: #275f74;
+    opacity: 0.9;
+    height: 100vh;
+    width: 100%;
+    transform: translatey(-150%);
+    display: flex;
+    flex-wrap: wrap;
+    transition: transform 0.5s ease-in-out;
+    box-shadow: 0px 0px 5px 5px #275f74;
+    }
+    .navbar .menu-elements li {
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    /* réduction taille logo */
+    .logo {
+    top: -5px;
+    min-width: 80px;
+    max-width: 80px;
+    }
+    /* animation des lignes du hamburger */
+    .navbar-container input[type="checkbox"]:checked ~ .menu-elements {
+    transform: translateY(0);
+    }
+    .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+    transform: translateX(10%) rotate(45deg) scale(80%);
+    }
+    .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+    transform: scaleY(0);
+    }
+    .navbar-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+    transform: rotate(-40deg);
+    }
+    /* correction emplacement du titre */
+    #titreMyComics {
+        position: absolute;
+    }
 }
 
 /* Media Query for Tablets Ipads portrait mode */
