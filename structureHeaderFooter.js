@@ -90,7 +90,7 @@ divHeader.append(navbar);
 // création footer
 const divFooter = document.getElementById('footer');
 let footer = document.createElement('p');
-footer.innerText = "prout voici le pied";
+footer.innerText = "Voici le pied";
 divFooter.append(footer);
 
 

@@ -1,42 +1,93 @@
 // Création du menu gauche
-const menuLateral = document.getElementById("menuLateral");
+const menuLateral = document.querySelector(".menuLateral");
+// Titre du menu
+let titreMenuLateral = document.createElement("h3");
+if (menuLateral.id = "menuLateralPresentation") {
+    titreMenuLateral.innerText = "Pages de l'application";
+}
+menuLateral.append(titreMenuLateral);
 // éléments du menu
 let menuLateralElements = document.createElement("ul");
 menuLateralElements.classList.add("menu-lateral-elements");
 menuLateral.appendChild(menuLateralElements);
-    //Bouton 1
-    let liLien1 = document.createElement("li");
-    menuLateralElements.appendChild(liLien1);
-    let btnLien1 = document.createElement("a");
-    btnLien1.classList.add("btnMenuLateral");
-    btnLien1.id = "btnLien1";
-    btnLien1.href = "./index.html";
-    btnLien1.innerText = "btnLien1";
-    liLien1.appendChild(btnLien1);
-    //Bouton 2
-    let liLien2 = document.createElement("li");
-    menuLateralElements.appendChild(liLien2);
-    let btnLien2 = document.createElement("a");
-    btnLien2.classList.add("btnMenuLateral");
-    btnLien2.id = "btnLien2";
-    btnLien2.href = "./presentation.html";
-    btnLien2.innerText = "btnLien2";
-    liLien2.appendChild(btnLien2);
-    //Bouton 3
-    let liLien3 = document.createElement("li");
-    menuLateralElements.appendChild(liLien3);
-    let btnLien3 = document.createElement("a");
-    btnLien3.classList.add("btnMenuLateral");
-    btnLien3.id = "btnLien3";
-    btnLien3.href = "./fonctionnalites.html";
-    btnLien3.innerText = "btnLien3";
-    liLien3.appendChild(btnLien3);
-    //Bouton 4
-    let liLien4 = document.createElement("li");
-    menuLateralElements.appendChild(liLien4);
-    let btnLien4 = document.createElement("a");
-    btnLien4.classList.add("btnMenuLateral");
-    btnLien4.id = "btnLien4";
-    btnLien4.href = "./structure.html";
-    btnLien4.innerText = "btnLien4";
-    liLien4.appendChild(btnLien4);
+if (menuLateral.id = "menuLateralPresentation") {
+    //Bouton Accueil
+    let liLienAccueil = document.createElement("li");
+    menuLateralElements.appendChild(liLienAccueil);
+    let btnLienAccueil = document.createElement("p");
+    btnLienAccueil.classList.add("btnMenuLateral");
+    btnLienAccueil.id = "btnLienAccueil";
+    btnLienAccueil.innerText = "Accueil";
+    liLienAccueil.appendChild(btnLienAccueil);
+    //Bouton Collection 
+    let liLienCollection = document.createElement("li");
+    menuLateralElements.appendChild(liLienCollection);
+    let btnLienCollection = document.createElement("p");
+    btnLienCollection.classList.add("btnMenuLateral");
+    btnLienCollection.id = "btnLienCollection";
+    btnLienCollection.innerText = "Collection";
+    liLienCollection.appendChild(btnLienCollection);
+    //Bouton Series
+    let liLienSeries = document.createElement("li");
+    menuLateralElements.appendChild(liLienSeries);
+    let btnLienSeries = document.createElement("p");
+    btnLienSeries.classList.add("btnMenuLateral");
+    btnLienSeries.id = "btnLienSeries";
+    btnLienSeries.innerText = "Séries";
+    liLienSeries.appendChild(btnLienSeries);
+    //Bouton Tomes
+    let liLienTomes = document.createElement("li");
+    menuLateralElements.appendChild(liLienTomes);
+    let btnLienTomes = document.createElement("p");
+    btnLienTomes.classList.add("btnMenuLateral");
+    btnLienTomes.id = "btnLienTomes";
+    btnLienTomes.innerText = "Tomes";
+    liLienTomes.appendChild(btnLienTomes);
+    //Bouton Auteurs
+    let liLienAuteurs = document.createElement("li");
+    menuLateralElements.appendChild(liLienAuteurs);
+    let btnLienAuteurs = document.createElement("p");
+    btnLienAuteurs.classList.add("btnMenuLateral");
+    btnLienAuteurs.id = "btnLienAuteurs";
+    btnLienAuteurs.innerText = "Auteurs";
+    liLienAuteurs.appendChild(btnLienAuteurs);
+    //Bouton Editeurs
+    let liLienEditeurs = document.createElement("li");
+    menuLateralElements.appendChild(liLienEditeurs);
+    let btnLienEditeurs = document.createElement("p");
+    btnLienEditeurs.classList.add("btnMenuLateral");
+    btnLienEditeurs.id = "btnLienSerie";
+    btnLienEditeurs.innerText = "Editeurs";
+    liLienEditeurs.appendChild(btnLienEditeurs);
+    //Bouton Réglages
+    let liLienReglages = document.createElement("li");
+    menuLateralElements.appendChild(liLienReglages);
+    let btnLienReglages = document.createElement("p");
+    btnLienReglages.classList.add("btnMenuLateral");
+    btnLienReglages.id = "btnLienReglages";
+    btnLienReglages.innerText = "Collection";
+    liLienReglages.appendChild(btnLienReglages);
+    //Bouton A propos
+    let liLienAPropos = document.createElement("li");
+    menuLateralElements.appendChild(liLienAPropos);
+    let btnLienAPropos = document.createElement("p");
+    btnLienbtnLienAProposSerie.classList.add("btnMenuLateral");
+    btnLienAPropos.id = "btnLienSerie";
+    btnLienAPropos.innerText = "A Propos";
+    liLienAPropos.appendChild(btnLienAPropos);
+};
+
+
+// Cadre android page Présentation
+
+// defaut accueil
+// if sur clic bouton, changer image(s)
+
+
+
+
+
+let cadreAndroidPresentation = document.getElementById("cadreAndroidPresentation");
+let imagecadreAndroidPresentation = document.createElement("img");
+imagecadreAndroidPresentation.src = "./img/MaquetteAccueil.png";
+cadreAndroidPresentation.appendChild(imagecadreAndroidPresentation);

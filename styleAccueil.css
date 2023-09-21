@@ -3,3 +3,15 @@
     color: #f2dcc2;
     box-shadow:0px 0px 0px 3px #f2dcc2 inset;
 }
+
+.menuLateral {
+    display: none;
+}
+
+#texteAccueil  {
+    display: inline-block;
+    height: 1vh;
+    padding: 0 10vh;
+    text-align: justify;
+    text-indent: 2em;
+}

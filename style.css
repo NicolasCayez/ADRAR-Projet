@@ -30,6 +30,11 @@ body {
 a {
     text-decoration: none;
 }
+/* Disposition corps de la page */
+#pageBody {
+    display: flex;
+    flex-direction: row;
+}
 
 /* ----------------- paramètres header (navbar, logo, titre et menu) ----------------- */
 /* Navbar largeur 100% */
@@ -53,7 +58,7 @@ a {
     flex-direction: column;
 }
 /* Titre : police et centré */
-#titreMyComics {
+#titreMyComics, .titrePage {
     font-family: "komika";
     text-align: center;
 }
@@ -95,19 +100,40 @@ list-style: none;
 }
 
 /* ----------------- Menu lateral ----------------- */
-#menuLateral {
+.menuLateral {
     background-color: #275f74;
     color:#f2dcc2;
-    width: 200px;
+    min-width: 200px;
     height: 100vh;
     padding-top: 30px;
-    
+    display: inline-flex;
 }
 .btnMenuLateral {
     font-size: small;
     margin:auto;
     margin-bottom: 1.5rem;
 }
+
+/* ----------------- Corps de la page ----------------- */
+.titrePage {
+    font-size: larger;
+    margin-top: 3em;
+    margin-bottom: 2em;
+}
+/* Dimensions cadre Android */
+.cadreAndroid {
+    height: 60vh;
+    width: calc(360/800*60vh);
+    box-shadow: 0px 0px 2px 10px #275f74;
+    border-radius: 10px;
+    padding:0;
+}
+.cadreAndroid img {
+    width: inherit;
+}
+
+
+
 
 
 /* ----------------- MEDIA QUERIES ----------------- */
@@ -213,6 +239,12 @@ list-style: none;
     #titreMyComics {
         position: absolute;
     }
+    /* Titre des pages */
+    .titrePage {
+        font-size: x-small;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
 }
 
 /* Media Query for Tablets Ipads portrait mode */
@@ -229,5 +261,3 @@ list-style: none;
 @media (min-width: 1281px) {
 
 }
-
-
