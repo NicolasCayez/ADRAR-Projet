@@ -15,9 +15,7 @@
     background-color: #275f74;
     color: #f2dcc2;
 }
-#footer {
-    margin-top: auto;
-}
+
 body {
     background-color: #f2dcc2;
     font-family: "kronika";
@@ -26,6 +24,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 a {
     text-decoration: none;
@@ -70,7 +69,7 @@ a {
 }
 /* Liens du menu style boutons */
 .btnMenu, .btnMenuLateral {
-    display: inline-block;
+    display: inline-flex;
     border-radius: 10px;
     background-color: #f2dcc2;
     color: #275f74;
@@ -78,6 +77,7 @@ a {
     width: 130px;
     height: 30px;
     text-align: center;
+    justify-content: space-around;
     padding: 5px;
 }
 .btnMenu:hover, .btnMenuLateral:hover {
@@ -104,7 +104,7 @@ list-style: none;
     background-color: #275f74;
     color:#f2dcc2;
     min-width: 200px;
-    height: 100vh;
+    height: inherit;
     padding-top: 30px;
     display: inline-flex;
 }

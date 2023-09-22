@@ -3,3 +3,30 @@
     color: #f2dcc2;
     box-shadow:0px 0px 0px 3px #f2dcc2 inset;
 }
+
+.menuLateral, .cadreAndroid {
+    display: none;
+}
+
+.titrePage {
+    display: block;
+}
+
+#pageContent {
+    display: block;
+    flex-direction: row;
+    width: 100%;
+}
+
+.texteStructure p {
+    width: 100vw;
+    justify-self: center;
+}
+
+.texteStructure p {
+    display: inline-block;
+    height: 1vh;
+    padding: 0 30vh;
+    text-align: justify;
+    text-indent: 2em;
+}

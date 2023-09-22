@@ -92,6 +92,14 @@ const divFooter = document.getElementById('footer');
 let footer = document.createElement('p');
 footer.innerText = "Voici le pied";
 divFooter.append(footer);
+let logoGitHub = document.createElement("img");
+logoGitHub.src="./img/logoGitHub.png";
+divFooter.append(logoGitHub);
+let logofacebook = document.createElement("img");
+logofacebook.src="./img/logofacebook.png";
+divFooter.append(logofacebook);
+
+
 
 
 // <!-- NavBar footer -->
