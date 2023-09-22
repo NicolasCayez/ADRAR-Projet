@@ -16,13 +16,13 @@ function creerElementMenuLateral (idChild, libelle, urlLogo) {
     menuLateralElements.appendChild(lienLi);
     let liDiv = document.createElement("div");
     liDiv.classList.add("btnMenuLateral");
+    liDiv.id = idChild
     lienLi.appendChild(liDiv);
     let logo = document.createElement("img");
     logo.src = urlLogo;
     logo.classList.add("logoBouton");
     liDiv.appendChild(logo);
     let btnLien = document.createElement("p");
-    btnLien.id = idChild;
     btnLien.innerText = libelle;
     liDiv.appendChild(btnLien);
 }
@@ -32,6 +32,8 @@ if (menuLateral.id = "menuLateralPresentation") {
     creerElementMenuLateral("btnLienAccueil","Accueil","./img/LogoAccueil.png");
     //Bouton Collection 
     creerElementMenuLateral("btnLienCollection","Collection", "./img/LogoCollection.png");
+    //Bouton rechercher
+    creerElementMenuLateral("btnLienRecherche","Recherche", "./img/LogoRecherche.png");
     //Bouton Series
     creerElementMenuLateral("btnLienSeries","Séries", "./img/LogoSeries.png");
     //Bouton Tomes
@@ -59,6 +61,7 @@ const cadreAndroidPresentation2 = document.getElementById("cadreAndroidPresentat
 // textes
 const texteMaquetteAccueil = document.getElementById("texteAccueil");
 const texteMaquetteCollection = document.getElementById("texteCollection");
+const texteMaquetteRecherche = document.getElementById("texteRecherche");
 const texteMaquetteSeries = document.getElementById("texteSeries");
 const texteMaquetteTomes = document.getElementById("texteTomes");
 const texteMaquetteAuteurs = document.getElementById("texteAuteurs");
@@ -68,6 +71,7 @@ const texteMaquetteApropos = document.getElementById("texteAPropos");
 // boutons
 let boutonMaquetteAccueil = document.getElementById("btnLienAccueil");
 let boutonMaquetteCollection = document.getElementById("btnLienCollection");
+let boutonMaquetteRecherche = document.getElementById("btnLienRecherche");
 let boutonMaquetteSeries = document.getElementById("btnLienSeries");
 let boutonMaquetteTomes = document.getElementById("btnLienTomes");
 let boutonMaquetteAuteurs = document.getElementById("btnLienAuteurs");
@@ -88,8 +92,11 @@ switch (cadreAndroid.id) {
     case "cadreAndroidPresentation" :
         // let imagecadreAndroidPresentation = document.createElement("img");
         imagecadreAndroidPresentation.src = "./img/MaquetteAccueil.png";
+        imagecadreAndroidPresentation2.src = "./img/MaquetteMenuHamburger.png";
         cadreAndroidPresentation.appendChild(imagecadreAndroidPresentation);
-        cadreAndroidPresentation2.appendChild(imagecadreAndroidPresentation2)
+        cadreAndroidPresentation2.appendChild(imagecadreAndroidPresentation2);
+        cadreAndroidPresentation2.style.display = "inline-block";
+        cadreAndroidPresentation.style.marginLeft = "auto";
         texteMaquetteAccueil.style.display = "inline-block";
     break;
 };
@@ -99,6 +106,7 @@ switch (cadreAndroid.id) {
 boutonMaquetteAccueil.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "inline-block";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "none";
@@ -115,6 +123,7 @@ boutonMaquetteAccueil.addEventListener('click', () => {
 boutonMaquetteCollection.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "inline-block";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "none";
@@ -125,10 +134,26 @@ boutonMaquetteCollection.addEventListener('click', () => {
     cadreAndroidPresentation2.style.display = "none";
     cadreAndroidPresentation.style.marginLeft = "";
 });
+// Clic bouton Menu Latéral Recherche
+boutonMaquetteRecherche.addEventListener('click', () => {
+    texteMaquetteAccueil.style.display = "none";
+    texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "inline-block";
+    texteMaquetteSeries.style.display = "none";
+    texteMaquetteTomes.style.display = "none";
+    texteMaquetteAuteurs.style.display = "none";
+    texteMaquetteEditeurs.style.display = "none";
+    texteMaquetteReglages.style.display = "none";
+    texteMaquetteApropos.style.display = "none";
+    imagecadreAndroidPresentation.src = "./img/MaquetteRecherche.png";
+    cadreAndroidPresentation2.style.display = "none";
+    cadreAndroidPresentation.style.marginLeft = "";
+});
 // Clic bouton Menu Latéral Series
 boutonMaquetteSeries.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "inline-block";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "none";
@@ -145,6 +170,7 @@ boutonMaquetteSeries.addEventListener('click', () => {
 boutonMaquetteTomes.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "inline-block";
     texteMaquetteAuteurs.style.display = "none";
@@ -161,6 +187,7 @@ boutonMaquetteTomes.addEventListener('click', () => {
 boutonMaquetteAuteurs.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "inline-block";
@@ -177,6 +204,7 @@ boutonMaquetteAuteurs.addEventListener('click', () => {
 boutonMaquetteEditeurs.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "none";
@@ -193,6 +221,7 @@ boutonMaquetteEditeurs.addEventListener('click', () => {
 boutonMaquetteReglages.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "none";
@@ -208,6 +237,7 @@ boutonMaquetteReglages.addEventListener('click', () => {
 boutonMaquetteAPropos.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
+    texteMaquetteRecherche.style.display = "none";
     texteMaquetteSeries.style.display = "none";
     texteMaquetteTomes.style.display = "none";
     texteMaquetteAuteurs.style.display = "none";

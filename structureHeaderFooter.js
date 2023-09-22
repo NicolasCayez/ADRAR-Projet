@@ -87,17 +87,25 @@ divHeader.append(navbar);
 
 
 
-// création footer
-const divFooter = document.getElementById('footer');
-let footer = document.createElement('p');
-footer.innerText = "Voici le pied";
-divFooter.append(footer);
+// Recherche de l'id #footer
+const divFooter = document.getElementById("footer");
+// Création navbar
+let navbarFooter = document.createElement("nav");
+navbarFooter.classList.add("navbar");
+// intégration navbar dans le header
+divFooter.append(navbarFooter);
+    // création navbar container
+    let navbarFooterContainer = document.createElement("div");
+    navbarFooterContainer.classList.add("navbar-container");
+    navbarFooterContainer.classList.add("container");
+    navbarFooterContainer.id = "navFooter";
+    navbarFooter.appendChild(navbarFooterContainer);
 let logoGitHub = document.createElement("img");
 logoGitHub.src="./img/logoGitHub.png";
-divFooter.append(logoGitHub);
+navbarFooterContainer.append(logoGitHub);
 let logofacebook = document.createElement("img");
 logofacebook.src="./img/logofacebook.png";
-divFooter.append(logofacebook);
+navbarFooterContainer.append(logofacebook);
 
 
 

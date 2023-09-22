@@ -35,7 +35,7 @@ a {
     flex-direction: row;
 }
 
-/* ----------------- paramètres header (navbar, logo, titre et menu) ----------------- */
+/* ----------------- paramètres header et footer (navbar, logo, titre et menu) ----------------- */
 /* Navbar largeur 100% */
 .navbar {
     display: flex;
@@ -98,6 +98,21 @@ display: flex;
 .menu-elements li, .menu-lateral-elements li {
 list-style: none;
 }
+/* footer */
+#navFooter {
+    width: auto;
+    flex-direction: row;
+    margin-right: 1em;
+}
+
+#navFooter img {
+    align-self: flex-start;
+    margin-left: 1em;
+}
+#footer {
+    margin-bottom: 0;
+}
+
 
 /* ----------------- Menu lateral ----------------- */
 .menuLateral {
@@ -112,6 +127,8 @@ list-style: none;
     font-size: small;
     margin:auto;
     margin-bottom: 1.5rem;
+    justify-content: space-between;
+    padding-inline: 15px;
 }
 
 /* ----------------- Corps de la page ----------------- */
