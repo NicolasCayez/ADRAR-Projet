@@ -21,7 +21,11 @@
     flex-direction: row;
 }
 
-#textePresentation p {
+.textePresentation {
+    display: none;
+}
+
+.textePresentation p {
     display: inline-block;
     height: 1vh;
     padding: 0 10vh;
