@@ -1,37 +1,32 @@
 // Création du menu gauche
 const menuLateral = document.querySelector(".menuLateral");
 // Titre du menu
-let titreMenuLateral = document.createElement("h3");
+let titreMenuLateral = document.createElement("p");
 if (menuLateral.id = "menuLateralPresentation") {
-    titreMenuLateral.innerText = "Pages de l'application";
+    titreMenuLateral.innerText = "Visite \nMyComics";
+    titreMenuLateral.classList.add("titreMenuLateral");
+    titreMenuLateral.classList.add("mt-2");
+    titreMenuLateral.classList.add("text-center");
+    titreMenuLateral.classList.add("text-wrap");
     menuLateral.append(titreMenuLateral);
-}
-// éléments du menu
-let menuLateralElements = document.createElement("ul");
-menuLateralElements.classList.add("menu-lateral-elements");
-menuLateral.appendChild(menuLateralElements);
-
-
-
-if (menuLateral.id = "menuLateralPresentation") {
     //Bouton Accueil
-    creerElementMenuLateral("btnLienAccueil","Accueil","./img/LogoAccueil.png");
+    creerElementMenuLateral("btnLienAccueil","Accueil","./img/LogoAccueil.png", menuLateral);
     //Bouton Collection 
-    creerElementMenuLateral("btnLienCollection","Collection", "./img/LogoCollection.png");
+    creerElementMenuLateral("btnLienCollection","Collection", "./img/LogoCollection.png", menuLateral);
     //Bouton rechercher
-    creerElementMenuLateral("btnLienRecherche","Recherche", "./img/LogoRecherche.png");
+    creerElementMenuLateral("btnLienRecherche","Recherche", "./img/LogoRecherche.png", menuLateral);
     //Bouton Series
-    creerElementMenuLateral("btnLienSeries","Séries", "./img/LogoSeries.png");
+    creerElementMenuLateral("btnLienSeries","Séries", "./img/LogoSeries.png", menuLateral);
     //Bouton Tomes
-    creerElementMenuLateral("btnLienTomes","Tomes", "./img/LogoTomes.png");
+    creerElementMenuLateral("btnLienTomes","Tomes", "./img/LogoTomes.png", menuLateral);
     //Bouton Auteurs
-    creerElementMenuLateral("btnLienAuteurs","Auteurs", "./img/LogoAuteurs.png");
+    creerElementMenuLateral("btnLienAuteurs","Auteurs", "./img/LogoAuteurs.png", menuLateral);
     //Bouton Editeurs
-    creerElementMenuLateral("btnLienEditeurs","Editeurs", "./img/LogoEditeur.png");
+    creerElementMenuLateral("btnLienEditeurs","Editeurs", "./img/LogoEditeur.png", menuLateral);
     //Bouton Réglages
-    creerElementMenuLateral("btnLienReglages","Réglages", "./img/LogoReglages.png");
+    creerElementMenuLateral("btnLienReglages","Réglages", "./img/LogoReglages.png", menuLateral);
     //Bouton A propos
-    creerElementMenuLateral("btnLienAPropos","A Propos", "./img/LogoAPropos.png");
+    creerElementMenuLateral("btnLienAPropos","A Propos", "./img/LogoAPropos.png", menuLateral);
 };
 
 //variables de repères sur la page

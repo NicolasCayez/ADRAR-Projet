@@ -55,8 +55,12 @@
 }
 
 /* checkbox cachée en version PC */
-#navHeader input[type="checkbox"],
-#navHeader .hamburger-lines {
+#navbarHeader input[type="checkbox"],
+#navbarHeader .hamburger-lines {
+    display: none;
+}
+/* menu hamburger caché */
+.hiddenMenu{
     display: none;
 }
 
@@ -65,19 +69,11 @@
     font-size: large;
 }
 
-
-/* ----------------- Menu lateral ----------------- */
-
-.btnMenuLateral {
-    font-size: small;
-    margin:auto;
-    margin-bottom: 1.5rem;
-    justify-content: space-between;
-    padding-inline: 15px;
-}
-
 /* ----------------- Corps de la page ----------------- */
-
+/* suppression slider horizontal */
+body{
+    overflow-x: hidden;
+}
 /* Dimensions cadre Android */
 .cadreAndroid {
     height: 60vh;
@@ -98,16 +94,16 @@
 /* Media Query for Mobile Devices */
 @media (max-width: 767px) {
     /* Navbar moins épaisse */
-    #navHeader {
+    #navbarHeader {
     height: 50px;
     }
     /* Menu Hamburger visible et checkbok pour le piloter */
-    #navHeader input[type="checkbox"],
-    #navHeader .hamburger-lines {
+    #navbarHeader input[type="checkbox"],
+    #navbarHeader .hamburger-lines {
     display: block;
     }
 
-    #navHeader input[type="checkbox"] {
+    #navbarHeader input[type="checkbox"] {
     position: absolute;
     display: block;
     height: 32px;
@@ -118,7 +114,7 @@
     opacity: 0;
     }
     /* aspect du hamburger */
-    #navHeader .hamburger-lines {
+    #navbarHeader .hamburger-lines {
     display: block;
     height: 23px;
     width: 35px;
@@ -132,7 +128,7 @@
     justify-content: space-between;
     }
     /* aspect des lignes du hamburger */
-    #navHeader .hamburger-lines .line {
+    #navbarHeader .hamburger-lines .line {
     display: block;
     height: 4px;
     width: 100%;
@@ -140,39 +136,32 @@
     background: #f2dcc2;
     }
     /* animation des lignes du hamburger: durée et point de départ */
-    #navHeader .hamburger-lines .line1 {
+    #navbarHeader .hamburger-lines .line1 {
     transform-origin: 0% 0%;
     transition: transform 0.4s ease-in-out;
     }
-    #navHeader .hamburger-lines .line2 {
+    #navbarHeader .hamburger-lines .line2 {
     transition: transform 0.2s ease-in-out;
     }
-    #navHeader .hamburger-lines .line3 {
+    #navbarHeader .hamburger-lines .line3 {
     transform-origin: 0% 100%;
     transition: transform 0.4s ease-in-out;
     }
-    /* aspect des liens qualnd le menu hamburger est ouvert */
-    #navHeader .menuHeader {
+    /* aspect des liens quand le menu hamburger est visible */
+    .hiddenMenu {
+    display: block;
     margin-left: 0;
     margin-right: 0;
-    margin-top: 45px;
-    padding-top: 20px;
-    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 20px;
     background: #275f74;
     opacity: 0.9;
-    height: 100vh;
-    width: 100%;
-    transform: translatey(-150%);
-    display: flex;
-    flex-wrap: wrap;
+    transform: translateY(-500%);
     transition: transform 0.5s ease-in-out;
     box-shadow: 0px 0px 5px 5px #275f74;
-    
     }
-    #navHeader .menu-elements li {
-    margin-bottom: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
+    .btnMenu {
+        margin-top: 15px;
     }
     /* réduction taille logo */
     .logo {
@@ -181,27 +170,46 @@
     max-width: 80px;
     }
     /* animation des lignes du hamburger */
-    #navHeader input[type="checkbox"]:checked ~ .menu-elements {
-    transform: translateY(0);
+    #navbarHeader input[type="checkbox"]:checked ~ .hiddenMenu {
+        transform: translateY(
+            0);
     }
-    #navHeader input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
-    transform: translateX(10%) rotate(45deg) scale(80%);
+    #navbarHeader input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+        transform: translateX(10%) rotate(45deg) scale(80%);
     }
-    #navHeader input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
-    transform: scaleY(0);
+    #navbarHeader input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+        transform: scaleY(0);
     }
-    #navHeader input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
-    transform: rotate(-40deg);
+    #navbarHeader input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+        transform: rotate(-40deg);
     }
-    /* Disparition du menu header */
-    #menuHeader{
-        display: none;
-    }
+
     /* réduction taille tite */
     #titrePage{
         font-size:small;
     }
-
+    #menuHeader{
+        display: none;
+    }
+    /* Aspect menu latéral épuré */
+    .menuLateral{
+        padding: 20px 0px 0px 8px;
+    }
+    .titreMenuLateral{
+        font-size: x-small;
+    }
+    .btnMenuLateral {
+        width:fit-content;
+        height: fit-content;
+    }
+    .btnMenuLateral img {
+        margin: 0px 5px 2px 0px;
+        height: 15px;
+        width: 15px;
+    }
+    .btnMenuLateral span {
+        display: none;
+    }
 }
 
 /* Media Query for Tablets Ipads portrait mode */
