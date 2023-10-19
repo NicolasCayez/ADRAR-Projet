@@ -75,13 +75,6 @@ body{
     overflow-x: hidden;
 }
 /* Dimensions cadre Android */
-.cadreAndroid {
-    height: 60vh;
-    width: calc(360/800*60vh);
-    /* box-shadow: 0px 0px 2px 10px #275f74; */
-    /* border-radius: 10px; */
-    /* padding:0; */
-}
 .cadreAndroid img {
     width: inherit;
 }
@@ -89,6 +82,11 @@ body{
     width:fit-content;
     height: fit-content;
 }
+
+.cadreAndroid {
+    width: 200px;
+}
+
 /* Cadre texte */
 .textDiv{
     text-align: justify;
@@ -215,6 +213,11 @@ body{
     .btnMenuLateral span {
         display: none;
     }
+
+    .cadreAndroid {
+        width: 150px;
+    }
+
 }
 
 /* Media Query for Tablets Ipads portrait mode */
@@ -223,6 +226,10 @@ body{
     #titrePage{
         font-size:medium;
     }
+    .cadreAndroid {
+        width: 150px;
+    }
+
 }
 
 /* Media Query for Laptops and Desktops */

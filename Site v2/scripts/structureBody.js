@@ -43,6 +43,7 @@ if (menuLateral.id = "menuLateralPresentation") {
     creerElementMenuLateral("btnLienAPropos","A Propos", "./img/LogoAPropos.png", menuLateral);
 };
 // récupération textes page Présentation
+const sousTitre = document.getElementById("sousTitre");
 const texteMaquetteAccueil = document.getElementById("texteAccueil");
 const texteMaquetteCollection = document.getElementById("texteCollection");
 const texteMaquetteRecherche = document.getElementById("texteRecherche");
@@ -86,6 +87,7 @@ switch (cadreAndroid.id) {
 //Gestion des éléments actifs selon le bouton menu gauche cliqué
 // Clic bouton Menu Latéral Accueil
 boutonMaquetteAccueil.addEventListener('click', () => {
+    sousTitre.innerText = "Accueil";
     texteMaquetteAccueil.style.display = "inline-block";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
@@ -103,6 +105,7 @@ boutonMaquetteAccueil.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Collection
 boutonMaquetteCollection.addEventListener('click', () => {
+    sousTitre.innerText = "Collection";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "inline-block";
     texteMaquetteRecherche.style.display = "none";
@@ -118,6 +121,7 @@ boutonMaquetteCollection.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Recherche
 boutonMaquetteRecherche.addEventListener('click', () => {
+    sousTitre.innerText = "Recherche";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "inline-block";
@@ -133,6 +137,7 @@ boutonMaquetteRecherche.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Series
 boutonMaquetteSeries.addEventListener('click', () => {
+    sousTitre.innerText = "Séries";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
@@ -150,6 +155,7 @@ boutonMaquetteSeries.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Tomes
 boutonMaquetteTomes.addEventListener('click', () => {
+    sousTitre.innerText = "Tomes";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
@@ -167,6 +173,7 @@ boutonMaquetteTomes.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Auteurs
 boutonMaquetteAuteurs.addEventListener('click', () => {
+    sousTitre.innerText = "Auteurs";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
@@ -184,6 +191,7 @@ boutonMaquetteAuteurs.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Editeurs
 boutonMaquetteEditeurs.addEventListener('click', () => {
+    sousTitre.innerText = "Editeurs";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
@@ -201,6 +209,7 @@ boutonMaquetteEditeurs.addEventListener('click', () => {
 });
 // Clic bouton Menu Latéral Réglages
 boutonMaquetteReglages.addEventListener('click', () => {
+    sousTitre.innerText = "Réglages";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
@@ -213,10 +222,10 @@ boutonMaquetteReglages.addEventListener('click', () => {
     imagecadreAndroidPresentation.src = "./img/TMaquetteReglages.png";
     cadreAndroidPresentation2.style.display = "none";
     cadreAndroidPresentation.style.marginLeft = "";
-
 });
 // Clic bouton Menu Latéral A Propos
 boutonMaquetteAPropos.addEventListener('click', () => {
+    sousTitre.innerText = "A Propos";
     texteMaquetteAccueil.style.display = "none";
     texteMaquetteCollection.style.display = "none";
     texteMaquetteRecherche.style.display = "none";
