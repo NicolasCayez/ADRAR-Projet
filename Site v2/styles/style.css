@@ -78,17 +78,22 @@ body{
 .cadreAndroid {
     height: 60vh;
     width: calc(360/800*60vh);
-    box-shadow: 0px 0px 2px 10px #275f74;
-    border-radius: 10px;
-    padding:0;
+    /* box-shadow: 0px 0px 2px 10px #275f74; */
+    /* border-radius: 10px; */
+    /* padding:0; */
 }
 .cadreAndroid img {
     width: inherit;
 }
-
-
-
-
+.phoneImageDiv{
+    width:fit-content;
+    height: fit-content;
+}
+/* Cadre texte */
+.textDiv{
+    text-align: justify;
+    text-indent: 2em;
+}
 
 /* ----------------- MEDIA QUERIES ----------------- */
 /* Media Query for Mobile Devices */

@@ -1,3 +1,17 @@
+//****************************************************/
+//* Structure dans le corps de la page sous le titre */
+//****************************************************/
+// récupération corps de la page sous le titre
+const pageContent = document.getElementById("pageContent");
+
+// Récupération des cadres
+const cadreAndroid = document.querySelector(".cadreAndroid");
+const cadreAndroidPresentation = document.getElementById("cadreAndroidPresentation");
+const cadreAndroidPresentation2 = document.getElementById("cadreAndroidPresentation2");
+
+//********************************************/
+//* PAGE PRESENTATION                        */
+//********************************************/
 // Création du menu gauche
 const menuLateral = document.querySelector(".menuLateral");
 // Titre du menu
@@ -28,18 +42,7 @@ if (menuLateral.id = "menuLateralPresentation") {
     //Bouton A propos
     creerElementMenuLateral("btnLienAPropos","A Propos", "./img/LogoAPropos.png", menuLateral);
 };
-
-//variables de repères sur la page
-
-
-
-
-// Chargement de la page par défaut
-const cadreAndroid = document.querySelector(".cadreAndroid");
-const cadreAndroidPresentation = document.getElementById("cadreAndroidPresentation");
-const cadreAndroidPresentation2 = document.getElementById("cadreAndroidPresentation2");
-
-// textes
+// récupération textes page Présentation
 const texteMaquetteAccueil = document.getElementById("texteAccueil");
 const texteMaquetteCollection = document.getElementById("texteCollection");
 const texteMaquetteRecherche = document.getElementById("texteRecherche");
@@ -49,7 +52,7 @@ const texteMaquetteAuteurs = document.getElementById("texteAuteurs");
 const texteMaquetteEditeurs = document.getElementById("texteEditeurs");
 const texteMaquetteReglages = document.getElementById("texteReglages");
 const texteMaquetteApropos = document.getElementById("texteAPropos");
-// boutons
+// récupération boutons
 let boutonMaquetteAccueil = document.getElementById("btnLienAccueil");
 let boutonMaquetteCollection = document.getElementById("btnLienCollection");
 let boutonMaquetteRecherche = document.getElementById("btnLienRecherche");
@@ -63,17 +66,16 @@ let boutonMaquetteAPropos = document.getElementById("btnLienAPropos");
 const imagecadreAndroidAccueil = document.createElement("img");
 const imagecadreAndroidPresentation = document.createElement("img");
 const imagecadreAndroidPresentation2 = document.createElement("img");
-
-
+// Activation 2 cadres pour Mycomics: Accueil et Présentation
 switch (cadreAndroid.id) {
     case "cadreAndroidAccueil" :
-        imagecadreAndroidAccueil.src = "./img/MaquetteAccueil.png";
+        imagecadreAndroidAccueil.src = "./img/TMaquetteAccueil.png";
         cadreAndroid.appendChild(imagecadreAndroidAccueil);
     break;
     case "cadreAndroidPresentation" :
         // let imagecadreAndroidPresentation = document.createElement("img");
-        imagecadreAndroidPresentation.src = "./img/MaquetteAccueil.png";
-        imagecadreAndroidPresentation2.src = "./img/MaquetteMenuHamburger.png";
+        imagecadreAndroidPresentation.src = "./img/TMaquetteAccueil.png";
+        imagecadreAndroidPresentation2.src = "./img/TMaquetteMenuHamburger.png";
         cadreAndroidPresentation.appendChild(imagecadreAndroidPresentation);
         cadreAndroidPresentation2.appendChild(imagecadreAndroidPresentation2);
         cadreAndroidPresentation2.style.display = "inline-block";
@@ -81,8 +83,7 @@ switch (cadreAndroid.id) {
         texteMaquetteAccueil.style.display = "inline-block";
     break;
 };
-
-
+//Gestion des éléments actifs selon le bouton menu gauche cliqué
 // Clic bouton Menu Latéral Accueil
 boutonMaquetteAccueil.addEventListener('click', () => {
     texteMaquetteAccueil.style.display = "inline-block";
@@ -94,10 +95,10 @@ boutonMaquetteAccueil.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteAccueil.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteAccueil.png";
     cadreAndroidPresentation2.style.display = "inline-block";
     cadreAndroidPresentation.style.marginLeft = "auto";
-    imagecadreAndroidPresentation2.src = "./img/MaquetteMenuHamburger.png";
+    imagecadreAndroidPresentation2.src = "./img/TMaquetteMenuHamburger.png";
     cadreAndroidPresentation2.style.height = "60vh";
 });
 // Clic bouton Menu Latéral Collection
@@ -111,7 +112,7 @@ boutonMaquetteCollection.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteCollection.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteCollection.png";
     cadreAndroidPresentation2.style.display = "none";
     cadreAndroidPresentation.style.marginLeft = "";
 });
@@ -126,7 +127,7 @@ boutonMaquetteRecherche.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteRecherche.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteRecherche.png";
     cadreAndroidPresentation2.style.display = "none";
     cadreAndroidPresentation.style.marginLeft = "";
 });
@@ -141,11 +142,11 @@ boutonMaquetteSeries.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteSeries.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteSeries.png";
     cadreAndroidPresentation2.style.display = "inline-block";
     cadreAndroidPresentation.style.marginLeft = "auto";
     cadreAndroidPresentation2.style.height = "60vh";
-    imagecadreAndroidPresentation2.src = "./img/MaquetteSeriesDetail.png";
+    imagecadreAndroidPresentation2.src = "./img/TMaquetteSeriesDetail.png";
 });
 // Clic bouton Menu Latéral Tomes
 boutonMaquetteTomes.addEventListener('click', () => {
@@ -158,11 +159,11 @@ boutonMaquetteTomes.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteTomes.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteTomes.png";
     cadreAndroidPresentation2.style.display = "inline-block";
     cadreAndroidPresentation.style.marginLeft = "auto";
     cadreAndroidPresentation2.style.height = "fit-content";
-    imagecadreAndroidPresentation2.src = "./img/MaquetteTomesDetail.png";
+    imagecadreAndroidPresentation2.src = "./img/TMaquetteTomesDetail.png";
 });
 // Clic bouton Menu Latéral Auteurs
 boutonMaquetteAuteurs.addEventListener('click', () => {
@@ -175,11 +176,11 @@ boutonMaquetteAuteurs.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteAuteurs.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteAuteurs.png";
     cadreAndroidPresentation2.style.display = "inline-block";
     cadreAndroidPresentation.style.marginLeft = "auto";
     cadreAndroidPresentation2.style.height = "60vh";
-    imagecadreAndroidPresentation2.src = "./img/MaquetteAuteurDetail.png";
+    imagecadreAndroidPresentation2.src = "./img/TMaquetteAuteurDetail.png";
 });
 // Clic bouton Menu Latéral Editeurs
 boutonMaquetteEditeurs.addEventListener('click', () => {
@@ -192,11 +193,11 @@ boutonMaquetteEditeurs.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "inline-block";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteEditeurs.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteEditeurs.png";
     cadreAndroidPresentation2.style.display = "inline-block";
     cadreAndroidPresentation.style.marginLeft = "auto";
     cadreAndroidPresentation2.style.height = "60vh";
-    imagecadreAndroidPresentation2.src = "./img/MaquetteEditeursDetail.png";
+    imagecadreAndroidPresentation2.src = "./img/TMaquetteEditeursDetail.png";
 });
 // Clic bouton Menu Latéral Réglages
 boutonMaquetteReglages.addEventListener('click', () => {
@@ -209,7 +210,7 @@ boutonMaquetteReglages.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "inline-block";
     texteMaquetteApropos.style.display = "none";
-    imagecadreAndroidPresentation.src = "./img/MaquetteReglages.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteReglages.png";
     cadreAndroidPresentation2.style.display = "none";
     cadreAndroidPresentation.style.marginLeft = "";
 
@@ -225,8 +226,7 @@ boutonMaquetteAPropos.addEventListener('click', () => {
     texteMaquetteEditeurs.style.display = "none";
     texteMaquetteReglages.style.display = "none";
     texteMaquetteApropos.style.display = "inline-block";
-    imagecadreAndroidPresentation.src = "./img/MaquetteAPropos.png";
+    imagecadreAndroidPresentation.src = "./img/TMaquetteAPropos.png";
     cadreAndroidPresentation2.style.display = "none";
     cadreAndroidPresentation.style.marginLeft = "";
-
 });

@@ -7,11 +7,3 @@
 .menuLateral {
     display: none;
 }
-
-#texteAccueil  {
-    display: inline-block;
-    height: 1vh;
-    padding: 0 10vh;
-    text-align: justify;
-    text-indent: 2em;
-}

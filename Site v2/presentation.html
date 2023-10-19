@@ -26,139 +26,148 @@
             <!-- Menu latéral gauche -->
             <div class="menuLateral col-1 w-auto h-auto py-0 px-auto bg-custom-bleu custom-beige" id="menuLateralPresentation"></div>
             <!-- reste de la page hors menu -->
-            <div class="col h-100 py-0">
+            <div id="pageContent" class="col h-100 py-0">
                 <!-- Titre de la page -->
                 <div class="row text-center fs-5 custom-font-title m-3 py-0">Présentation des pages de l'application</div>
                 <!-- contenu de la page -->
-                <div class="row center py-0" id="pageContent" >
-                    <!-- Cadre Android -->
-                    <div class="cadreAndroid col-1" id="cadreAndroidPresentation"></div>
-                    <div class="cadreAndroid col-1" id="cadreAndroidPresentation2"></div>
-                    <!-- Texte explication Accueil -->
-                    <div class="textePresentation col h-auto" id="texteAccueil">
-                        <p class="fs-5">
-                            Accueil
-                        </p>
-                        <br><br>
-                        <p>
-                            La porte d'entrée de l'application, avec un menu rapide permettant la recherche, l'accès aux séries, tomes, auteurs et éditeurs.
-                        </p>
-                        <p>
-                            Le menu hamburger, lui, permet d'accéder en plus au résumé de la collection et aux réglages de l'application.
-                            Cela parmet depuis n'importe quelle page de l'application de pouvoir se déplacer et changer de type d'informations.
-                        </p>
+                <div id="pageContent" class="row row-cols-1 row-cols-sm-3 justify-content-center">
+                    <!-- Partie de gauche -->
+                    <div id="colLeft" class="phoneImageDiv mt-3 mt-md-4 mt-lg-3 mx-1 ms-lg-5 me-lg-3">
+                        <!-- Cadre Android -->
+                        <div class="cadreAndroid col-1" id="cadreAndroidPresentation"></div>
                     </div>
-                    <!-- Texte explication Collection -->
-                    <div class="textePresentation" id="texteCollection">
-                        <p class="fs-5">
-                            Collection
-                        </p>
-                        <p>
-                            Cette page permet d'avoir un résumé de sa collection, ainsi que des éventuels tomes ou informations qui sont incmplètes ou alors sans lien (un auteur sans tome, série ou éditeur enregistré par exemple).
-                        </p>
-                        <p>
-                            Cet accès permet de trouver rapidement les informations à compléteter. On peut par exepmple saisir un tome acheté en sortant de la librairie pour la compléter par la suite.
-                        </p>
+                    <div id="colMiddle" class="phoneImageDiv mt-3 mt-md-4 mt-lg-3 mx-1 ms-lg-5 me-lg-3">
+                        <!-- Cadre Android -->
+                        <div class="cadreAndroid col-1" id="cadreAndroidPresentation2"></div>
                     </div>
-                    <!-- Texte explication Recherche -->
-                    <div class="textePresentation" id="texteRecherche">
-                        <p class="fs-5">
-                            Recherche
-                        </p>
-                        <p>
-                            Cette fonctionnalité sera la plus important de l'application car elle permet d'accéder à toutes les informations saisies,de retrouver les séries, tomes, auteurs ou éditeurs même sans avoir un nom complet. Le champ de saisie accepte également les codes ISBN.
-                        </p>
-                        <p>
-                            La liste de tous les enregistrements correspondant au champ de recherche.
-                        </p>
-                        <p>
-                            Le bouton filtrer, lui, fonctionne sur toutes les pages où il est présent. Il permet le filtrage des listes affichées de toutes les pages en fonction également du champ de recherche.
-                        </p>
-                    </div>
-                    <!-- Texte explication Series -->
-                    <div class="textePresentation" id="texteSeries">
-                        <p class="fs-5">
-                            Séries
-                        </p>
-                        <p>
-                            La liste de toutes les séries enregistrées, pour laquelle on peut avoir le détail avec une image d'un des tomes, les éditeurs et auteurs ayant participé à la série.
-                        </p>
-                        <p>
-                            Les boutons du bas permettent d'ajouter, éditer, ou bien supprimer une série en cas d'erreur.
-                        </p>
-                        <p>
-                            La recherche permet également de filtrer les résultats affichés dans la liste.
-                        </p>
-                    </div>
-                    <!-- Texte explication Tomes -->
-                    <div class="textePresentation" id="texteTomes">
-                        <p class="fs-5">
-                            Tomes
-                        </p>
-                        <p>
-                            La page qui sera la plus souvent utilisée, elle parmet de trouver tous les tomes enregistrés, qu'ils fassent partie d'une série ou non.
-                        </p>
-                        <p>
-                            La page de saisie permet de saisir un nouveau tome, ou bien de modifier les informations d'un tome existant.
-                            Les informations permettrant une bonne gestion sont le nom du tome, son numéro dans la série, son ISBN, la série à laquelle il appartient, ses auteurs et éditeurs.
-                        </p>
-                        <p>
-                            La recherche permet également de filtrer les résultats affichés dans la liste.
-                        </p>
-                    </div>
-                    <!-- Texte explication Auteurs -->
-                    <div class="textePresentation" id="texteAuteurs">
-                        <p class="fs-5">
-                            Auteurs
-                        </p>
-                        <p>
-                            La liste de tous les auteurs enregistrés, elle permet de retrouver tous les tomes pour lesquels l'auteur a participé, ainsi que de modifier les informations de l'auteur.
-                        </p>
-                        <p>
-                            La partie détail affiche tous les liens de l'auteur, et permet d'y accéder rapidement.
-                        </p>
-                        <p>
-                            La recherche permet également de filtrer les résultats affichés dans la liste.
-                        </p>
-                    </div>
-                    <!-- Texte explication Editeurs -->
-                    <div class="textePresentation" id="texteEditeurs">
-                        <p class="fs-5">
-                            Editeurs
-                        </p>
-                        <p>
-                        La liste de tous les éditeurs enregistrés, elle fonctiomme sur le même modèle que la page auteurs.
-                        </p>
-                        <p>
-                            La partie détail affiche tous les liens de l'éditeur, et permet d'y accéder rapidement.
-                        </p>
-                        <p>
-                            La recherche permet également de filtrer les résultats affichés dans la liste.
-                        </p>
-                    </div>
-                    <!-- Texte explication Réglages -->
-                    <div class="textePresentation" id="texteReglages">
-                        <p class="fs-5">
-                            Réglages
-                        </p>
-                        <p>
-                            Cette page permet pour le moment de changer de profil et de passer en mode sombre.
-                        </p>
-                        <p>
-                            Le profil est un collection indépendante. Une famille peut avoir plusieurs personnes qui gèrent séparément lesurs collections, ou bien quelqu'un qui veut offrir des BD à un proche et savoir quelles BD il adéjà offert.
-                        </p>
-                        <p>
-                            Le mode sombre inverse les couleurs de l'affichage.
-                        </p>
-                    </div>
-                    <!-- Texte explication A Propos -->
-                    <div class="textePresentation" id="texteAPropos">
-                        <p class="fs-5">
-                            A Propos
-                        </p>
-                        <p>
-                            Accessible depuis le bas de la page, la section A Propos contint les informations générales sur la version de l'application, les fonctionnalités actives ou en préparation.
-                        </p>
+                    <!-- Partie de droite -->
+                    <div id="colRight" class="textDiv mt-lg-4 mt-md-3 mx-1 me-lg-5 ms-1 ms-sm-3 p-5 p-sm-2 col">
+                        <!-- Texte explication Accueil -->
+                        <div class="textePresentation col h-auto" id="texteAccueil">
+                            <p class="fs-5">
+                                Accueil
+                            </p>
+                            <br><br>
+                            <p>
+                                La porte d'entrée de l'application, avec un menu rapide permettant la recherche, l'accès aux séries, tomes, auteurs et éditeurs.
+                            </p>
+                            <p>
+                                Le menu hamburger, lui, permet d'accéder en plus au résumé de la collection et aux réglages de l'application.
+                                Cela parmet depuis n'importe quelle page de l'application de pouvoir se déplacer et changer de type d'informations.
+                            </p>
+                        </div>
+                        <!-- Texte explication Collection -->
+                        <div class="textePresentation" id="texteCollection">
+                            <p class="fs-5">
+                                Collection
+                            </p>
+                            <p>
+                                Cette page permet d'avoir un résumé de sa collection, ainsi que des éventuels tomes ou informations qui sont incmplètes ou alors sans lien (un auteur sans tome, série ou éditeur enregistré par exemple).
+                            </p>
+                            <p>
+                                Cet accès permet de trouver rapidement les informations à compléteter. On peut par exepmple saisir un tome acheté en sortant de la librairie pour la compléter par la suite.
+                            </p>
+                        </div>
+                        <!-- Texte explication Recherche -->
+                        <div class="textePresentation" id="texteRecherche">
+                            <p class="fs-5">
+                                Recherche
+                            </p>
+                            <p>
+                                Cette fonctionnalité sera la plus important de l'application car elle permet d'accéder à toutes les informations saisies,de retrouver les séries, tomes, auteurs ou éditeurs même sans avoir un nom complet. Le champ de saisie accepte également les codes ISBN.
+                            </p>
+                            <p>
+                                La liste de tous les enregistrements correspondant au champ de recherche.
+                            </p>
+                            <p>
+                                Le bouton filtrer, lui, fonctionne sur toutes les pages où il est présent. Il permet le filtrage des listes affichées de toutes les pages en fonction également du champ de recherche.
+                            </p>
+                        </div>
+                        <!-- Texte explication Series -->
+                        <div class="textePresentation" id="texteSeries">
+                            <p class="fs-5">
+                                Séries
+                            </p>
+                            <p>
+                                La liste de toutes les séries enregistrées, pour laquelle on peut avoir le détail avec une image d'un des tomes, les éditeurs et auteurs ayant participé à la série.
+                            </p>
+                            <p>
+                                Les boutons du bas permettent d'ajouter, éditer, ou bien supprimer une série en cas d'erreur.
+                            </p>
+                            <p>
+                                La recherche permet également de filtrer les résultats affichés dans la liste.
+                            </p>
+                        </div>
+                        <!-- Texte explication Tomes -->
+                        <div class="textePresentation" id="texteTomes">
+                            <p class="fs-5">
+                                Tomes
+                            </p>
+                            <p>
+                                La page qui sera la plus souvent utilisée, elle parmet de trouver tous les tomes enregistrés, qu'ils fassent partie d'une série ou non.
+                            </p>
+                            <p>
+                                La page de saisie permet de saisir un nouveau tome, ou bien de modifier les informations d'un tome existant.
+                                Les informations permettrant une bonne gestion sont le nom du tome, son numéro dans la série, son ISBN, la série à laquelle il appartient, ses auteurs et éditeurs.
+                            </p>
+                            <p>
+                                La recherche permet également de filtrer les résultats affichés dans la liste.
+                            </p>
+                        </div>
+                        <!-- Texte explication Auteurs -->
+                        <div class="textePresentation" id="texteAuteurs">
+                            <p class="fs-5">
+                                Auteurs
+                            </p>
+                            <p>
+                                La liste de tous les auteurs enregistrés, elle permet de retrouver tous les tomes pour lesquels l'auteur a participé, ainsi que de modifier les informations de l'auteur.
+                            </p>
+                            <p>
+                                La partie détail affiche tous les liens de l'auteur, et permet d'y accéder rapidement.
+                            </p>
+                            <p>
+                                La recherche permet également de filtrer les résultats affichés dans la liste.
+                            </p>
+                        </div>
+                        <!-- Texte explication Editeurs -->
+                        <div class="textePresentation" id="texteEditeurs">
+                            <p class="fs-5">
+                                Editeurs
+                            </p>
+                            <p>
+                            La liste de tous les éditeurs enregistrés, elle fonctiomme sur le même modèle que la page auteurs.
+                            </p>
+                            <p>
+                                La partie détail affiche tous les liens de l'éditeur, et permet d'y accéder rapidement.
+                            </p>
+                            <p>
+                                La recherche permet également de filtrer les résultats affichés dans la liste.
+                            </p>
+                        </div>
+                        <!-- Texte explication Réglages -->
+                        <div class="textePresentation" id="texteReglages">
+                            <p class="fs-5">
+                                Réglages
+                            </p>
+                            <p>
+                                Cette page permet pour le moment de changer de profil et de passer en mode sombre.
+                            </p>
+                            <p>
+                                Le profil est un collection indépendante. Une famille peut avoir plusieurs personnes qui gèrent séparément lesurs collections, ou bien quelqu'un qui veut offrir des BD à un proche et savoir quelles BD il adéjà offert.
+                            </p>
+                            <p>
+                                Le mode sombre inverse les couleurs de l'affichage.
+                            </p>
+                        </div>
+                        <!-- Texte explication A Propos -->
+                        <div class="textePresentation" id="texteAPropos">
+                            <p class="fs-5">
+                                A Propos
+                            </p>
+                            <p>
+                                Accessible depuis le bas de la page, la section A Propos contint les informations générales sur la version de l'application, les fonctionnalités actives ou en préparation.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
