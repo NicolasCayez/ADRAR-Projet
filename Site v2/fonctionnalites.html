@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,6 @@
     <!-- lien css -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/styleFonctionnalites.css">
-
     <title>Fonctionnalités MyComics</title>
 </head>
 <body class="position-relative custom-bleu custom-font-txt">
@@ -23,128 +22,43 @@
         <!-- Appel Header -->
         <div class="container-fluid bg-custom-bleu custom-beige" id="header"></div>
         <!-- corps de la page -->
-        <div id="pageBody m-0 p-0 g-0">
-            <!-- Menu latérel gauche -->
-            <div class="menuLateral" id=""></div>
-            <!-- reste de la page hors menu -->
-            <div>
-                <!-- Titre de la page -->
-                <div class="titrePage">Présentation des pages de l'application</div>
-                <!-- contenu de la page -->
-                <div id="pageContent" class="row-cols-2 justify-content-center">
-                    <!-- Cadre Android -->
-                    <div class="cadreAndroid" id=""></div>
-                    <!-- Texte explication Accueil -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page d'accueil
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
+        <div class="row flex-grow-1" id="pageBody">
+            <!-- Menu latéral gauche -->
+            <div class="menuLateral col-1 w-auto h-auto py-0 px-auto bg-custom-bleu custom-beige" id="menuLateralPresentation"></div>
+            <!-- contenu de la page -->
+            <div class="bg-custom-bleu col h-100 p-0 mb-auto">
+                <div class="arrondiMenu bg-custom-beige col py-0">
+                    <!-- Titre de la page -->
+                    <div id="titrePage" class="custom-font-title text-center mt-lg-2 mt-1 mb-lg-5">Présentation des fonctionnalités de l'application</div>
+                    <!-- Sous-titre -->
+                    <div>
+                        <p id="sousTitre" class="text-center fs-5 mt-2 mb-2 mb-lg-5">TITRE A CHANGER</p>
                     </div>
-                    <!-- Texte explication Collection -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page Collection
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
-                    </div>
-                    <!-- Texte explication Series -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page Series
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
-                    </div>
-                    <!-- Texte explication Tomes -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page Tomes
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
-                    </div>
-                    <!-- Texte explication Auteurs -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page Auteurs
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
-                    </div>
-                    <!-- Texte explication Editeurs -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page Editeurs
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
-                    </div>
-                    <!-- Texte explication Réglages -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page des réglages
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
-                    </div>
-                    <!-- Texte explication A Propos -->
-                    <div class="texteFonctionnalites" id="">
-                        <p>
-                            Explication page Collection
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure quibusdam ipsum, minus voluptatum odio ullam repellendus asperiores, eius atque ducimus quod debitis corporis blanditiis tempore et sequi qui molestiae quia?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatibus, expedita assumenda magni repudiandae pariatur aliquid obcaecati, cum quis reiciendis commodi sapiente nam quos debitis provident ipsa aliquam molestias quae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam voluptates veniam rem quae sed. Magnam autem sunt, deserunt veniam inventore aperiam, quas voluptatem dolor deleniti non nulla. Necessitatibus, possimus voluptatem.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt ad est dolor. Et voluptatum quo sequi id! Architecto illo fuga earum ipsum qui accusantium, exercitationem porro quae praesentium nemo dicta.
-                        </p>
+                    <!-- contenu de la page -->
+                    <div id="pageContent" class="row row-cols-1 row-cols-sm-3 justify-content-center">
+                        <!-- Partie de gauche -->
+                        <div id="colLeft" class="phoneImageDiv mt-3 mt-md-4 mt-lg-3 mx-1 ms-lg-5 me-lg-3">
+                            <!-- Cadre Android -->
+                            <div class="cadreAndroid col-1" id="cadreAndroidPresentation">COLONNE 1</div>
+                        </div>
+                        <div id="colMiddle" class="phoneImageDiv mt-3 mt-md-4 mt-lg-3 mx-1 ms-lg-5 me-lg-3">
+                            <!-- Cadre Android -->
+                            <div class="cadreAndroid col-1" id="cadreAndroidPresentation2">COLONNE 2</div>
+                        </div>
+                        <!-- Partie de droite -->
+                        <div id="colRight" class="col">
+                            <!-- Texte explication Accueil -->
+                            <div class="textePresentation textDiv mt-lg-3 mt-md-2 mx-1 me-lg-5 ms-1 ms-sm-3 p-5 p-sm-2 " id="texteAccueil">COLONNE 3
+                                <br><br>
+                                <p>
+                                    La porte d'entrée de l'application, avec un menu rapide permettant la recherche, l'accès aux séries, tomes, auteurs et éditeurs.
+                                </p>
+                                <p>
+                                    Le menu hamburger, lui, permet d'accéder en plus au résumé de la collection et aux réglages de l'application.
+                                    Cela parmet depuis n'importe quelle page de l'application de pouvoir se déplacer et changer de type d'informations.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
