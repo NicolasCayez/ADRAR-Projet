@@ -1,3 +1,6 @@
+//********************************************/
+//* HEADER                                   */
+//********************************************/
 // Recherche de l'id #header
 const divHeader = document.getElementById("header");
 // Création navbar
@@ -73,7 +76,9 @@ divHeader.append(navbarHeader);
         //Bouton Structure
         creerElementMenuHeader("btnContact","Contact","./contact.html", hiddenMenu);
 
-
+//********************************************/
+//* FOOTER                                   */
+//********************************************/
 // Recherche de l'id #footer
 const divFooter = document.getElementById("footer");
 // Création navbar
@@ -90,26 +95,24 @@ divFooter.append(navbarFooter);
 let logosFooter = document.createElement("div");
 logosFooter.classList.add("align-top");
 navbarFooter.append(logosFooter);
+//Lien gitHub avec image
+let lienGitHub = document.createElement("a");
+lienGitHub.href = "https://github.com/NicolasCayez/ADRAR-Projet.git";
+lienGitHub.target = "_blank";
+logosFooter.append(lienGitHub);
 let logoGitHub = document.createElement("img");
 logoGitHub.src="./img/logoGitHub.png";
 logoGitHub.classList.add("align-top");
 logoGitHub.classList.add("float-end");
-logosFooter.append(logoGitHub);
+lienGitHub.append(logoGitHub);
+//Lien facebook avec image
+let lienFacebook = document.createElement("a");
+lienFacebook.href = "https://github.com/NicolasCayez/ADRAR-Projet.git";
+lienFacebook.target = "_blank";
+logosFooter.append(lienFacebook);
 let logofacebook = document.createElement("img");
 logofacebook.src="./img/logofacebook.png";
 logofacebook.classList.add("align-top");
 logofacebook.classList.add("float-end");
-logosFooter.append(logofacebook);
-
-
-
-
-
-    // création navbar container
-    let navbarFooterContainer = document.createElement("div");
-    navbarFooterContainer.classList.add("navbar-container");
-    navbarFooterContainer.classList.add("container");
-    navbarFooterContainer.classList.add("px-0");
-    navbarFooterContainer.id = "navFooter";
-    navbarFooter.appendChild(navbarFooterContainer);
+lienFacebook.append(logofacebook);
 
