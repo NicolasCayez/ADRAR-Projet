@@ -28,14 +28,17 @@ function creerElementMenuLateral (idChild, libelle, urlLogo, cible) {
     btn.classList.add("py-1");
     btn.classList.add("ps-2");
         //création logo dans la div
-        let logo = document.createElement("img");
-        logo.src = urlLogo;
-        logo.classList.add("logoBouton");
-        btn.appendChild(logo);
+        if (urlLogo != ""){
+            let logo = document.createElement("img");
+            logo.src = urlLogo;
+            logo.classList.add("logoBouton");
+            btn.appendChild(logo);
+        }
         //création texte du bouton
         let btnLien = document.createElement("span");
         btnLien.innerText = libelle;
-        btnLien.classList.add("ps-3");
+        btnLien.classList.add("ps-md-1");
+        btnLien.classList.add("ps-0");
         btn.appendChild(btnLien);
     cible.appendChild(btn);
 }

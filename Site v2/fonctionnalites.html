@@ -11,7 +11,7 @@
     <!-- SCIPTS Js -->
     <script src="./scripts/functions.js" async></script>
     <script src="./scripts/structureHeaderFooter.js" async></script>
-    <script src="./scripts/structureBody.js" async></script>
+    <script src="./scripts/structureBodyFonctionnalites.js" async></script>
     <!-- lien css -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/styleFonctionnalites.css">
@@ -24,39 +24,135 @@
         <!-- corps de la page -->
         <div class="row flex-grow-1" id="pageBody">
             <!-- Menu latéral gauche -->
-            <div class="menuLateral col-1 w-auto h-auto py-0 px-auto bg-custom-bleu custom-beige" id="menuLateralPresentation"></div>
+            <div class="menuLateral col-1 w-auto h-auto py-0 px-auto bg-custom-bleu custom-beige" id="menuLateralFonctionnalites"></div>
             <!-- contenu de la page -->
             <div class="bg-custom-bleu col h-100 p-0 mb-auto">
                 <div class="arrondiMenu bg-custom-beige col py-0">
                     <!-- Titre de la page -->
-                    <div id="titrePage" class="custom-font-title text-center mt-lg-2 mt-1 mb-lg-5">Présentation des fonctionnalités de l'application</div>
-                    <!-- Sous-titre -->
-                    <div>
-                        <p id="sousTitre" class="text-center fs-5 mt-2 mb-2 mb-lg-5">TITRE A CHANGER</p>
-                    </div>
+                    <div id="titrePage" class="custom-font-title text-center pt-lg-2 mt-lg-2 mt-1 mb-lg-5">Présentation des fonctionnalités de l'application</div>
                     <!-- contenu de la page -->
-                    <div id="pageContent" class="row row-cols-1 row-cols-sm-3 justify-content-center">
-                        <!-- Partie de gauche -->
-                        <div id="colLeft" class="phoneImageDiv mt-3 mt-md-4 mt-lg-3 mx-1 ms-lg-5 me-lg-3">
-                            <!-- Cadre Android -->
-                            <div class="cadreAndroid col-1" id="cadreAndroidPresentation">COLONNE 1</div>
+                    <div id="pageContent" class="row justify-content-center px-lg-5">
+                        <div id="sectionSaisie" class="row">
+                            <!-- Sous-titre -->
+                            <div>
+                                <p class="col-12 sousTitre custom-font-title text-start fs-5 mt-2 mb-2 mb-lg-5">Saisie de nouveaux tomes, auteurs ou éditeurs</p>
+                            </div>
+                            <!-- Partie de gauche -->
+                            <div id="colLeft" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">Les tomes :</h2>
+                                    <p>
+                                        L'étape la plus importante, le seul champ obligatoires sont le nom du tome. Sont conseillés l'ISBN (non obligatoire car des anciennes éditions en étaient dépourvues), son numéro, la série dont il fait partie si existante, ses auteurs, ses éditeurs.
+                                        Il peut y avoir des informations non uniques (exemple Astérix édité à l'origine par Pilote).
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Partie de droite -->
+                            <div id="colRight" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <!-- Texte explication Accueil -->
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">Auteurs, Editeurs et séries :</h2>
+                                    <p>
+                                        Les auteurs, éditeurs et séries sont optionnels mais nécessaires pour faire le lien entre les différents tomes.
+                                        Ces éléments seront essentiels pour que la fonction de recherche soit efficace.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div id="colMiddle" class="phoneImageDiv mt-3 mt-md-4 mt-lg-3 mx-1 ms-lg-5 me-lg-3">
-                            <!-- Cadre Android -->
-                            <div class="cadreAndroid col-1" id="cadreAndroidPresentation2">COLONNE 2</div>
+                        <div id="sectionRecherche" class="row">
+                            <!-- Sous-titre -->
+                            <div>
+                                <p class="col-12 sousTitre custom-font-title text-start fs-5 mt-2 mb-2 mb-lg-5">La fonction de recherche</p>
+                            </div>
+                            <!-- Partie de gauche -->
+                            <div id="colLeft" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">Comment lancer la recherche :</h2>
+                                    <p>
+                                        Le champ de saisie permet de filter les éléments de la page en cours grace au bouton <span class="btnExemple bg-custom-bleu custom-beige text-decoration-none px-2">filtrer</span>.
+                                    </p>
+                                    <p>
+                                        Le bouton <span class="btnExemple bg-custom-bleu custom-beige text-decoration-none px-2">Chercher</span> envoie sur la page de recherche et affiche les résultats dans les 4 catégories Série, Tome, Auteurs et Editeurs.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Partie de droite -->
+                            <div id="colRight" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <!-- Texte explication Accueil -->
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">Les champs de résultats :</h2>
+                                    <p>
+                                        chaque catégorie a sa propre liste de résultats et permet d'aller sur l'élement choisi directement
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Partie de droite -->
-                        <div id="colRight" class="col">
-                            <!-- Texte explication Accueil -->
-                            <div class="textePresentation textDiv mt-lg-3 mt-md-2 mx-1 me-lg-5 ms-1 ms-sm-3 p-5 p-sm-2 " id="texteAccueil">COLONNE 3
-                                <br><br>
-                                <p>
-                                    La porte d'entrée de l'application, avec un menu rapide permettant la recherche, l'accès aux séries, tomes, auteurs et éditeurs.
-                                </p>
-                                <p>
-                                    Le menu hamburger, lui, permet d'accéder en plus au résumé de la collection et aux réglages de l'application.
-                                    Cela parmet depuis n'importe quelle page de l'application de pouvoir se déplacer et changer de type d'informations.
-                                </p>
+                        <div id="sectionProfils" class="row">
+                            <!-- Sous-titre -->
+                            <div>
+                                <p class="col-12 sousTitre custom-font-title text-start fs-5 mt-2 mb-2 mb-lg-5">La gestion des profils</p>
+                            </div>
+                            <!-- Partie de gauche -->
+                            <div id="colLeft" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">A quoi correspond un profil :</h2>
+                                    <p>
+                                        Un profil correspond à une collection, avec ses tomes, auteurs, editeurs, etc.
+                                    </p>
+                                    <p>
+                                        Sur un même smartphone plusieurs profils peuvent être actifs. Pour le moment ces profils sont indépendants.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Partie de droite -->
+                            <div id="colRight" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <!-- Texte explication Accueil -->
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">Pourquoi plusieurs profils ?</h2>
+                                    <p>
+                                        Un utilisateur peut vouloir dissocier ses BD en plusieurs listes, ou bien gérer des livres autres que des BD "classiques" (magasines par exemple).
+                                    </p>
+                                    <p>
+                                        Un même smartphone peut également servir à gérer des collections de plusieurs utilisateurs, par exemple les parents qui gèrent leur collection, et les enfants la leur. Cela peut aussi servir à des parents qui veulent savoir quels tomes sont déjà en possession des enfants pour faire un achat en librairie.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sectionAddOn" class="row">
+                            <!-- Sous-titre -->
+                            <div>
+                                <p class="col-12 sousTitre custom-font-title text-start fs-5 mt-2 mb-2 mb-lg-5">Les projets d'ajouts de fonctionnalités</p>
+                            </div>
+                            <!-- Partie de gauche -->
+                            <div id="colLeft" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">A court terme :</h2>
+                                    <p>
+                                        Recherche par code ISBN dans l'application.
+                                    </p>
+                                    <p>
+                                        Ajout de la langue anglaise en plus du français
+                                    </p>
+                                    <p>
+                                        Mode clair/sombre
+                                    </p>
+                                    <p>
+                                        Import/Export de la base de donnée Collection pour sauvegarde.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Partie de droite -->
+                            <div id="colRight" class="col-12 col-md-5 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <!-- Texte explication Accueil -->
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <h2 class="custom-font-title fs-6">A long terme :</h2>
+                                    <p>
+                                        Recherche par code ISBN en base de donnée externe (connexion internet requise).
+                                    </p>
+                                    <p>
+                                        Appli web pour faciliter la saisie des informations - nécessite la fonction d'import/export.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

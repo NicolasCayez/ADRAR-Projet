@@ -43,7 +43,7 @@ divHeader.append(navbarHeader);
             //Bouton Fonctionnalités
             creerElementMenuHeader("btnFonctionnalites","Fonctionnalités","./fonctionnalites.html", menuHeader);
             //Bouton Structure
-            creerElementMenuHeader("btnStructure","Structure","./structure.html", menuHeader);
+            creerElementMenuHeader("btnContact","Contact","./contact.html", menuHeader);
     // Création checkbox
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -71,7 +71,7 @@ divHeader.append(navbarHeader);
         //Bouton Fonctionnalités
         creerElementMenuHeader("btnFonctionnalites","Fonctionnalités","./fonctionnalites.html", hiddenMenu);
         //Bouton Structure
-        creerElementMenuHeader("btnStructure","Structure","./structure.html", hiddenMenu);
+        creerElementMenuHeader("btnContact","Contact","./contact.html", hiddenMenu);
 
 
 // Recherche de l'id #footer

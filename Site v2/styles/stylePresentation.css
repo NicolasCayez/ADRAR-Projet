@@ -21,6 +21,7 @@
     display: none;
     margin-left: auto;
     margin-bottom: 1em;
+    margin-bottom: 100px;
 }
 
 .textePresentation {
@@ -38,4 +39,13 @@
     border-bottom-width: 0;
     border-right-width: 0;
     border-top-left-radius: 25px;
+}
+
+
+/* ----------------- MEDIA QUERIES ----------------- */
+/* Media Query for Mobile Devices */
+@media (max-width: 767px) {
+    .btnMenuLateral span {
+    display: none;
+    }
 }

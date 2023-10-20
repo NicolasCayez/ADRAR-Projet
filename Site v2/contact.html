@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- LIEN BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    
+    <!-- SCIPTS Js -->
+    <script src="./scripts/functions.js" async></script>
+    <script src="./scripts/structureHeaderFooter.js" async></script>
+    <!-- lien css -->
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/styleContact.css">
+    <title>Structure MyComics</title>
+</head>
+<body class="position-relative custom-bleu custom-font-txt">
+    <div class="container-fluid min-vh-100 p-0 d-flex flex-column bg-custom-beige">
+        <!-- Appel Header -->
+        <div class="container-fluid bg-custom-bleu custom-beige" id="header"></div>
+        <!-- corps de la page -->
+        <div class="row flex-grow-1" id="pageBody">
+            <!-- Menu latéral gauche -->
+            <div class="menuLateral col-1 w-auto h-auto py-0 px-auto bg-custom-bleu custom-beige" id="menuLateralPresentation"></div>
+            <!-- contenu de la page -->
+            <div class="bg-custom-bleu col h-100 p-0 mb-auto">
+                <div class="arrondiMenu bg-custom-beige col py-0">
+                    <!-- contenu de la page -->
+                    <div id="pageContent" class="row justify-content-center px-lg-5">
+                        <div id="formulaireContactDiv" class="row">
+                            <!-- Sous-titre -->
+                            <div>
+                                <p class="col-12 sousTitre custom-font-title text-center fs-5 mt-2 mb-2 mb-lg-5">Contactez-nous</p>
+                            </div>
+                            <!-- Partie de gauche -->
+                            <div id="colLeft" class="col-12 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
+                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Appel Footer -->
+        <div class="position-absolute container-fluid bottom-0 bg-custom-bleu" id="footer"></div>
+    </div>
+    <!-- SCRIPT BOOTSTRAP -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

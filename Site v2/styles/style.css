@@ -49,7 +49,14 @@
     border-radius: 10px;
     width: 130px;
     height: 30px;
+    box-shadow: #f2dcc2 0px 0px 3px;
 }
+.btnExemple{
+    border-radius: 7px;
+    height: 30px;
+    box-shadow: #275f74 0px 0px 3px;
+}
+
 .btnMenu:hover, .btnMenuLateral:hover {
     background-color: #afdff3;
 }
@@ -64,9 +71,16 @@
     display: none;
 }
 
-/* Taille des textes */
+/* Taille et aspect des textes */
+#titreMyComics{
+    text-shadow: #f2dcc2 0px 0px 3px;
+}
+
 #titrePage{
-    font-size: large;
+    font-size: x-large;
+}
+.sousTitre{
+    font-size: medium;
 }
 
 /* ----------------- Corps de la page ----------------- */
@@ -189,7 +203,10 @@ body{
 
     /* réduction taille tite */
     #titrePage{
-        font-size:small;
+        font-size:medium;
+    }
+    .sousTitre{
+        font-size: small;
     }
     #menuHeader{
         display: none;
@@ -210,9 +227,6 @@ body{
         height: 15px;
         width: 15px;
     }
-    .btnMenuLateral span {
-        display: none;
-    }
 
     .cadreAndroid {
         width: 150px;
@@ -224,7 +238,7 @@ body{
 @media (min-width: 768px) and (max-width: 1024px){
     /* réduction taille tite */
     #titrePage{
-        font-size:medium;
+        font-size:large;
     }
     .cadreAndroid {
         width: 150px;
