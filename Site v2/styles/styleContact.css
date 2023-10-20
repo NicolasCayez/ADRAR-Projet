@@ -1,4 +1,4 @@
-#btnStructure {
+#btnContact {
     background-color: #275f74;
     color: #f2dcc2;
     box-shadow:0px 0px 0px 3px #f2dcc2 inset;
@@ -6,4 +6,15 @@
 
 .menuLateral {
     display: none;
+}
+
+#cadreFormulaire{
+    box-shadow: 0px 0px 2px 10px #275f74;
+    border-radius: 10px;
+    padding:0;
+}
+#submitButton:hover{
+    background-color: #f2dcc2;
+    color: #275f74;
+    box-shadow:0px 0px 0px 3px #275f74 inset;
 }

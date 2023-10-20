@@ -1,4 +1,6 @@
-// Création d'un bouton du menu du header
+//********************************************/
+//* Création d'un bouton du menu du header   */
+//********************************************/
 function creerElementMenuHeader (idChild, libelle, lien, cible) {
     let btn = document.createElement("a");
     btn.id = idChild;
@@ -14,7 +16,9 @@ function creerElementMenuHeader (idChild, libelle, lien, cible) {
     cible.appendChild(btn);
 }
 
-// Création d'un bouton du menu latéral
+//********************************************/
+//* Création d'un bouton du menu latéral     */
+//********************************************/
 function creerElementMenuLateral (idChild, libelle, urlLogo, cible) {
     //création div bouton
     let btn = document.createElement("div");
@@ -42,3 +46,8 @@ function creerElementMenuLateral (idChild, libelle, urlLogo, cible) {
         btn.appendChild(btnLien);
     cible.appendChild(btn);
 }
+
+//********************************************/
+//* Envoi du formulaire                      */
+//********************************************/
+//TODO

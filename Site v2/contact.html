@@ -33,10 +33,51 @@
                             <div>
                                 <p class="col-12 sousTitre custom-font-title text-center fs-5 mt-2 mb-2 mb-lg-5">Contactez-nous</p>
                             </div>
-                            <!-- Partie de gauche -->
-                            <div id="colLeft" class="col-12 mt-1 mt-md-4 mt-lg-3 mx-1 mx-lg-3">
-                                <div class="texteFonctionnalite textDiv mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                            <div id="cadreFormulaire" class="col-6 mx-auto">
+                                <div class="texteFonctionnalite mt-1 mt-md-4 mt-lg-3 mx-4 mx-lg-3">
+                                    <form action="" method="post">
+                                        <fieldset class="d-flex row">
+                                            <legend>Formulaire de contact</legend>
+                                            <!-- Champ email -->
+                                            <div class="row mb-3 pe-0">
+                                                <div>
+                                                    <label for="inputEmail" class="form-label">Adresse email<span class="redStar">*</span></label>
+                                                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"  placeholder="Exemple : tartanpion@tonfai.fr" id="email">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3 pe-0 input-group">
+                                                <!-- Champ prénom -->
+                                                <div class="col">
+                                                    <label for="inputPrenom" class="form-label">Prénom ou pseudo<span class="redStar">*</span></label>
+                                                    <input type="prenom" class="form-control" id="inputPrenom" placeholder="Exemple : Asterix" required minlength="2" maxlength="20">
+                                                </div>
+                                                <!-- Champ nom -->
+                                                <div class="col">
+                                                    <label for="inputNom" class="form-label">Nom</label>
+                                                    <input type="nom" class="form-control" id="inputNom" placeholder="Exemple : LeGaulois" required minlength="2" maxlength="20">
+                                                </div>
+                                            </div>
 
+                                            <!-- zone de texte -->
+                                            <div class="row mb-3 pe-0">
+                                                <div>
+                                                    <label for="commentaire">Laissez un commentaire :<span class="redStar">*</span></label>
+                                                    <br>
+                                                    <textarea class="form-control" aria-label="With textarea" placeholder="Bla bla bla"></textarea>
+                                                </div>
+                                            </div>
+                                            <p>
+                                                Les champs marqués par <span class="redStar">*</span> sont nécessaires
+                                            </p>
+
+                                            <!-- Bouton envoyer -->
+                                            <div class="row mb-3">
+                                                <button id="submitButton" type="submit" class="col-2 btn bg-custom-bleu custom-beige ms-auto">Envoyer</button>
+                                            </div>
+
+
+                                        </fieldset>
+                                    </form>
                                 </div>
                             </div>
                         </div>
