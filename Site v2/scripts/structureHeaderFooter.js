@@ -103,6 +103,7 @@ logosFooter.append(lienGitHub);
 let logoGitHub = document.createElement("img");
 logoGitHub.src="./img/logoGitHub.png";
 logoGitHub.classList.add("align-top");
+logoGitHub.classList.add("mx-1");
 logoGitHub.classList.add("float-end");
 lienGitHub.append(logoGitHub);
 //Lien facebook avec image
@@ -113,6 +114,7 @@ logosFooter.append(lienFacebook);
 let logofacebook = document.createElement("img");
 logofacebook.src="./img/logofacebook.png";
 logofacebook.classList.add("align-top");
+logofacebook.classList.add("mx-1");
 logofacebook.classList.add("float-end");
 lienFacebook.append(logofacebook);
 
