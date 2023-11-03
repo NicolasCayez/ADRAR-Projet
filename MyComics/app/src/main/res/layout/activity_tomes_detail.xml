@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/custom_blue"
+    tools:context=".TomesDetailActivity">
+    <!-- Header -->
+    <include
+        android:id="@+id/tbMenu"
+        layout="@layout/custom_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <!-- Menu hamburger -->
+    <include
+        android:id="@+id/fragViewMenu"
+        layout="@layout/fragment_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <!-- Bandeau DETAIL TOME -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginVertical="5dp"
+        android:orientation="horizontal"
+        android:background="@color/custom_beige">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="30dp"
+            android:src="@drawable/tomes_bleu" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView3"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/kronika"
+            android:text="DETAIL TOME"
+            android:textAlignment="textStart"
+            android:gravity="center"
+            android:paddingStart="50dp"
+            android:layout_weight="1"
+            android:textColor="@color/custom_blue"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <!-- Body -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_corner_custom_beige"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <!-- Titre tome -->
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="#eee"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="Titre tome"
+                    android:textColorHint="#999"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp"/>
+                <!-- Numéro tome -->
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextNumber4"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="#eee"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="Numéro tome"
+                    android:textColorHint="#999"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <!-- ISBN -->
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextNumber5"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="#eee"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="ISBN"
+                    android:textColorHint="#999"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <!-- Prix éditeur -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView14"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Prix éditeur :"
+                        android:fontFamily="@font/kronika"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextNumber7"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="#eee"
+                        android:ems="10"
+                        android:fontFamily="@font/kronika"
+                        android:inputType="number|numberDecimal"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!-- Valeur actuelle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView15"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Valeur actuelle :"
+                        android:fontFamily="@font/kronika"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextNumber6"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="#eee"
+                        android:ems="10"
+                        android:fontFamily="@font/kronika"
+                        android:inputType="number|numberDecimal"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!-- Date édition -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView16"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Date édition :"
+                        android:fontFamily="@font/kronika"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextNumber8"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="#eee"
+                        android:ems="10"
+                        android:fontFamily="@font/kronika"
+                        android:hint="MM/AAAA"
+                        android:inputType="datetime|date"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/custom_blue"
+                        android:textColorHint="#999"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!-- Dédicassé -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView17"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Dédicassé :"
+                        android:fontFamily="@font/kronika"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp" />
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        app:buttonTint="@color/custom_blue" />
+                </LinearLayout>
+                <!-- Edition spéciale -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView18"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:text="Edition spéciale :"
+                        android:fontFamily="@font/kronika"
+                        android:textColor="@color/custom_blue"
+                        android:textSize="14sp" />
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        app:buttonTint="@color/custom_blue" />
+                </LinearLayout>
+                <!-- Intitulé édition spéciale -->
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextNumber9"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="#eee"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="Intitulé édition spéciale"
+                    android:textColorHint="#999"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <!-- Image Tome -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btnProfilDelete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:src="@drawable/tomes_bleu" />
+                    </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_plus_bleu" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_delete_bleu" />
+                </LinearLayout>
+                <!-- Série -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Série"
+                    android:textAlignment="textStart"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <!-- Boutons Série -->
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="#eee"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_plus_bleu" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_delete_bleu" />
+                </LinearLayout>
+                <!-- Liste auteurs -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Auteurs qui ont travaillé ensemble"
+                    android:textAlignment="textStart"
+                    android:fontFamily="@font/kronika"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:id="@+id/lvAuteursDetailEditeurs"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="#eee" />
+                </LinearLayout>
+                <!-- Boutons Auteur -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_plus_bleu" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_delete_bleu" />
+                </LinearLayout>
+                <!-- Liste éditeurs -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/kronika"
+                    android:text="Editeurs"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:id="@+id/lvAuteursDetailAuteurs"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="#eee" />
+                </LinearLayout>
+                <!-- Boutons Editeur -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_plus_bleu" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/btn_delete_bleu" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- Boutons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:background="@drawable/rounded_corner_custom_beige"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnAuteursAjout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/btn_save_bleu" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnProfilAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/btn_delete_bleu" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/custom_blue"
+    tools:context=".MainActivity">
+    <!-- Header -->
+    <include
+        android:id="@+id/tbMenu"
+        layout="@layout/custom_toolbar_layout"
+        />
+    <!-- Menu Hamburger -->
+    <include
+        android:id="@+id/fragViewMenu"
+        layout="@layout/fragment_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <!-- Body -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Bandeau Accueil -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginVertical="5dp"
+                android:orientation="horizontal"
+                android:background="@color/custom_beige">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    android:src="@drawable/accueil_bleu" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView3"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/kronika"
+                    android:text="ACCUEIL"
+                    android:textAlignment="textStart"
+                    android:gravity="center"
+                    android:paddingStart="50dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- Search bar -->
+            <include
+                android:id="@+id/sbSearch"
+                layout="@layout/fragment_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+            <!-- Bouton SERIES -->
+            <LinearLayout
+                android:id="@+id/btnAccueilSeries"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_corner_custom_beige"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMenuAccueilSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/series_bleu" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMenuAccueilSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/kronika"
+                    android:text="SERIES"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- Bouton TOMES -->
+            <LinearLayout
+                android:id="@+id/btnAccueilTomes"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_corner_custom_beige"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMenuAccueilTomes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/tomes_bleu" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMenuAccueiTomes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/kronika"
+                    android:text="TOMES"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- Bouton AUTEURS -->
+            <LinearLayout
+                android:id="@+id/btnAccueilAuteurs"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_corner_custom_beige"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMenuAccueilAuteurs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/auteurs_bleu" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMenuAccueilAuteurs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/kronika"
+                    android:text="AUTEURS"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- Bouton EDITEURS -->
+            <LinearLayout
+                android:id="@+id/btnAccueilEditeurs"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_corner_custom_beige"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMenuAccueilEditeurs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:src="@drawable/editeurs_bleu" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMenuAccueilEditeurs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/kronika"
+                    android:text="EDITEURS"
+                    android:textColor="@color/custom_blue"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!-- Footer inactif -->
+<!--    <include-->
+<!--        android:id="@+id/llFooter"-->
+<!--        layout="@layout/fragment_footer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        />-->
+</LinearLayout>
