@@ -210,14 +210,13 @@ public class AuteursActivity extends AppCompatActivity {
                 try {
                     auteurBean = (AuteurBean) lvAuteursListe.getItemAtPosition(position);
                 } catch (Exception e) {
-                    auteurBean = new AuteurPseudoBean(-1,"error","error","error","error");
+                    auteurBean = new AuteurPseudoBean(-1,"error","error","error");
                 }
                 Intent intent = new Intent(AuteursActivity.this, AuteursDetailActivity.class);
                 intent.putExtra("auteur_id",auteurBean.getAuteur_id());
                 intent.putExtra("auteur_nom",auteurBean.getAuteur_nom());
                 intent.putExtra("auteur_prenom",auteurBean.getAuteur_prenom());
                 intent.putExtra("auteur_pseudo",auteurBean.getAuteur_pseudo());
-                intent.putExtra("auteur_photo",auteurBean.getAuteur_photo());
                 startActivity(intent);
             }
         });

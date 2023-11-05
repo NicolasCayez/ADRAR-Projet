@@ -2,18 +2,17 @@ package com.example.mycomics.beans;
 
 public class AuteurBean {
     private int auteur_id;
-    private String auteur_nom, auteur_prenom, auteur_pseudo, auteur_photo;
+    private String auteur_nom, auteur_prenom, auteur_pseudo;
 
     /* -------------------------------------- */
     // Constructor
     /* -------------------------------------- */
 
-    public AuteurBean(int auteur_id, String auteur_nom, String auteur_prenom, String auteur_pseudo, String auteur_photo) {
+    public AuteurBean(int auteur_id, String auteur_nom, String auteur_prenom, String auteur_pseudo) {
         this.auteur_id = auteur_id;
         this.auteur_nom = auteur_nom;
         this.auteur_prenom = auteur_prenom;
         this.auteur_pseudo = auteur_pseudo;
-        this.auteur_photo = auteur_photo;
     }
     public AuteurBean(int auteur_id, String auteur_pseudo) {
         this.auteur_id = auteur_id;
@@ -49,13 +48,6 @@ public class AuteurBean {
     public void setAuteur_pseudo(String auteur_pseudo) {
         this.auteur_pseudo = auteur_pseudo;
     }
-    public String getAuteur_photo() {
-        return auteur_photo;
-    }
-    public void setAuteur_photo(String auteur_photo) {
-        this.auteur_photo = auteur_photo;
-    }
-
     /* -------------------------------------- */
     // ToString
     /* -------------------------------------- */
@@ -66,7 +58,6 @@ public class AuteurBean {
                 ", auteur_nom='" + auteur_nom + '\'' +
                 ", auteur_prenom='" + auteur_prenom + '\'' +
                 ", auteur_pseudo='" + auteur_pseudo + '\'' +
-                ", auteur_photo='" + auteur_photo + '\'' +
                 '}';
     }
 }

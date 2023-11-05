@@ -74,7 +74,7 @@
                 android:background="@drawable/rounded_corner_custom_beige"
                 android:padding="5dp">
                 <ListView
-                    android:id="@+id/lvTomesTomes"
+                    android:id="@+id/lvTomesListe"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:background="#eee" />
@@ -86,7 +86,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/btnTomesAjout"
+                    android:id="@+id/btnAddTomes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"

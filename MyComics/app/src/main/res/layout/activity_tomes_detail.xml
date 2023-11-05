@@ -66,7 +66,7 @@
                 android:padding="5dp">
                 <!-- Titre tome -->
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextText2"
+                    android:id="@+id/etTomeTitre"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_marginTop="5dp"
