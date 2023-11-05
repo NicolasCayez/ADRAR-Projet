@@ -1,6 +1,7 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;

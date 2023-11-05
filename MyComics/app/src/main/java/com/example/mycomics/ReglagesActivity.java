@@ -3,6 +3,7 @@ package com.example.mycomics;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +14,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.example.mycomics.beans.PopupBean;
-import com.example.mycomics.beans.PopupListBean;
+import com.example.mycomics.adapters.ProfilsListAdapter;
+import com.example.mycomics.popups.PopupAddBean;
+import com.example.mycomics.popups.PopupListBean;
 import com.example.mycomics.beans.ProfilBean;
+import com.example.mycomics.beans.ProfilNomBean;
 import com.example.mycomics.helpers.DataBaseHelper;
 
 public class ReglagesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -30,13 +32,10 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
     ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
     //Page réglages
-    Spinner spinProfil;
     ImageView btnAddProfil, btnDeleteProfil;
     Button btnPopupValider, btnPopupAnnuler;
+    TextView tvProfilActif;
     EditText etPopupText;
-//--------------------------------------------------------------Test a remplacer quand utilisation BDD
-    String test;
-    ProfilBean profilBeantest = null;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -45,17 +44,10 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
     DataBaseHelper dataBaseHelper;
     ArrayAdapter profilsArrayAdapter;
 
-
-
-    /* -------------------------------------- */
-    // instance activity
-    /* -------------------------------------- */
-    private ReglagesActivity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reglages);
-        this.activity = this;
 
         /* -------------------------------------- */
         // Activation fragmentManager
@@ -80,9 +72,14 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         btnPopupAnnuler = findViewById(R.id.btnPopupAnnuler);
         etPopupText = findViewById(R.id.etPopupText);
 
+        tvProfilActif = findViewById(R.id.tvProfilActif);
         lvPopupListe = findViewById(R.id.lvPopupListe);
         dataBaseHelper = new DataBaseHelper(ReglagesActivity.this);
 
+        /* -------------------------------------- */
+        // Initialisation affichage
+        /* -------------------------------------- */
+        afficherProfilActif();
 
         /* -------------------------------------- */
         // Clic sur le logo
@@ -166,74 +163,61 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         });
 
         /* -------------------------------------- */
-        // Remplissage liste profils
-        /* -------------------------------------- */
-        dataBaseHelper = new DataBaseHelper(ReglagesActivity.this);
-//        afficherListeProfils(); //spinner
-
-
-        /* -------------------------------------- */
         // Clic sur bouton AddProfil
         /* -------------------------------------- */
         btnAddProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupBean popupBean = new PopupBean(activity);
-                popupBean.setTitre("Entrez un nom de profil");
-                popupBean.setHint("Nom de profil");
-                System.out.println("clic ajouter profil");
-                //Clic bouton Valider
-//                afficherListeProfils();
-                popupBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupAddBean popupAddBean = new PopupAddBean(ReglagesActivity.this);
+                popupAddBean.setTitre("Entrez un nom de profil");
+                popupAddBean.setHint("Nom de profil");
+                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("clic Valider nouveau profil");
-                        ProfilBean profilBean;
+                        ProfilNomBean profilBean;
                         try {
-                            profilBean = new ProfilBean(-1, popupBean.getEtPopupText().getText().toString());
+                            profilBean = new ProfilNomBean(-1, popupAddBean.getEtPopupText().getText().toString());
                         } catch (Exception e) {
-                            Toast.makeText(ReglagesActivity.this, "Erreur création profil", Toast.LENGTH_SHORT).show();
-                            profilBean = new ProfilBean(-1, "error" );
+//                            Toast.makeText(ReglagesActivity.this, "Erreur création profil", Toast.LENGTH_SHORT).show();
+                            profilBean = new ProfilNomBean(-1, "error" );
                         }
-                        popupBean.dismiss(); // Fermeture Popup
+                        popupAddBean.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(ReglagesActivity.this);
 
                         boolean success = dataBaseHelper.insertIntoProfils(profilBean);
-                        Toast.makeText(ReglagesActivity.this, "Création profil= " + success, Toast.LENGTH_SHORT).show();
 //                        afficherListeProfils();
                     }
                 });
-                popupBean.build();
-
+                popupAddBean.build();
+                afficherProfilActif();
             }
+
         });
 
         /* -------------------------------------- */
         // Clic sur profil actif pour avoir la liste
         /* -------------------------------------- */
-        findViewById(R.id.tvProfilActif).setOnClickListener(new View.OnClickListener() {
+        tvProfilActif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
                 PopupListBean popupListBean = new PopupListBean(ReglagesActivity.this);
                 popupListBean.setTitre("Choisissez un profil dans la liste");
-                System.out.println("clic clic");
-                System.out.println(profilsArrayAdapter);
                 ListView listView = (ListView) popupListBean.findViewById(R.id.lvPopupListe);
-                profilsArrayAdapter = new ArrayAdapter<>(ReglagesActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.selectAllFromProfils());
+//                profilsArrayAdapter = new ArrayAdapter<>(ReglagesActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.selectAllFromProfilsNomSeul());
+                profilsArrayAdapter = new ProfilsListAdapter(ReglagesActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromProfilsNomSeul());
                 listView.setAdapter(profilsArrayAdapter);
-
-                //Clic bouton Valider
+                //Clic Profil choisi pour modification
                 popupListBean.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ProfilBean profilBean;
                         try {
-                            profilBean = new ProfilBean(-1, popupListBean.getLvPopupListe().getItemAtPosition(position).toString());
+                            profilBean = (ProfilBean) popupListBean.getLvPopupListe().getItemAtPosition(position);
+                            dataBaseHelper.updateProfilActif(dataBaseHelper, ((ProfilBean) popupListBean.getLvPopupListe().getItemAtPosition(position)).getProfil_id());
                         } catch (Exception e) {
-                            Toast.makeText(ReglagesActivity.this, "Erreur création profil", Toast.LENGTH_SHORT).show();
                             profilBean = new ProfilBean(-1, "error" );
                         }
                         popupListBean.dismiss(); // Fermeture Popup
@@ -242,18 +226,27 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
                     }
                 });
                 popupListBean.Build();
+                popupListBean.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        afficherProfilActif();
+                    }
+                });
             }
         });
-
     }
 
     /* -------------------------------------- */
-    // Methode d'affichage de profils dans le popup
+    // Methode d'affichage dans le TextViev
     /* -------------------------------------- */
-    //textview et popup
-    private void afficherProfilsListePopup() {
-        profilsArrayAdapter = new ArrayAdapter<>(ReglagesActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.selectAllFromProfils());
-        lvPopupListe.setAdapter(profilsArrayAdapter);
+    private void afficherProfilActif() {
+        try {
+            System.out.println("test: " + dataBaseHelper.selectFromProfilProfilActif().getProfil_nom());
+            tvProfilActif.setText(dataBaseHelper.selectFromProfilProfilActif().getProfil_nom());
+        } catch (Exception e) {
+
+        }
+
     }
 
     @Override

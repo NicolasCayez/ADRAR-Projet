@@ -1,24 +1,71 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+
+import com.example.mycomics.adapters.EditeursListAdapter;
+import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.beans.EditeurBean;
+import com.example.mycomics.beans.SerieBean;
+import com.example.mycomics.helpers.DataBaseHelper;
+import com.example.mycomics.popups.PopupAddBean;
 
 public class SeriesActivity extends AppCompatActivity {
+    /* -------------------------------------- */
+    // Référence vers les éléments de la page
+    /* -------------------------------------- */
+    //menu Hamburger
+    ImageView ivLogoMyComics, ivHamburgLines;
+    LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
+    //Page Series
+    ImageView btnAddSeries;
+    ListView lvSeriesListe;
 
+    /* -------------------------------------- */
+    // Variable BDD
+    /* -------------------------------------- */
+    DataBaseHelper dataBaseHelper;
+    ArrayAdapter seriesArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
-
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+        /* -------------------------------------- */
+        // findViewbyId
+        /* -------------------------------------- */
+        //menu Hamburger
+        ivLogoMyComics = findViewById(R.id.ivLogoMyComics);
+        ivHamburgLines = findViewById(R.id.ivHamburgLines);
+        btnMenuCollection = findViewById(R.id.btnMenuCollection);
+        btnMenuSeries = findViewById(R.id.btnMenuSeries);
+        btnMenuTomes = findViewById(R.id.btnMenuTomes);
+        btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
+        btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
+        // Page Editeurs
+        btnAddSeries = findViewById(R.id.btnAddSeries);
+        lvSeriesListe = findViewById(R.id.lvSeriesListe);
+
+        dataBaseHelper = new DataBaseHelper(SeriesActivity.this);
+
+        /* -------------------------------------- */
+        // Initialisation affichage
+        /* -------------------------------------- */
+        afficherListeSeries();
 
         /* -------------------------------------- */
         // Clic sur le logo
@@ -100,16 +147,73 @@ public class SeriesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         /* -------------------------------------- */
-        // Clic Liste Séries *************************************************** A revoir avec BDD
+        // clic searchBar
         /* -------------------------------------- */
-        findViewById(R.id.btnSeriesAjout).setOnClickListener(new View.OnClickListener() {
+        SearchView searchView = findViewById(R.id.svSearch);
+        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Active le clic sur toute la zone de la searchBar
+                searchView.setIconified(false);
+            }
+        });
+        /* -------------------------------------- */
+        // Clic Bouton ajout série
+        /* -------------------------------------- */
+        btnAddSeries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Création Popup
+                PopupAddBean popupAddBean = new PopupAddBean(SeriesActivity.this);
+                popupAddBean.setTitre("Entrez le nom de la série");
+                popupAddBean.setHint("Nom de la série");
+                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SerieBean serieBean;
+                        try {
+                            serieBean = new SerieBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                        } catch (Exception e) {
+//                            Toast.makeText(ReglagesActivity.this, "Erreur création série", Toast.LENGTH_SHORT).show();
+                            serieBean = new SerieBean(-1, "error" );
+                        }
+                        popupAddBean.dismiss(); // Fermeture Popup
+                        //Appel DataBaseHelper
+                        dataBaseHelper = new DataBaseHelper(SeriesActivity.this);
+
+                        boolean success = dataBaseHelper.insertIntoSeries(serieBean);
+                        afficherListeSeries();
+                    }
+                });
+                popupAddBean.build();
+                afficherListeSeries();
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic Element liste Serie
+        /* -------------------------------------- */
+        lvSeriesListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SerieBean serieBean;
+                try {
+                    serieBean = (SerieBean) lvSeriesListe.getItemAtPosition(position);
+                } catch (Exception e) {
+                    serieBean = new SerieBean(-1,"error");
+                }
                 Intent intent = new Intent(SeriesActivity.this, SeriesDetailActivity.class);
+                intent.putExtra("serie_id",serieBean.getSerie_id());
+                intent.putExtra("serie_nom",serieBean.getSerie_nom());
                 startActivity(intent);
             }
         });
+    }
+
+    private void afficherListeSeries(){
+        ListView listView = (ListView) lvSeriesListe;
+        seriesArrayAdapter = new SeriesListAdapter(SeriesActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromSeriesNomSeul());
+        listView.setAdapter(seriesArrayAdapter);
     }
 }

@@ -3,27 +3,48 @@ package com.example.mycomics;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.mycomics.helpers.DataBaseHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import androidx.core.view.WindowCompat;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.mycomics.databinding.ActivityEditeursDetailBinding;
 
 public class EditeursDetailActivity extends AppCompatActivity {
+    /* -------------------------------------- */
+    // Référence vers les éléments de la page
+    /* -------------------------------------- */
+    //menu Hamburger
+    ImageView ivLogoMyComics, ivHamburgLines;
+    LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
+    //Page Detail Editeur
+    TextView tvEditeurDetailNom;
 
+    /* -------------------------------------- */
+    // Variable BDD
+    /* -------------------------------------- */
+    DataBaseHelper dataBaseHelper;
+    ArrayAdapter editeursArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editeurs_detail);
+        /* -------------------------------------- */
+        // Récupération données
+        /* -------------------------------------- */
+        Intent intentAvecDonnees = getIntent();
+        // id : intentAvecDonnees.getIntExtra("editeur_id",0)
+        // nom : intentAvecDonnees.getStringExtra("editeur_nom")
+        /* -------------------------------------- */
+        // findViewById
+        /* -------------------------------------- */
+        tvEditeurDetailNom = findViewById(R.id.tvEditeurDetailNom);
 
         /* -------------------------------------- */
         // Activation fragmentManager
@@ -123,6 +144,10 @@ public class EditeursDetailActivity extends AppCompatActivity {
             }
         });
 
+        /* -------------------------------------- */
+        // Initialisation Nom fiche
+        /* -------------------------------------- */
+        tvEditeurDetailNom.setText(intentAvecDonnees.getStringExtra("editeur_nom"));
         /* -------------------------------------- */
         // Clic Liste Détail Séries *************************************************** A revoir avec BDD
         /* -------------------------------------- */

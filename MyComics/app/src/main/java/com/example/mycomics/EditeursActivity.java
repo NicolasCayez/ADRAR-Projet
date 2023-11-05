@@ -1,16 +1,22 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.ListView;
+
+import com.example.mycomics.adapters.EditeursListAdapter;
+import com.example.mycomics.beans.EditeurBean;
+import com.example.mycomics.popups.PopupAddBean;
+import com.example.mycomics.helpers.DataBaseHelper;
 
 public class EditeursActivity extends AppCompatActivity {
     /* -------------------------------------- */
@@ -19,16 +25,20 @@ public class EditeursActivity extends AppCompatActivity {
     //menu Hamburger
     ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page réglages
-//    Spinner spinProfil;
-//    ImageView btnAddProfil, btnDeleteProfil;
-//    Button btnPopupValider, btnPopupAnnuler;
-//    EditText etPopupText;
+    //Page Editeurs
+    ImageView btnAddEditeurs;
+    ListView lvEditeursListe;
+
+    /* -------------------------------------- */
+    // Variable BDD
+    /* -------------------------------------- */
+    DataBaseHelper dataBaseHelper;
+    ArrayAdapter editeursArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editeurs);
-
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -45,13 +55,16 @@ public class EditeursActivity extends AppCompatActivity {
         btnMenuTomes = findViewById(R.id.btnMenuTomes);
         btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
         btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
-        // Page réglages
-//        spinProfil = findViewById(R.id.spinProfil);
-//        btnAddProfil = findViewById(R.id.btnProfilAdd);
-//        btnDeleteProfil = findViewById(R.id.btnProfilDelete);
-//        btnPopupValider = findViewById(R.id.btnPopupValider);
-//        btnPopupAnnuler = findViewById(R.id.btnPopupAnnuler);
-//        etPopupText = findViewById(R.id.etPopupText);
+        // Page Editeurs
+        btnAddEditeurs = findViewById(R.id.btnAddEditeurs);
+        lvEditeursListe = findViewById(R.id.lvEditeursListe);
+
+        dataBaseHelper = new DataBaseHelper(EditeursActivity.this);
+
+        /* -------------------------------------- */
+        // Initialisation affichage
+        /* -------------------------------------- */
+        afficherListeEditeurs();
 
         /* -------------------------------------- */
         // Clic sur le logo
@@ -133,16 +146,73 @@ public class EditeursActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         /* -------------------------------------- */
-        // Clic Liste Editeurs *************************************************** A revoir avec BDD
+        // clic searchBar
         /* -------------------------------------- */
-        findViewById(R.id.btnEditeursAjout).setOnClickListener(new View.OnClickListener() {
+        SearchView searchView = findViewById(R.id.svSearch);
+        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Active le clic sur toute la zone de la searchBar
+                searchView.setIconified(false);
+            }
+        });
+        /* -------------------------------------- */
+        // Clic Bouton ajout éditeur
+        /* -------------------------------------- */
+        btnAddEditeurs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Création Popup
+                PopupAddBean popupAddBean = new PopupAddBean(EditeursActivity.this);
+                popupAddBean.setTitre("Entrez le nom de l'éditeur");
+                popupAddBean.setHint("Nom de l'éditeur");
+                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditeurBean editeurBean;
+                        try {
+                            editeurBean = new EditeurBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                        } catch (Exception e) {
+//                            Toast.makeText(ReglagesActivity.this, "Erreur création éditeur", Toast.LENGTH_SHORT).show();
+                            editeurBean = new EditeurBean(-1, "error" );
+                        }
+                        popupAddBean.dismiss(); // Fermeture Popup
+                        //Appel DataBaseHelper
+                        dataBaseHelper = new DataBaseHelper(EditeursActivity.this);
+
+                        boolean success = dataBaseHelper.insertIntoEditeurs(editeurBean);
+                        afficherListeEditeurs();
+                    }
+                });
+                popupAddBean.build();
+                afficherListeEditeurs();
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic Element liste Editeur
+        /* -------------------------------------- */
+        lvEditeursListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EditeurBean editeurBean;
+                try {
+                    editeurBean = (EditeurBean) lvEditeursListe.getItemAtPosition(position);
+                } catch (Exception e) {
+                    editeurBean = new EditeurBean(-1,"error");
+                }
                 Intent intent = new Intent(EditeursActivity.this, EditeursDetailActivity.class);
+                intent.putExtra("editeur_id",editeurBean.getEditeur_id());
+                intent.putExtra("editeur_nom",editeurBean.getEditeur_nom());
                 startActivity(intent);
             }
         });
+    }
+
+    private void afficherListeEditeurs(){
+        ListView listView = (ListView) lvEditeursListe;
+        editeursArrayAdapter = new EditeursListAdapter(EditeursActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromEditeursNomSeul());
+        listView.setAdapter(editeursArrayAdapter);
     }
 }

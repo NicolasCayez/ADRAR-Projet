@@ -26,7 +26,18 @@ public class MainActivity extends AppCompatActivity {
         // Initialisation BDD au besoin
         /* -------------------------------------- */
         DataBaseHelper dataBaseHelper;
-
+        dataBaseHelper = new DataBaseHelper(MainActivity.this);
+        /* -------------------------------------- */
+        // clic searchBar
+        /* -------------------------------------- */
+        SearchView searchView = findViewById(R.id.svSearch);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Active le clic sur toute la zone de la searchBar
+                searchView.setIconified(false);
+            }
+        });
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
@@ -108,17 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* -------------------------------------- */
-        // clic searchBar
-        /* -------------------------------------- */
-        SearchView searchView = findViewById(R.id.svSearch);
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                searchView.setIconified(false);
-            }
-        });
+
 
         /* -------------------------------------- */
         // Clic Bouton Accueil Series

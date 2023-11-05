@@ -1,18 +1,52 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.mycomics.helpers.DataBaseHelper;
 
 public class AuteursDetailActivity extends AppCompatActivity {
+    /* -------------------------------------- */
+    // Référence vers les éléments de la page
+    /* -------------------------------------- */
+    //menu Hamburger
+    ImageView ivLogoMyComics, ivHamburgLines;
+    LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
+    //Page Detail Auteur
+    TextView tvAuteurDetailPseudo;
 
+    /* -------------------------------------- */
+    // Variable BDD
+    /* -------------------------------------- */
+    DataBaseHelper dataBaseHelper;
+    ArrayAdapter auteursArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auteurs_detail);
+        /* -------------------------------------- */
+        // Récupération données
+        /* -------------------------------------- */
+        Intent intentAvecDonnees = getIntent();
+        // id : intentAvecDonnees.getIntExtra("auteur_id",0)
+        // nom : intentAvecDonnees.getStringExtra("auteur_nom")
+        // prenom : intentAvecDonnees.getStringExtra("auteur_prenom")
+        // pseudo : intentAvecDonnees.getStringExtra("auteur_pseudo")
+        // photo : intentAvecDonnees.getStringExtra("auteur_photo")
+
+        /* -------------------------------------- */
+        // findViewById
+        /* -------------------------------------- */
+        tvAuteurDetailPseudo = findViewById(R.id.tvAuteurDetailPseudo);
 
         /* -------------------------------------- */
         // Activation fragmentManager
@@ -23,7 +57,7 @@ public class AuteursDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+         findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AuteursDetailActivity.this, MainActivity.class);
@@ -113,6 +147,11 @@ public class AuteursDetailActivity extends AppCompatActivity {
         });
 
         /* -------------------------------------- */
+        // Initialisation Nom fiche
+        /* -------------------------------------- */
+        tvAuteurDetailPseudo.setText(intentAvecDonnees.getStringExtra("auteur_pseudo"));
+
+        /* -------------------------------------- */
         // Clic Liste Détail Séries *************************************************** A revoir avec BDD
         /* -------------------------------------- */
 //        findViewById(R.id.lvAuteursDetailSeries).setOnClickListener(new View.OnClickListener() {
@@ -155,5 +194,6 @@ public class AuteursDetailActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
     }
 }

@@ -40,5 +40,6 @@ public class ProfilBean {
                 "profil_id=" + profil_id +
                 ", profil_nom='" + profil_nom + '\'' +
                 '}';
+
     }
 }

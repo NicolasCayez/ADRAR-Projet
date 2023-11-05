@@ -1,6 +1,7 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
@@ -101,7 +102,17 @@ public class TomesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        /* -------------------------------------- */
+        // clic searchBar
+        /* -------------------------------------- */
+        SearchView searchView = findViewById(R.id.svSearch);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Active le clic sur toute la zone de la searchBar
+                searchView.setIconified(false);
+            }
+        });
         /* -------------------------------------- */
         // Clic Liste Séries *************************************************** A revoir avec BDD
         /* -------------------------------------- */

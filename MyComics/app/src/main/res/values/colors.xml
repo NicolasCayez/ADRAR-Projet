@@ -5,4 +5,6 @@
     <color name="custom_beige">#f2dcc2</color>
     <color name="custom_blue">#275f74</color>
     <color name="custom_lightblue">#afdff3</color>
+    <color name="custom_lightgrey">#eee</color>
+
 </resources>
