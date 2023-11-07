@@ -12,17 +12,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mycomics.databinding.ActivityAuteursDetailBinding;
+import com.example.mycomics.databinding.ActivityEditeursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
-public class AuteursDetailActivity extends AppCompatActivity {
+public class AuteursDetailActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityAuteursDetailBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page Detail Auteur
-    TextView tvAuteurDetailPseudo;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -32,7 +33,9 @@ public class AuteursDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auteurs_detail);
+//        setContentView(R.layout.activity_auteurs_detail);
+        binding = ActivityAuteursDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Récupération données
         /* -------------------------------------- */
@@ -44,20 +47,29 @@ public class AuteursDetailActivity extends AppCompatActivity {
         // photo : intentAvecDonnees.getStringExtra("auteur_photo")
 
         /* -------------------------------------- */
-        // findViewById
-        /* -------------------------------------- */
-        tvAuteurDetailPseudo = findViewById(R.id.tvAuteurDetailPseudo);
-
-        /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+        /* -------------------------------------- */
+        // findViewById
+        /* -------------------------------------- */
+        //menu Hamburger
+        btnMenuCollection = findViewById(R.id.btnMenuCollection);
+        btnMenuSeries = findViewById(R.id.btnMenuSeries);
+        btnMenuTomes = findViewById(R.id.btnMenuTomes);
+        btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
+        btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
+
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-         findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AuteursDetailActivity.this, MainActivity.class);
@@ -68,7 +80,7 @@ public class AuteursDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -149,7 +161,7 @@ public class AuteursDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
-        tvAuteurDetailPseudo.setText(intentAvecDonnees.getStringExtra("auteur_pseudo"));
+        binding.tvAuteurDetailPseudo.setText(intentAvecDonnees.getStringExtra("auteur_pseudo"));
 
         /* -------------------------------------- */
         // Clic Liste Détail Séries *************************************************** A revoir avec BDD
@@ -194,6 +206,11 @@ public class AuteursDetailActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

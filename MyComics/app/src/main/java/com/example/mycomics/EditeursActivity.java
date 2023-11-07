@@ -1,7 +1,6 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
@@ -9,25 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.beans.EditeurBean;
-import com.example.mycomics.popups.PopupAddBean;
+import com.example.mycomics.databinding.ActivityEditeursBinding;
+import com.example.mycomics.popups.PopupAddDialog;
 import com.example.mycomics.helpers.DataBaseHelper;
 
-public class EditeursActivity extends AppCompatActivity {
+public class EditeursActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityEditeursBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page Editeurs
-    ImageView btnAddEditeurs;
-    ListView lvEditeursListe;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -38,7 +34,9 @@ public class EditeursActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editeurs);
+//        setContentView(R.layout.activity_editeurs);
+        binding = ActivityEditeursBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -48,18 +46,16 @@ public class EditeursActivity extends AppCompatActivity {
         // findViewbyId
         /* -------------------------------------- */
         //menu Hamburger
-        ivLogoMyComics = findViewById(R.id.ivLogoMyComics);
-        ivHamburgLines = findViewById(R.id.ivHamburgLines);
         btnMenuCollection = findViewById(R.id.btnMenuCollection);
         btnMenuSeries = findViewById(R.id.btnMenuSeries);
         btnMenuTomes = findViewById(R.id.btnMenuTomes);
         btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
         btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
-        // Page Editeurs
-        btnAddEditeurs = findViewById(R.id.btnAddEditeurs);
-        lvEditeursListe = findViewById(R.id.lvEditeursListe);
 
-        dataBaseHelper = new DataBaseHelper(EditeursActivity.this);
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Initialisation affichage
@@ -69,7 +65,7 @@ public class EditeursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditeursActivity.this, MainActivity.class);
@@ -80,7 +76,7 @@ public class EditeursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -149,35 +145,34 @@ public class EditeursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // clic searchBar
         /* -------------------------------------- */
-        SearchView searchView = findViewById(R.id.svSearch);
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Active le clic sur toute la zone de la searchBar
-                searchView.setIconified(false);
+                binding.sbSearch.svSearch.setIconified(false);
             }
         });
         /* -------------------------------------- */
         // Clic Bouton ajout éditeur
         /* -------------------------------------- */
-        btnAddEditeurs.setOnClickListener(new View.OnClickListener() {
+        binding.btnAddEditeurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddBean popupAddBean = new PopupAddBean(EditeursActivity.this);
-                popupAddBean.setTitre("Entrez le nom de l'éditeur");
-                popupAddBean.setHint("Nom de l'éditeur");
-                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupAddDialog popupAddDialog = new PopupAddDialog(EditeursActivity.this);
+                popupAddDialog.setTitre("Entrez le nom de l'éditeur");
+                popupAddDialog.setHint("Nom de l'éditeur");
+                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         EditeurBean editeurBean;
                         try {
-                            editeurBean = new EditeurBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                            editeurBean = new EditeurBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création éditeur", Toast.LENGTH_SHORT).show();
                             editeurBean = new EditeurBean(-1, "error" );
                         }
-                        popupAddBean.dismiss(); // Fermeture Popup
+                        popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(EditeursActivity.this);
 
@@ -185,7 +180,7 @@ public class EditeursActivity extends AppCompatActivity {
                         afficherListeEditeurs();
                     }
                 });
-                popupAddBean.build();
+                popupAddDialog.build();
                 afficherListeEditeurs();
             }
         });
@@ -193,12 +188,12 @@ public class EditeursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Element liste Editeur
         /* -------------------------------------- */
-        lvEditeursListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.lvEditeursListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EditeurBean editeurBean;
                 try {
-                    editeurBean = (EditeurBean) lvEditeursListe.getItemAtPosition(position);
+                    editeurBean = (EditeurBean) binding.lvEditeursListe.getItemAtPosition(position);
                 } catch (Exception e) {
                     editeurBean = new EditeurBean(-1,"error");
                 }
@@ -211,8 +206,12 @@ public class EditeursActivity extends AppCompatActivity {
     }
 
     private void afficherListeEditeurs(){
-        ListView listView = (ListView) lvEditeursListe;
         editeursArrayAdapter = new EditeursListAdapter(EditeursActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromEditeursNomSeul());
-        listView.setAdapter(editeursArrayAdapter);
+        binding.lvEditeursListe.setAdapter(editeursArrayAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

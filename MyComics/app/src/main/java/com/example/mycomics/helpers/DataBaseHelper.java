@@ -306,7 +306,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     public List<ProfilNomBean> selectAllFromProfilsNomSeul(){
         List<ProfilNomBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + PROFILS + " ORDER BY " + COLUMN_PROFIL_NOM;;
+        String requete = "SELECT * FROM " + PROFILS + " ORDER BY " + COLUMN_PROFIL_NOM;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats

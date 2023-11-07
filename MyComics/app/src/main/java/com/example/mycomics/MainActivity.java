@@ -1,22 +1,30 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
+import com.example.mycomics.databinding.ActivityMainBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityMainBinding binding = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //Création de l'interface graphique
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -26,22 +34,21 @@ public class MainActivity extends AppCompatActivity {
         // Initialisation BDD au besoin
         /* -------------------------------------- */
         DataBaseHelper dataBaseHelper;
-        dataBaseHelper = new DataBaseHelper(MainActivity.this);
+        dataBaseHelper = new DataBaseHelper(this);
         /* -------------------------------------- */
         // clic searchBar
         /* -------------------------------------- */
-        SearchView searchView = findViewById(R.id.svSearch);
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Active le clic sur toute la zone de la searchBar
-                searchView.setIconified(false);
+                binding.sbSearch.svSearch.setIconified(false);
             }
         });
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -124,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Bouton Accueil Series
         /* -------------------------------------- */
-        findViewById(R.id.btnAccueilSeries).setOnClickListener(new View.OnClickListener() {
+        binding.btnAccueilSeries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
@@ -135,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Bouton Accueil Tomes
         /* -------------------------------------- */
-        findViewById(R.id.btnAccueilTomes).setOnClickListener(new View.OnClickListener() {
+        binding.btnAccueilTomes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TomesActivity.class);
@@ -146,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Bouton Accueil Auteurs
         /* -------------------------------------- */
-        findViewById(R.id.btnAccueilAuteurs).setOnClickListener(new View.OnClickListener() {
+        binding.btnAccueilAuteurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AuteursActivity.class);
@@ -157,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Bouton Accueil Tomes
         /* -------------------------------------- */
-        findViewById(R.id.btnAccueilEditeurs).setOnClickListener(new View.OnClickListener() {
+        binding.btnAccueilEditeurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EditeursActivity.class);
@@ -168,4 +175,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

@@ -7,24 +7,61 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 
-public class CollectionActivity extends AppCompatActivity {
+import com.example.mycomics.databinding.ActivityAuteursBinding;
+import com.example.mycomics.databinding.ActivityCollectionBinding;
+import com.example.mycomics.helpers.DataBaseHelper;
 
+public class CollectionActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityCollectionBinding binding = null;
+
+    /* -------------------------------------- */
+    // Référence vers les éléments de la page
+    /* -------------------------------------- */
+    //menu Hamburger
+    LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
+
+    /* -------------------------------------- */
+    // Variable BDD
+    /* -------------------------------------- */
+    DataBaseHelper dataBaseHelper;
+    ArrayAdapter CollectionArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection);
-
+//        setContentView(R.layout.activity_collection);
+        binding = ActivityCollectionBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
         FragmentManager fragmentManager = getSupportFragmentManager();
+        /* -------------------------------------- */
+        // findViewbyId
+        /* -------------------------------------- */
+        //menu Hamburger
+        btnMenuCollection = findViewById(R.id.btnMenuCollection);
+        btnMenuSeries = findViewById(R.id.btnMenuSeries);
+        btnMenuTomes = findViewById(R.id.btnMenuTomes);
+        btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
+        btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
 
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
+
+        /* -------------------------------------- */
+        // Initialisation affichage
+        /* -------------------------------------- */
+        afficherPageCollection();
 
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CollectionActivity.this, MainActivity.class);
@@ -35,7 +72,7 @@ public class CollectionActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -102,5 +139,14 @@ public class CollectionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void afficherPageCollection(){
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

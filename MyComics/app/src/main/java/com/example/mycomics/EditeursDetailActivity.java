@@ -3,6 +3,8 @@ package com.example.mycomics;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.mycomics.databinding.ActivityEditeursBinding;
+import com.example.mycomics.databinding.ActivityEditeursDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +18,14 @@ import android.widget.TextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
-public class EditeursDetailActivity extends AppCompatActivity {
+public class EditeursDetailActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityEditeursDetailBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page Detail Editeur
-    TextView tvEditeurDetailNom;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -34,28 +35,41 @@ public class EditeursDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editeurs_detail);
+//        setContentView(R.layout.activity_editeurs_detail);
+        binding = ActivityEditeursDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         /* -------------------------------------- */
         // Récupération données
         /* -------------------------------------- */
         Intent intentAvecDonnees = getIntent();
         // id : intentAvecDonnees.getIntExtra("editeur_id",0)
         // nom : intentAvecDonnees.getStringExtra("editeur_nom")
-        /* -------------------------------------- */
-        // findViewById
-        /* -------------------------------------- */
-        tvEditeurDetailNom = findViewById(R.id.tvEditeurDetailNom);
 
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+        /* -------------------------------------- */
+        // findViewById
+        /* -------------------------------------- */
+        //menu Hamburger
+        btnMenuCollection = findViewById(R.id.btnMenuCollection);
+        btnMenuSeries = findViewById(R.id.btnMenuSeries);
+        btnMenuTomes = findViewById(R.id.btnMenuTomes);
+        btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
+        btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
+
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditeursDetailActivity.this, MainActivity.class);
@@ -66,7 +80,7 @@ public class EditeursDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -147,7 +161,7 @@ public class EditeursDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
-        tvEditeurDetailNom.setText(intentAvecDonnees.getStringExtra("editeur_nom"));
+        binding.tvEditeurDetailNom.setText(intentAvecDonnees.getStringExtra("editeur_nom"));
         /* -------------------------------------- */
         // Clic Liste Détail Séries *************************************************** A revoir avec BDD
         /* -------------------------------------- */
@@ -183,4 +197,8 @@ public class EditeursDetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

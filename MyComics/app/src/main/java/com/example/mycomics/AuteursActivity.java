@@ -1,7 +1,6 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
@@ -9,36 +8,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.mycomics.adapters.AuteursListAdapter;
 import com.example.mycomics.beans.AuteurBean;
 import com.example.mycomics.beans.AuteurPseudoBean;
+import com.example.mycomics.databinding.ActivityAuteursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddBean;
+import com.example.mycomics.popups.PopupAddDialog;
 
-public class AuteursActivity extends AppCompatActivity {
+public class AuteursActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityAuteursBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page Auteurs
-    ImageView btnAddAuteurs;
-    ListView lvAuteursListe;
 
     /* -------------------------------------- */
     // Variable BDD
     /* -------------------------------------- */
     DataBaseHelper dataBaseHelper;
     ArrayAdapter auteursArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auteurs);
+//        setContentView(R.layout.activity_auteurs);
+        binding = ActivityAuteursBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -48,18 +47,15 @@ public class AuteursActivity extends AppCompatActivity {
         // findViewbyId
         /* -------------------------------------- */
         //menu Hamburger
-        ivLogoMyComics = findViewById(R.id.ivLogoMyComics);
-        ivHamburgLines = findViewById(R.id.ivHamburgLines);
         btnMenuCollection = findViewById(R.id.btnMenuCollection);
         btnMenuSeries = findViewById(R.id.btnMenuSeries);
         btnMenuTomes = findViewById(R.id.btnMenuTomes);
         btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
         btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
-        // Page Editeurs
-        btnAddAuteurs = findViewById(R.id.btnAddAuteurs);
-        lvAuteursListe = findViewById(R.id.lvAuteursListe);
-
-        dataBaseHelper = new DataBaseHelper(AuteursActivity.this);
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Initialisation affichage
@@ -69,7 +65,7 @@ public class AuteursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AuteursActivity.this, MainActivity.class);
@@ -80,7 +76,7 @@ public class AuteursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -149,45 +145,34 @@ public class AuteursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // clic searchBar
         /* -------------------------------------- */
-        SearchView searchView = findViewById(R.id.svSearch);
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Active le clic sur toute la zone de la searchBar
-                searchView.setIconified(false);
-            }
-        });
-        /* -------------------------------------- */
-        // Clic Ajout Auteur
-        /* -------------------------------------- */
-        findViewById(R.id.btnAddAuteurs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AuteursActivity.this, AuteursDetailActivity.class);
-                startActivity(intent);
+                binding.sbSearch.svSearch.setIconified(false);
             }
         });
         /* -------------------------------------- */
         // Clic Bouton ajout auteur
         /* -------------------------------------- */
-        btnAddAuteurs.setOnClickListener(new View.OnClickListener() {
+        binding.btnAddAuteurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddBean popupAddBean = new PopupAddBean(AuteursActivity.this);
-                popupAddBean.setTitre("Entrez le Pseudonyme (ou le Nom) de l'auteur");
-                popupAddBean.setHint("Pseudonyme de l'auteur");
-                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupAddDialog popupAddDialog = new PopupAddDialog(AuteursActivity.this);
+                popupAddDialog.setTitre("Entrez le Pseudonyme (ou le Nom) de l'auteur");
+                popupAddDialog.setHint("Pseudonyme de l'auteur");
+                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AuteurBean auteurBean;
                         try {
-                            auteurBean = new AuteurBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                            auteurBean = new AuteurBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création auteur", Toast.LENGTH_SHORT).show();
                             auteurBean = new AuteurBean(-1, "error" );
                         }
-                        popupAddBean.dismiss(); // Fermeture Popup
+                        popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(AuteursActivity.this);
 
@@ -195,7 +180,7 @@ public class AuteursActivity extends AppCompatActivity {
                         afficherListeAuteurs();
                     }
                 });
-                popupAddBean.build();
+                popupAddDialog.build();
                 afficherListeAuteurs();
             }
         });
@@ -203,12 +188,12 @@ public class AuteursActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Element liste Auteur
         /* -------------------------------------- */
-        lvAuteursListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.lvAuteursListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AuteurBean auteurBean;
                 try {
-                    auteurBean = (AuteurBean) lvAuteursListe.getItemAtPosition(position);
+                    auteurBean = (AuteurBean) binding.lvAuteursListe.getItemAtPosition(position);
                 } catch (Exception e) {
                     auteurBean = new AuteurPseudoBean(-1,"error","error","error");
                 }
@@ -224,8 +209,12 @@ public class AuteursActivity extends AppCompatActivity {
     }
 
     private void afficherListeAuteurs(){
-        ListView listView = (ListView) lvAuteursListe;
         auteursArrayAdapter = new AuteursListAdapter(AuteursActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromAuteursPseudoSeul());
-        listView.setAdapter(auteursArrayAdapter);
+        binding.lvAuteursListe.setAdapter(auteursArrayAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

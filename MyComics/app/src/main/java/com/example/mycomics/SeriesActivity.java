@@ -1,7 +1,6 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
@@ -9,27 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.adapters.SeriesListAdapter;
-import com.example.mycomics.beans.EditeurBean;
 import com.example.mycomics.beans.SerieBean;
+import com.example.mycomics.databinding.ActivitySeriesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddBean;
+import com.example.mycomics.popups.PopupAddDialog;
 
-public class SeriesActivity extends AppCompatActivity {
+public class SeriesActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivitySeriesBinding binding = null;
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
     //Page Series
-    ImageView btnAddSeries;
-    ListView lvSeriesListe;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -39,7 +33,9 @@ public class SeriesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_series);
+//        setContentView(R.layout.activity_series);
+        binding = ActivitySeriesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -49,17 +45,14 @@ public class SeriesActivity extends AppCompatActivity {
         // findViewbyId
         /* -------------------------------------- */
         //menu Hamburger
-        ivLogoMyComics = findViewById(R.id.ivLogoMyComics);
-        ivHamburgLines = findViewById(R.id.ivHamburgLines);
         btnMenuCollection = findViewById(R.id.btnMenuCollection);
         btnMenuSeries = findViewById(R.id.btnMenuSeries);
         btnMenuTomes = findViewById(R.id.btnMenuTomes);
         btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
         btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
-        // Page Editeurs
-        btnAddSeries = findViewById(R.id.btnAddSeries);
-        lvSeriesListe = findViewById(R.id.lvSeriesListe);
-
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
         dataBaseHelper = new DataBaseHelper(SeriesActivity.this);
 
         /* -------------------------------------- */
@@ -70,7 +63,7 @@ public class SeriesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SeriesActivity.this, MainActivity.class);
@@ -81,7 +74,7 @@ public class SeriesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -150,35 +143,34 @@ public class SeriesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // clic searchBar
         /* -------------------------------------- */
-        SearchView searchView = findViewById(R.id.svSearch);
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Active le clic sur toute la zone de la searchBar
-                searchView.setIconified(false);
+                binding.sbSearch.svSearch.setIconified(false);
             }
         });
         /* -------------------------------------- */
         // Clic Bouton ajout série
         /* -------------------------------------- */
-        btnAddSeries.setOnClickListener(new View.OnClickListener() {
+        binding.btnAddSeries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddBean popupAddBean = new PopupAddBean(SeriesActivity.this);
-                popupAddBean.setTitre("Entrez le nom de la série");
-                popupAddBean.setHint("Nom de la série");
-                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupAddDialog popupAddDialog = new PopupAddDialog(SeriesActivity.this);
+                popupAddDialog.setTitre("Entrez le nom de la série");
+                popupAddDialog.setHint("Nom de la série");
+                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         SerieBean serieBean;
                         try {
-                            serieBean = new SerieBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                            serieBean = new SerieBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création série", Toast.LENGTH_SHORT).show();
                             serieBean = new SerieBean(-1, "error" );
                         }
-                        popupAddBean.dismiss(); // Fermeture Popup
+                        popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(SeriesActivity.this);
 
@@ -186,7 +178,7 @@ public class SeriesActivity extends AppCompatActivity {
                         afficherListeSeries();
                     }
                 });
-                popupAddBean.build();
+                popupAddDialog.build();
                 afficherListeSeries();
             }
         });
@@ -194,12 +186,12 @@ public class SeriesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Element liste Serie
         /* -------------------------------------- */
-        lvSeriesListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.lvSeriesListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SerieBean serieBean;
                 try {
-                    serieBean = (SerieBean) lvSeriesListe.getItemAtPosition(position);
+                    serieBean = (SerieBean) binding.lvSeriesListe.getItemAtPosition(position);
                 } catch (Exception e) {
                     serieBean = new SerieBean(-1,"error");
                 }
@@ -212,8 +204,12 @@ public class SeriesActivity extends AppCompatActivity {
     }
 
     private void afficherListeSeries(){
-        ListView listView = (ListView) lvSeriesListe;
         seriesArrayAdapter = new SeriesListAdapter(SeriesActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromSeriesNomSeul());
-        listView.setAdapter(seriesArrayAdapter);
+        binding.lvSeriesListe.setAdapter(seriesArrayAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

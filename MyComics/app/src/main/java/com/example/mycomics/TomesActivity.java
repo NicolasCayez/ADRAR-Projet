@@ -1,7 +1,6 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
@@ -9,28 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import com.example.mycomics.adapters.SeriesListAdapter;
 import com.example.mycomics.adapters.TomesListAdapter;
-import com.example.mycomics.beans.SerieBean;
 import com.example.mycomics.beans.TomeBean;
-import com.example.mycomics.beans.TomeTitreBean;
+import com.example.mycomics.databinding.ActivityTomesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddBean;
+import com.example.mycomics.popups.PopupAddDialog;
 
-public class TomesActivity extends AppCompatActivity {
+public class TomesActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityTomesBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
     //Page Series
-    ImageView btnAddTomes;
-    ListView lvTomesListe;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -40,7 +34,9 @@ public class TomesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tomes);
+//        setContentView(R.layout.activity_tomes);
+        binding = ActivityTomesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -50,18 +46,15 @@ public class TomesActivity extends AppCompatActivity {
         // findViewbyId
         /* -------------------------------------- */
         //menu Hamburger
-        ivLogoMyComics = findViewById(R.id.ivLogoMyComics);
-        ivHamburgLines = findViewById(R.id.ivHamburgLines);
         btnMenuCollection = findViewById(R.id.btnMenuCollection);
         btnMenuSeries = findViewById(R.id.btnMenuSeries);
         btnMenuTomes = findViewById(R.id.btnMenuTomes);
         btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
         btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
-        // Page Editeurs
-        btnAddTomes = findViewById(R.id.btnAddTomes);
-        lvTomesListe = findViewById(R.id.lvTomesListe);
-
-        dataBaseHelper = new DataBaseHelper(TomesActivity.this);
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Initialisation affichage
@@ -70,7 +63,7 @@ public class TomesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TomesActivity.this, MainActivity.class);
@@ -81,7 +74,7 @@ public class TomesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -150,35 +143,34 @@ public class TomesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // clic searchBar
         /* -------------------------------------- */
-        SearchView searchView = findViewById(R.id.svSearch);
-        searchView.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Active le clic sur toute la zone de la searchBar
-                searchView.setIconified(false);
+                binding.sbSearch.svSearch.setIconified(false);
             }
         });
         /* -------------------------------------- */
         // Clic Bouton ajout série
         /* -------------------------------------- */
-        btnAddTomes.setOnClickListener(new View.OnClickListener() {
+        binding.btnAddTomes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddBean popupAddBean = new PopupAddBean(TomesActivity.this);
-                popupAddBean.setTitre("Entrez le nom du tome");
-                popupAddBean.setHint("Nom du tome");
-                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupAddDialog popupAddDialog = new PopupAddDialog(TomesActivity.this);
+                popupAddDialog.setTitre("Entrez le nom du tome");
+                popupAddDialog.setHint("Nom du tome");
+                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TomeBean tomeBean;
                         try {
-                            tomeBean = new TomeBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                            tomeBean = new TomeBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création série", Toast.LENGTH_SHORT).show();
                             tomeBean = new TomeBean(-1, "error" );
                         }
-                        popupAddBean.dismiss(); // Fermeture Popup
+                        popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(TomesActivity.this);
 
@@ -186,7 +178,7 @@ public class TomesActivity extends AppCompatActivity {
                         afficherListeTomes();
                     }
                 });
-                popupAddBean.build();
+                popupAddDialog.build();
                 afficherListeTomes();
             }
         });
@@ -194,12 +186,12 @@ public class TomesActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Element liste Serie
         /* -------------------------------------- */
-        lvTomesListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.lvTomesListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TomeBean tomeBean;
                 try {
-                    tomeBean = (TomeBean) lvTomesListe.getItemAtPosition(position);
+                    tomeBean = (TomeBean) binding.lvTomesListe.getItemAtPosition(position);
                 } catch (Exception e) {
                     tomeBean = new TomeBean(-1,"error");
                 }
@@ -212,8 +204,12 @@ public class TomesActivity extends AppCompatActivity {
     }
 
     private void afficherListeTomes(){
-        ListView listView = (ListView) lvTomesListe;
         tomesArrayAdapter = new TomesListAdapter(TomesActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromTomesTitreSeul());
-        listView.setAdapter(tomesArrayAdapter);
+        binding.lvTomesListe.setAdapter(tomesArrayAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

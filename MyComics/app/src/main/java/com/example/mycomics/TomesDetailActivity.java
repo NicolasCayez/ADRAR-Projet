@@ -12,17 +12,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mycomics.databinding.ActivitySeriesDetailBinding;
+import com.example.mycomics.databinding.ActivityTomesDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
-public class TomesDetailActivity extends AppCompatActivity {
+public class TomesDetailActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivityTomesDetailBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page Detail Editeur
-    TextView etTomeTitre;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -32,11 +33,9 @@ public class TomesDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tomes_detail);
-        /* -------------------------------------- */
-        // Activation fragmentManager
-        /* -------------------------------------- */
-        FragmentManager fragmentManager = getSupportFragmentManager();
+//        setContentView(R.layout.activity_tomes_detail);
+        binding = ActivityTomesDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         /* -------------------------------------- */
         // Récupération données
@@ -44,14 +43,31 @@ public class TomesDetailActivity extends AppCompatActivity {
         Intent intentAvecDonnees = getIntent();
         // id : intentAvecDonnees.getIntExtra("serie_id",0)
         // nom : intentAvecDonnees.getStringExtra("serie_nom")
+
+        /* -------------------------------------- */
+        // Activation fragmentManager
+        /* -------------------------------------- */
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         /* -------------------------------------- */
         // findViewById
         /* -------------------------------------- */
-        etTomeTitre = findViewById(R.id.etTomeTitre);
+        //menu Hamburger
+        btnMenuCollection = findViewById(R.id.btnMenuCollection);
+        btnMenuSeries = findViewById(R.id.btnMenuSeries);
+        btnMenuTomes = findViewById(R.id.btnMenuTomes);
+        btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
+        btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
+
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
+
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TomesDetailActivity.this, MainActivity.class);
@@ -62,7 +78,7 @@ public class TomesDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -143,7 +159,7 @@ public class TomesDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
-        etTomeTitre.setText(intentAvecDonnees.getStringExtra("tome_titre"));
+        binding.etTomeTitre.setText(intentAvecDonnees.getStringExtra("tome_titre"));
         /* -------------------------------------- */
         // Clic Liste Détail Tomes *************************************************** A revoir avec BDD
         /* -------------------------------------- */
@@ -177,6 +193,11 @@ public class TomesDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

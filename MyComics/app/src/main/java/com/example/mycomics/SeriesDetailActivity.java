@@ -12,17 +12,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mycomics.databinding.ActivityEditeursBinding;
+import com.example.mycomics.databinding.ActivitySeriesDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
-public class SeriesDetailActivity extends AppCompatActivity {
+public class SeriesDetailActivity extends AppCompatActivity implements View.OnClickListener {
+    private ActivitySeriesDetailBinding binding = null;
+
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page Detail Editeur
-    TextView tvSerieDetailNom;
 
     /* -------------------------------------- */
     // Variable BDD
@@ -32,27 +33,41 @@ public class SeriesDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_series_detail);
+//        setContentView(R.layout.activity_series_detail);
+        binding = ActivitySeriesDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         /* -------------------------------------- */
         // Récupération données
         /* -------------------------------------- */
         Intent intentAvecDonnees = getIntent();
         // id : intentAvecDonnees.getIntExtra("serie_id",0)
         // nom : intentAvecDonnees.getStringExtra("serie_nom")
-        /* -------------------------------------- */
-        // findViewById
-        /* -------------------------------------- */
-        tvSerieDetailNom = findViewById(R.id.tvSerieDetailNom);
+
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+        /* -------------------------------------- */
+        // findViewById
+        /* -------------------------------------- */
+        //menu Hamburger
+        btnMenuCollection = findViewById(R.id.btnMenuCollection);
+        btnMenuSeries = findViewById(R.id.btnMenuSeries);
+        btnMenuTomes = findViewById(R.id.btnMenuTomes);
+        btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
+        btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
+
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        findViewById(R.id.ivLogoMyComics).setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SeriesDetailActivity.this, MainActivity.class);
@@ -63,7 +78,7 @@ public class SeriesDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        findViewById(R.id.ivHamburgLines).setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -144,7 +159,7 @@ public class SeriesDetailActivity extends AppCompatActivity {
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
-        tvSerieDetailNom.setText(intentAvecDonnees.getStringExtra("serie_nom"));
+        binding.tvSerieDetailNom.setText(intentAvecDonnees.getStringExtra("serie_nom"));
         /* -------------------------------------- */
         // Clic Liste Détail Tomes *************************************************** A revoir avec BDD
         /* -------------------------------------- */
@@ -177,5 +192,10 @@ public class SeriesDetailActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

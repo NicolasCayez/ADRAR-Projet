@@ -5,50 +5,48 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.ListFormatter;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.mycomics.adapters.ProfilsListAdapter;
-import com.example.mycomics.popups.PopupAddBean;
-import com.example.mycomics.popups.PopupListBean;
+import com.example.mycomics.databinding.ActivityReglagesBinding;
+import com.example.mycomics.popups.PopupMenuDialog;
+import com.example.mycomics.popups.PopupAddDialog;
+import com.example.mycomics.popups.PopupListDialog;
 import com.example.mycomics.beans.ProfilBean;
 import com.example.mycomics.beans.ProfilNomBean;
 import com.example.mycomics.helpers.DataBaseHelper;
 
-public class ReglagesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ReglagesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+
+    private ActivityReglagesBinding binding = null;
 
     /* -------------------------------------- */
     // Référence vers les éléments de la page
     /* -------------------------------------- */
     //menu Hamburger
-    ImageView ivLogoMyComics, ivHamburgLines;
     LinearLayout btnMenuCollection, btnMenuSeries, btnMenuTomes, btnMenuAuteurs, btnMenuEditeurs;
-    //Page réglages
-    ImageView btnAddProfil, btnDeleteProfil;
-    Button btnPopupValider, btnPopupAnnuler;
-    TextView tvProfilActif;
-    EditText etPopupText;
 
     /* -------------------------------------- */
     // Variable BDD
     /* -------------------------------------- */
-    ListView lvPopupListe;
     DataBaseHelper dataBaseHelper;
     ArrayAdapter profilsArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reglages);
-
+//        setContentView(R.layout.activity_reglages);
+        binding = ActivityReglagesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         /* -------------------------------------- */
         // Activation fragmentManager
         /* -------------------------------------- */
@@ -58,23 +56,15 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         // findViewbyId
         /* -------------------------------------- */
         //menu Hamburger
-        ivLogoMyComics = findViewById(R.id.ivLogoMyComics);
-        ivHamburgLines = findViewById(R.id.ivHamburgLines);
         btnMenuCollection = findViewById(R.id.btnMenuCollection);
         btnMenuSeries = findViewById(R.id.btnMenuSeries);
         btnMenuTomes = findViewById(R.id.btnMenuTomes);
         btnMenuAuteurs = findViewById(R.id.btnMenuAuteurs);
         btnMenuEditeurs = findViewById(R.id.btnMenuEditeurs);
-        // Page réglages
-        btnAddProfil = findViewById(R.id.btnProfilAdd);
-        btnDeleteProfil = findViewById(R.id.btnProfilDelete);
-        btnPopupValider = findViewById(R.id.btnPopupValider);
-        btnPopupAnnuler = findViewById(R.id.btnPopupAnnuler);
-        etPopupText = findViewById(R.id.etPopupText);
-
-        tvProfilActif = findViewById(R.id.tvProfilActif);
-        lvPopupListe = findViewById(R.id.lvPopupListe);
-        dataBaseHelper = new DataBaseHelper(ReglagesActivity.this);
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(this);
 
         /* -------------------------------------- */
         // Initialisation affichage
@@ -84,7 +74,7 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
+        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReglagesActivity.this, MainActivity.class);
@@ -95,7 +85,7 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        ivHamburgLines.setOnClickListener((new View.OnClickListener() {
+        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
@@ -165,24 +155,24 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         /* -------------------------------------- */
         // Clic sur bouton AddProfil
         /* -------------------------------------- */
-        btnAddProfil.setOnClickListener(new View.OnClickListener() {
+        binding.btnAddProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddBean popupAddBean = new PopupAddBean(ReglagesActivity.this);
-                popupAddBean.setTitre("Entrez un nom de profil");
-                popupAddBean.setHint("Nom de profil");
-                popupAddBean.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupAddDialog popupAddDialog = new PopupAddDialog(ReglagesActivity.this);
+                popupAddDialog.setTitre("Entrez un nom de profil");
+                popupAddDialog.setHint("Nom de profil");
+                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ProfilNomBean profilBean;
                         try {
-                            profilBean = new ProfilNomBean(-1, popupAddBean.getEtPopupText().getText().toString());
+                            profilBean = new ProfilNomBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création profil", Toast.LENGTH_SHORT).show();
                             profilBean = new ProfilNomBean(-1, "error" );
                         }
-                        popupAddBean.dismiss(); // Fermeture Popup
+                        popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(ReglagesActivity.this);
 
@@ -190,8 +180,26 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
 //                        afficherListeProfils();
                     }
                 });
-                popupAddBean.build();
+                popupAddDialog.build();
                 afficherProfilActif();
+            }
+
+        });
+/************************************************************ TEST MENU POPUP
+        /* -------------------------------------- */
+        // Clic sur bouton DeleteProfil
+        /* -------------------------------------- */
+        binding.btnDeleteProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Création Popup
+                PopupMenuDialog popupMenuDialog = new PopupMenuDialog(ReglagesActivity.this);
+                Window window = popupMenuDialog.getWindow();
+                WindowManager.LayoutParams wlp = window.getAttributes();
+                wlp.gravity = Gravity.TOP;
+                window.setLayout(wlp.MATCH_PARENT, wlp.WRAP_CONTENT);
+                //clic listeners
+                popupMenuDialog.build();
             }
 
         });
@@ -199,34 +207,34 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
         /* -------------------------------------- */
         // Clic sur profil actif pour avoir la liste
         /* -------------------------------------- */
-        tvProfilActif.setOnClickListener(new View.OnClickListener() {
+        binding.tvProfilActif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupListBean popupListBean = new PopupListBean(ReglagesActivity.this);
-                popupListBean.setTitre("Choisissez un profil dans la liste");
-                ListView listView = (ListView) popupListBean.findViewById(R.id.lvPopupListe);
+                PopupListDialog popupListDialog = new PopupListDialog(ReglagesActivity.this);
+                popupListDialog.setTitre("Choisissez un profil dans la liste");
+                ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupListe);
 //                profilsArrayAdapter = new ArrayAdapter<>(ReglagesActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.selectAllFromProfilsNomSeul());
                 profilsArrayAdapter = new ProfilsListAdapter(ReglagesActivity.this , R.layout.listview_template , dataBaseHelper.selectAllFromProfilsNomSeul());
                 listView.setAdapter(profilsArrayAdapter);
                 //Clic Profil choisi pour modification
-                popupListBean.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                popupListDialog.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ProfilBean profilBean;
                         try {
-                            profilBean = (ProfilBean) popupListBean.getLvPopupListe().getItemAtPosition(position);
-                            dataBaseHelper.updateProfilActif(dataBaseHelper, ((ProfilBean) popupListBean.getLvPopupListe().getItemAtPosition(position)).getProfil_id());
+                            profilBean = (ProfilBean) popupListDialog.getLvPopupListe().getItemAtPosition(position);
+                            dataBaseHelper.updateProfilActif(dataBaseHelper, ((ProfilBean) popupListDialog.getLvPopupListe().getItemAtPosition(position)).getProfil_id());
                         } catch (Exception e) {
                             profilBean = new ProfilBean(-1, "error" );
                         }
-                        popupListBean.dismiss(); // Fermeture Popup
+                        popupListDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(ReglagesActivity.this);
                     }
                 });
-                popupListBean.Build();
-                popupListBean.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                popupListDialog.Build();
+                popupListDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
                         afficherProfilActif();
@@ -242,7 +250,7 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
     private void afficherProfilActif() {
         try {
             System.out.println("test: " + dataBaseHelper.selectFromProfilProfilActif().getProfil_nom());
-            tvProfilActif.setText(dataBaseHelper.selectFromProfilProfilActif().getProfil_nom());
+            binding.tvProfilActif.setText(dataBaseHelper.selectFromProfilProfilActif().getProfil_nom());
         } catch (Exception e) {
 
         }
@@ -259,6 +267,8 @@ public class ReglagesActivity extends AppCompatActivity implements AdapterView.O
     }
 
 
+    @Override
+    public void onClick(View v) {
 
-
+    }
 }
