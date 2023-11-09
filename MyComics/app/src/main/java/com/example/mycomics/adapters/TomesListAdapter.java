@@ -8,18 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.mycomics.R;
-import com.example.mycomics.beans.SerieNomBean;
-import com.example.mycomics.beans.TomeTitreBean;
+import com.example.mycomics.beans.TomeBean;
 
 import java.util.List;
 
-public class TomesListAdapter extends ArrayAdapter<TomeTitreBean> {
+public class TomesListAdapter extends ArrayAdapter<TomeBean> {
 
     private Context mContext;
     private int id;
-    private List<TomeTitreBean> items ;
+    private List<TomeBean> items ;
 
-    public TomesListAdapter(Context context, int textViewResourceId , List<TomeTitreBean> list )
+    public TomesListAdapter(Context context, int textViewResourceId , List<TomeBean> list )
     {
         super(context, textViewResourceId, list);
         mContext = context;
@@ -36,11 +35,13 @@ public class TomesListAdapter extends ArrayAdapter<TomeTitreBean> {
             mView = vi.inflate(id, null);
         }
 
-        TextView text = (TextView) mView.findViewById(R.id.tvListviewTemplate);
+        TextView text1 = (TextView) mView.findViewById(R.id.tvListview_row_2col_col1);
+        TextView text2 = (TextView) mView.findViewById(R.id.tvListview_row_2col_col2);
 
         if(items.get(position) != null )
         {
-            text.setText(items.get(position).getTome_titre());
+            text1.setText(String.valueOf(items.get(position).getTome_numero()));
+            text2.setText(items.get(position).getTome_titre().toString());
         }
 
         return mView;

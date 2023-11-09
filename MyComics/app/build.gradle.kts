@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("androidx.navigation.safeargs")
+
 }
 
 android {
@@ -23,6 +25,7 @@ android {
         }
     }
     compileOptions {
+        encoding = "UTF-8"
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -30,6 +33,10 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    buildTypes.getByName("debug") {
+        isPseudoLocalesEnabled = true
+    }
+
 
 
 }

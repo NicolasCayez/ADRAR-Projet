@@ -8,17 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.mycomics.R;
-import com.example.mycomics.beans.AuteurPseudoBean;
+import com.example.mycomics.beans.AuteurBean;
 
 import java.util.List;
 
-public class AuteursListAdapter extends ArrayAdapter<AuteurPseudoBean> {
+public class AuteursListAdapter extends ArrayAdapter<AuteurBean> {
 
     private Context mContext;
     private int id;
-    private List<AuteurPseudoBean> items ;
+    private List<AuteurBean> items ;
 
-    public AuteursListAdapter(Context context, int textViewResourceId , List<AuteurPseudoBean> list )
+    public AuteursListAdapter(Context context, int textViewResourceId , List<AuteurBean> list )
     {
         super(context, textViewResourceId, list);
         mContext = context;
@@ -35,7 +35,7 @@ public class AuteursListAdapter extends ArrayAdapter<AuteurPseudoBean> {
             mView = vi.inflate(id, null);
         }
 
-        TextView text = (TextView) mView.findViewById(R.id.tvListviewTemplate);
+        TextView text = (TextView) mView.findViewById(R.id.tvListview_row_1col_col1);
 
         if(items.get(position) != null )
         {

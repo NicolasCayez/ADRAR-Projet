@@ -1,61 +1,68 @@
 package com.example.mycomics;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.mycomics.databinding.ActivityMainBinding;
+import com.example.mycomics.fragments.AccueilFragment;
+import com.example.mycomics.fragments.CollectionFragment;
 import com.example.mycomics.helpers.DataBaseHelper;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //Création de l'interface graphique
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        /* -------------------------------------- */
-        // Activation fragmentManager
-        /* -------------------------------------- */
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        binding.menuHamburger.setVisibility(View.GONE);
 
         /* -------------------------------------- */
         // Initialisation BDD au besoin
         /* -------------------------------------- */
         DataBaseHelper dataBaseHelper;
         dataBaseHelper = new DataBaseHelper(this);
+
         /* -------------------------------------- */
-        // clic searchBar
+        // Clic sur le logo
         /* -------------------------------------- */
-        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
+        binding.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                binding.sbSearch.svSearch.setIconified(false);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).popBackStack(R.id.accueilFragment, false);
+//                        .navigate(R.id.action_accueilFragment_to_collectionFragment);
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
+
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
+        binding.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
-
-                findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
+                if (binding.menuHamburger.getVisibility() == View.GONE) {
+                    binding.menuHamburger.setVisibility(View.VISIBLE);
                 } else {
-                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
+                    binding.menuHamburger.setVisibility(View.GONE);
                 }
             }
         }));
@@ -63,120 +70,85 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /* -------------------------------------- */
         // Clic Bouton menu Collection
         /* -------------------------------------- */
-        findViewById(R.id.btnMenuCollection).setOnClickListener(new View.OnClickListener() {
+        binding.btnMenuCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CollectionActivity.class);
-                startActivity(intent);
+
+                System.out.println();
+//                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.action_accueilFragment_to_collectionFragment);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.collectionFragment);
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
 
         /* -------------------------------------- */
         // Clic Bouton menu Series
         /* -------------------------------------- */
-        findViewById(R.id.btnMenuSeries).setOnClickListener(new View.OnClickListener() {
+        binding.btnMenuSeries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-                startActivity(intent);
+//                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.action_accueilFragment_to_seriesFragment);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.seriesFragment);
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
 
         /* -------------------------------------- */
         // Clic Bouton menu Tomes
         /* -------------------------------------- */
-        findViewById(R.id.btnMenuTomes).setOnClickListener(new View.OnClickListener() {
+        binding.btnMenuTomes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TomesActivity.class);
-                startActivity(intent);
+//                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.action_accueilFragment_to_tomesFragment);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.tomesFragment);
+
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
 
         /* -------------------------------------- */
         // Clic Bouton menu Auteurs
         /* -------------------------------------- */
-        findViewById(R.id.btnMenuAuteurs).setOnClickListener(new View.OnClickListener() {
+        binding.btnMenuAuteurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AuteursActivity.class);
-                startActivity(intent);
+//                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.action_accueilFragment_to_auteursFragment);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.auteursFragment);
+
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
 
         /* -------------------------------------- */
         // Clic Bouton menu Editeurs
         /* -------------------------------------- */
-        findViewById(R.id.btnMenuEditeurs).setOnClickListener(new View.OnClickListener() {
+        binding.btnMenuEditeurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EditeursActivity.class);
-                startActivity(intent);
+//                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.action_accueilFragment_to_editeursFragment);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.editeursFragment);
+
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
 
         /* -------------------------------------- */
         // Clic Bouton menu Reglages
         /* -------------------------------------- */
-        findViewById(R.id.btnMenuReglages).setOnClickListener(new View.OnClickListener() {
+        binding.btnMenuReglages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ReglagesActivity.class);
-                startActivity(intent);
-            }
-        });
+//                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.action_accueilFragment_to_reglagesFragment);
+                NavHostFragment.findNavController(binding.navHostFragment.getFragment()).navigate(R.id.reglagesFragment);
 
-
-
-        /* -------------------------------------- */
-        // Clic Bouton Accueil Series
-        /* -------------------------------------- */
-        binding.btnAccueilSeries.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SeriesActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /* -------------------------------------- */
-        // Clic Bouton Accueil Tomes
-        /* -------------------------------------- */
-        binding.btnAccueilTomes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TomesActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /* -------------------------------------- */
-        // Clic Bouton Accueil Auteurs
-        /* -------------------------------------- */
-        binding.btnAccueilAuteurs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AuteursActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /* -------------------------------------- */
-        // Clic Bouton Accueil Tomes
-        /* -------------------------------------- */
-        binding.btnAccueilEditeurs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EditeursActivity.class);
-                startActivity(intent);
+                binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
 
     }
 
-
     @Override
-    public void onClick(View v) {
-
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
     }
 }

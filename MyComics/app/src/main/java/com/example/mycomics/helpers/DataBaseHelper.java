@@ -9,19 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.mycomics.beans.AuteurBean;
-import com.example.mycomics.beans.AuteurPseudoBean;
 import com.example.mycomics.beans.EditeurBean;
-import com.example.mycomics.beans.EditeurNomBean;
 import com.example.mycomics.beans.ProfilActifBean;
 import com.example.mycomics.beans.ProfilBean;
-import com.example.mycomics.beans.ProfilNomBean;
 import com.example.mycomics.beans.SerieBean;
-import com.example.mycomics.beans.SerieNomBean;
 import com.example.mycomics.beans.TomeBean;
-import com.example.mycomics.beans.TomeTitreBean;
+import com.example.mycomics.beans.TomeSerieBean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 //*********************** Convention noms SQLITE : UPPERCASE et undersores
@@ -57,7 +52,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TOME_ID = "TOME_ID";
     public static final String COLUMN_TOME_NUMERO = "TOME_NUMERO";
     public static final String COLUMN_TOME_TITRE = "TOME_TITRE";
-    public static final String COLUMN_TOME_PRIX_ACHAT = "TOME_PRIX_ACHAT";
+    public static final String COLUMN_TOME_PRIX_EDITEUR = "TOME_PRIX_EDITEUR";
     public static final String COLUMN_TOME_VALEUR_CONNUE = "TOME_VALEUR_CONNUE";
     public static final String COLUMN_TOME_DATE_EDITION = "TOME_DATE_EDITION";
     public static final String COLUMN_TOME_ISBN = "TOME_ISBN";
@@ -71,56 +66,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     /* -------------------------------------- */
-    // Constructeur
+    // Constructeur - Crée la base si inexistante
     /* -------------------------------------- */
-    // Car SQLiteHelper en a besoin
+    // = CREATE DATABASE IF NOT EXISTS mycomics
     public DataBaseHelper(@Nullable Context context) {
         super(context, "mycomics.db", null, 1);
     }
 
-    //Oncreate appelée à la première fois que l'application a besoin de la BDD, crée les tables
-    @Override
+    //Methode Oncreate appelée si la base de donnée est inexistante
+        @Override
     public void onCreate(SQLiteDatabase db) {
-        //Table PROFILS
-        db.execSQL("CREATE TABLE " + PROFILS + " (" +
-                COLUMN_PROFIL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_PROFIL_NOM + " TEXT NOT NULL)");
+        //Table PROFILS (profil_id, profil_nom)
+        db.execSQL("CREATE TABLE " + PROFILS + " (" + COLUMN_PROFIL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PROFIL_NOM + " TEXT NOT NULL)");
+        db.execSQL("INSERT INTO " + PROFILS + " ("+ COLUMN_PROFIL_NOM+ ") " + "VALUES (\"Profil 1\")");
 
-        //Table PROFIL_ACTIF initialisée
-        db.execSQL("CREATE TABLE  " + PROFIL_ACTIF + "  (" +
-                COLUMN_PROFIL_ACTIF_ID + " INTEGER PRIMARY KEY, " +
-                COLUMN_PROFIL_ID + " INTEGER)");
 
-        db.execSQL("INSERT INTO " + PROFIL_ACTIF + " ("+
-                COLUMN_PROFIL_ACTIF_ID + ", " +
-                COLUMN_PROFIL_ID+ ") " +
-                "VALUES (1,-1)");
+            //Table PROFIL_ACTIF 1 ligne initialisée (profil_actif_id, profil_id)
+        db.execSQL("CREATE TABLE  " + PROFIL_ACTIF + "  (" + COLUMN_PROFIL_ACTIF_ID + " INTEGER PRIMARY KEY, " + COLUMN_PROFIL_ID + " INTEGER)");
+        db.execSQL("INSERT INTO " + PROFIL_ACTIF + " ("+ COLUMN_PROFIL_ACTIF_ID + ", " + COLUMN_PROFIL_ID+ ") " + "VALUES (1,1)");
 
-        //Table EDITEURS
-        db.execSQL("CREATE TABLE " + EDITEURS + " (" +
-                COLUMN_EDITEUR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_EDITEUR_NOM + " TEXT NOT NULL)");
+        //Table EDITEURS (editeur_id, editeur_nom)
+        db.execSQL("CREATE TABLE " + EDITEURS + " (" + COLUMN_EDITEUR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_EDITEUR_NOM + " TEXT NOT NULL)");
 
-        //Table SERIES
-        db.execSQL("CREATE TABLE " + SERIES + " (" +
-                COLUMN_SERIE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_SERIE_NOM + " TEXT NOT NULL)");
+        //Table SERIES (serie_id, serie_nom)
+        db.execSQL("CREATE TABLE " + SERIES + " (" + COLUMN_SERIE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SERIE_NOM + " TEXT NOT NULL)");
 
-        //Table AUTEURS
-        db.execSQL("CREATE TABLE " + AUTEURS + " (" +
-                COLUMN_AUTEUR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_AUTEUR_NOM + " TEXT, " +
-                COLUMN_AUTEUR_PRENOM + " TEXT, " +
-                COLUMN_AUTEUR_PSEUDO + " TEXT NOT NULL)");
+        //Table AUTEURS (auteur_id, auteur_pseudo, auteur_prenom, auteur_nom)
+        db.execSQL("CREATE TABLE " + AUTEURS + " (" + COLUMN_AUTEUR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_AUTEUR_PSEUDO + " TEXT NOT NULL, " +
+                COLUMN_AUTEUR_PRENOM + " TEXT, " + COLUMN_AUTEUR_NOM + " TEXT)");
 
-        //Table TOMES
+        //Table TOMES (tome_id, tome_titre, tome_isbn, tome_numero, tome_image, tome_prix_editeur, tome_valeur_connue,
+        //              tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id)
         db.execSQL("CREATE TABLE " + TOMES + " (" +
                 COLUMN_TOME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_TOME_TITRE + " TEXT NOT NULL, " +
-                COLUMN_TOME_ISBN + " TEXT, " +
                 COLUMN_TOME_NUMERO + " INTEGER, " +
+                COLUMN_TOME_ISBN + " TEXT, " +
                 COLUMN_TOME_IMAGE + " TEXT, " +
-                COLUMN_TOME_PRIX_ACHAT + " DECIMAL(5,2), " +
+                COLUMN_TOME_PRIX_EDITEUR + " DECIMAL(5,2), " +
                 COLUMN_TOME_VALEUR_CONNUE + " DECIMAL(5,2), " +
                 COLUMN_TOME_DATE_EDITION + " TEXT, " +
                 COLUMN_TOME_DEDICACE + " BOOLEAN, " +
@@ -129,7 +112,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 COLUMN_SERIE_ID + " INTEGER," +
                 " FOREIGN KEY(" + COLUMN_SERIE_ID + ") REFERENCES " + SERIES + "(" + COLUMN_SERIE_ID + "))");
 
-        //Table d'association DETENIR
+        //Table d'association DETENIR (tome_id, profil_id)
         db.execSQL("CREATE TABLE " + DETENIR + " (" +
                 COLUMN_TOME_ID + " INTEGER, " +
                 COLUMN_PROFIL_ID + " INTEGER, " +
@@ -137,7 +120,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + COLUMN_TOME_ID + ") REFERENCES " + TOMES + "(" + COLUMN_TOME_ID + ")," +
                 "FOREIGN KEY(" + COLUMN_PROFIL_ID + ") REFERENCES " + PROFILS + "(" + COLUMN_PROFIL_ID + "))");
 
-        //Table d'association EDITER
+        //Table d'association EDITER (tome_id, editeur_id)
         db.execSQL("CREATE TABLE " + EDITER + " (" +
                 COLUMN_TOME_ID + " INTEGER, " +
                 COLUMN_EDITEUR_ID + " INTEGER, " +
@@ -145,7 +128,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + COLUMN_TOME_ID + ") REFERENCES " + TOMES + "(" + COLUMN_TOME_ID + ")," +
                 "FOREIGN KEY(" + COLUMN_EDITEUR_ID + ") REFERENCES " + EDITEURS + "(" + COLUMN_EDITEUR_ID + "))");
 
-        //Table d'association ECRIRE
+        //Table d'association ECRIRE (tome_id, auteur_id)
         db.execSQL("CREATE TABLE " + ECRIRE + " (" +
                 COLUMN_TOME_ID + " INTEGER, " +
                 COLUMN_AUTEUR_ID + " INTEGER, " +
@@ -154,6 +137,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + COLUMN_AUTEUR_ID + ") REFERENCES " + AUTEURS + "(" + COLUMN_AUTEUR_ID + "))");
 
     }
+
 
     //onUpgrade appelé si la version de la BDD change. Pour éviter conflits
     @Override
@@ -183,6 +167,52 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_PROFIL_ID, nouvelId);
         long update =  db.update(PROFIL_ACTIF,cv,null,null);
+        if (update == -1){ // Test si insertion ok
+            System.out.println("update request : non");
+            return false;
+        } else {
+            System.out.println("update request : OK");
+            System.out.println("Id profil actif: " + dataBaseHelper.selectAllFromProfilActif().toString());
+            return true;
+        }
+    }
+
+    /* -------------------------------------- */
+    // UPDATE PROFIL_ACTIF SET PROFIL_ID = x
+    /* -------------------------------------- */
+    public boolean updateProfil(DataBaseHelper dataBaseHelper, ProfilBean profil){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_PROFIL_NOM, profil.getProfil_nom());
+        long update =  db.update(PROFILS,cv,"PROFIL_ID = ?",new String[]{String.valueOf(profil.getProfil_id())});
+        if (update == -1){ // Test si insertion ok
+            System.out.println("update request : non");
+            return false;
+        } else {
+            System.out.println("update request : OK");
+            System.out.println("Id profil actif: " + dataBaseHelper.selectAllFromProfilActif().toString());
+            return true;
+        }
+    }
+
+    /* -------------------------------------- */
+    // UPDATE TOME WHERE TOME_ID = tome_id
+    /* -------------------------------------- */
+    public boolean updateTome(DataBaseHelper dataBaseHelper, TomeBean tome){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TOME_TITRE, tome.getTome_titre());
+        cv.put(COLUMN_TOME_NUMERO, tome.getTome_numero());
+        cv.put(COLUMN_TOME_ISBN, tome.getTome_isbn());
+        cv.put(COLUMN_TOME_PRIX_EDITEUR, tome.getTome_prix_editeur());
+        cv.put(COLUMN_TOME_VALEUR_CONNUE, tome.getTome_valeur_connue());
+        cv.put(COLUMN_TOME_DATE_EDITION, tome.getTome_date_edition());
+        cv.put(COLUMN_TOME_IMAGE, tome.getTome_image());
+        cv.put(COLUMN_TOME_DEDICACE, tome.isTome_dedicace());
+        cv.put(COLUMN_TOME_EDITION_SPECIALE, tome.isTome_edition_speciale());
+        cv.put(COLUMN_TOME_EDITION_SPECIALE_LIBELLE, tome.getTome_edition_speciale_libelle());
+        cv.put(COLUMN_SERIE_ID, tome.getSerie_id());
+        long update =  db.update(TOMES,cv,"TOME_ID = ?",new String[]{String.valueOf(tome.getTome_id())});
         if (update == -1){ // Test si insertion ok
             System.out.println("update request : non");
             return false;
@@ -261,13 +291,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // INSERT INTO TOMES TITRE SEUL
     /* -------------------------------------- */
     public boolean insertIntoTomes(TomeBean tomeBean){
+        //Table Tomes
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
         cv.put(COLUMN_TOME_TITRE, tomeBean.getTome_titre()); //ajout dans la pile
         long insert = db.insert(TOMES, null, cv); //insertion en base
         if (insert == -1){ // Test si insertion ok
+            db.close();
             return false;
         } else {
+            db.close();
+            return true;
+        }
+    }
+
+    /* -------------------------------------- */
+    // INSERT INTO DETENIR
+    /* -------------------------------------- */
+//     = INSERT INTO DETENIR (tome_id, profil_id) VALUES (Tome.tome_titre, selectAllformProfilActif.getprofil.id())
+    public boolean insertIntoDetenir(TomeBean tomeBean){
+        int profil_id = this.selectAllFromProfilActif().getProfil_id();
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        cv.put(COLUMN_TOME_ID, tomeBean.getTome_id()); //ajout dans la pile
+        cv.put(COLUMN_PROFIL_ID, profil_id);
+        long insert = db.insert(DETENIR, null, cv); //insertion en base
+        if (insert == -1){ // Test si insertion ok
+            db.close();
+            return false;
+        } else {
+            db.close();
             return true;
         }
     }
@@ -291,52 +344,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String profil_nom = cursor.getString(1);
                 ProfilBean profilBean = new ProfilBean(profil_id, profil_nom);
                 returnList.add(profilBean);
-            } while (cursor.moveToNext()); //on passe au tuple suivant
-        } else {
-            // pas de résultats on ne fait rien
-        }
-        // fermeture db et cursor
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-
-    /* -------------------------------------- */
-    // SELECT * FROM PROFILS (PROFILNOMBEAN)
-    /* -------------------------------------- */
-    public List<ProfilNomBean> selectAllFromProfilsNomSeul(){
-        List<ProfilNomBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + PROFILS + " ORDER BY " + COLUMN_PROFIL_NOM;
-        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
-        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
-        if (cursor.moveToFirst()) { // true si il y a des résultats
-            do { // pour chaque tuple
-                int profil_id = cursor.getInt(0);
-                String profil_nom = cursor.getString(1);
-                ProfilNomBean profilNomBean = new ProfilNomBean(profil_id, profil_nom);
-                returnList.add(profilNomBean);
-            } while (cursor.moveToNext()); //on passe au tuple suivant
-        } else {
-            // pas de résultats on ne fait rien
-        }
-        // fermeture db et cursor
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-
-    /* -------------------------------------- */
-    // SELECT COLUMN_PROFIL_NOM FROM PROFILS
-    /* -------------------------------------- */
-    public List<String> selectNomFromProfils(){
-        List<String> returnList = new ArrayList<>();
-        String requete = "SELECT " + COLUMN_PROFIL_NOM + " FROM " + PROFILS;
-        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
-        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
-        if (cursor.moveToFirst()) { // true si il y a des résultats
-            do { // pour chaque tuple
-                String profil_nom = cursor.getString(0);
-                returnList.add(profil_nom);
             } while (cursor.moveToNext()); //on passe au tuple suivant
         } else {
             // pas de résultats on ne fait rien
@@ -414,30 +421,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM EDITEURS (EDITEURNOMBEAN)
-    /* -------------------------------------- */
-    public List<EditeurNomBean> selectAllFromEditeursNomSeul(){
-        List<EditeurNomBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + EDITEURS + " ORDER BY " + COLUMN_EDITEUR_NOM;
-        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
-        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
-        if (cursor.moveToFirst()) { // true si il y a des résultats
-            do { // pour chaque tuple
-                int editeur_id = cursor.getInt(0);
-                String editeur_nom = cursor.getString(1);
-                EditeurNomBean editeurNomBean = new EditeurNomBean(editeur_id, editeur_nom);
-                returnList.add(editeurNomBean);
-            } while (cursor.moveToNext()); //on passe au tuple suivant
-        } else {
-            // pas de résultats on ne fait rien
-        }
-        // fermeture db et cursor
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-
-    /* -------------------------------------- */
     // SELECT * FROM AUTEURS
     /* -------------------------------------- */
     public List<AuteurBean> selectAllFromAuteurs(){
@@ -453,32 +436,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String auteur_pseudo = cursor.getString(3);
                 AuteurBean auteurBean = new AuteurBean(auteur_id, auteur_nom, auteur_prenom, auteur_pseudo);
                 returnList.add(auteurBean);
-            } while (cursor.moveToNext()); //on passe au tuple suivant
-        } else {
-            // pas de résultats on ne fait rien
-        }
-        // fermeture db et cursor
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-
-    /* -------------------------------------- */
-    // SELECT * FROM AUTEURS (AUTEURPSEUDOBEAN)
-    /* -------------------------------------- */
-    public List<AuteurPseudoBean> selectAllFromAuteursPseudoSeul(){
-        List<AuteurPseudoBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + AUTEURS + " ORDER BY " + COLUMN_AUTEUR_PSEUDO;
-        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
-        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
-        if (cursor.moveToFirst()) { // true si il y a des résultats
-            do { // pour chaque tuple
-                int auteur_id = cursor.getInt(0);
-                String auteur_nom = cursor.getString(1);
-                String auteur_prenom = cursor.getString(2);
-                String auteur_pseudo = cursor.getString(3);
-                AuteurPseudoBean auteurPseudoBean = new AuteurPseudoBean(auteur_id, auteur_nom, auteur_prenom, auteur_pseudo);
-                returnList.add(auteurPseudoBean);
             } while (cursor.moveToNext()); //on passe au tuple suivant
         } else {
             // pas de résultats on ne fait rien
@@ -514,35 +471,56 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM SERIES (SERIENOMBEAN)
-    /* -------------------------------------- */
-    public List<SerieNomBean> selectAllFromSeriesNomSeul(){
-        List<SerieNomBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + SERIES + " ORDER BY " + COLUMN_SERIE_NOM;
-        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
-        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
-        if (cursor.moveToFirst()) { // true si il y a des résultats
-            do { // pour chaque tuple
-                int serie_id = cursor.getInt(0);
-                String serie_nom = cursor.getString(1);
-                SerieNomBean serieNomBean = new SerieNomBean(serie_id, serie_nom);
-                returnList.add(serieNomBean);
-            } while (cursor.moveToNext()); //on passe au tuple suivant
-        } else {
-            // pas de résultats on ne fait rien
-        }
-        // fermeture db et cursor
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-
-    /* -------------------------------------- */
     // SELECT * FROM TOMES
     /* -------------------------------------- */
-    public List<TomeBean> selectAllFromTomes(){
-        List<TomeBean> returnList = new ArrayList<>();
+    public ArrayList<TomeBean> selectAllFromTomes(){
+        ArrayList<TomeBean> returnList = new ArrayList<>();
         String requete = "SELECT * FROM " + TOMES;
+
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int tome_id = cursor.getInt(0);
+                String tome_titre = cursor.getString(1);
+                int tome_numero = cursor.getInt(2);
+                String tome_isbn = cursor.getString(3);
+                double tome_prix_achat = cursor.getDouble(4);
+                double tome_valeur_connue = cursor.getDouble(5);
+                String tome_date_edition = cursor.getString(6);
+                String tome_image = cursor.getString(7);
+                boolean tome_dedicace = cursor.getInt(8) == 1 ? true: false;
+                boolean tome_edition_speciale = cursor.getInt(9) == 1 ? true: false;
+                String tome_edition_speciale_libelle = cursor.getString(10);
+                int serie_id = cursor.getInt(11);
+
+                TomeBean tomeBean = new TomeBean(tome_id, tome_titre, tome_numero, tome_isbn, tome_image,
+                        tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace,
+                        tome_edition_speciale, tome_edition_speciale_libelle, serie_id);
+                returnList.add(tomeBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        }
+        else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture base de données et cursor
+        cursor.close();
+        db.close();
+        return returnList; // résultat de la requête
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM TOMES JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectAllFromProfilActif().getProfil_id();    /* -------------------------------------- */
+    public List<TomeSerieBean> selectAllFromTomesEtNomSerie(){
+        List<TomeSerieBean> returnList = new ArrayList<>();
+        String requete = "SELECT * FROM " + TOMES +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = " + DETENIR + "." + COLUMN_PROFIL_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID + " = \"" + selectAllFromProfilActif().getProfil_id() +
+                "\" AND " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = 1";
+//        String requete = "SELECT * FROM " + TOMES + " ORDER BY " + COLUMN_TOME_TITRE;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -550,17 +528,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 int tome_id = cursor.getInt(0);
                 String tome_titre = cursor.getString(1);
                 int tome_numero = cursor.getInt(2);
-                double tome_prix_achat = cursor.getDouble(3);
-                double tome_valeur_connue = cursor.getDouble(4);
-                String tome_date_edition = cursor.getString(5);
-                String tome_isbn = cursor.getString(6);
-                String tome_image = cursor.getString(7);
-                boolean tome_dedicace = cursor.getInt(8) == 1 ? true: false;
-                boolean tome_edition_speciale = cursor.getInt(9) == 1 ? true: false;
-                String tome_edition_speciale_libelle = cursor.getString(10);
                 int serie_id = cursor.getInt(11);
-                TomeBean tomeBean = new TomeBean(tome_id, tome_titre, tome_isbn, tome_numero, tome_image, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id);
-                returnList.add(tomeBean);
+                TomeSerieBean tomeSerieBean = new TomeSerieBean(tome_id, tome_titre, tome_numero, null,
+                        null, 0, 0, null, false,
+                        false, null, serie_id, "test");
+                returnList.add(tomeSerieBean);
             } while (cursor.moveToNext()); //on passe au tuple suivant
         } else {
             // pas de résultats on ne fait rien
@@ -572,11 +544,66 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM TOMES (TOMENOMBEAN)
+    // "SELECT COLUMN_TOME_ID FROM TOMES WHERE COLUMN_TOME_TITRE = + tomeBean.getTome_titre() +
+    // ORDER BY COLUMN_TOME_ID DESC LIMIT 1"
     /* -------------------------------------- */
-    public List<TomeTitreBean> selectAllFromTomesTitreSeul(){
-        List<TomeTitreBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + TOMES + " ORDER BY " + COLUMN_TOME_TITRE;
+    public TomeBean selectTOMEIDFromTomesDernierAjout(TomeBean tomeBean){
+        String requete = "SELECT " + COLUMN_TOME_ID + " FROM " + TOMES +
+                " WHERE " + COLUMN_TOME_TITRE + " = \"" + tomeBean.getTome_titre() +
+                "\" ORDER BY " + COLUMN_TOME_ID +" DESC LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        TomeBean result = new TomeBean();
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            result.setTome_id(cursor.getInt(0));
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    /* -------------------------------------- */
+    // SELECT COUNT (*) FROM DETENIR WHERE COLUMN_TOME_ID = selectTOMEIDFromTomesDernierAjout(tomeBean)
+    /* -------------------------------------- */
+
+    public boolean selectFromDetenirDernierTomeOk(TomeBean tomeBean){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+
+//        SELECT COUNT (*) FROM DETENIR WHERE COLUMN_TOME_ID = selectFromTomesDernierAjout(tomeBean)
+        String requete = "SELECT COUNT(*) FROM " + DETENIR + " WHERE " + COLUMN_TOME_ID + " = " + selectTOMEIDFromTomesDernierAjout(tomeBean);
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM TOMES WHERE TOME_ID = tome_id
+    /* -------------------------------------- */
+    public TomeBean selectTome(int tome_id_voulu){
+        TomeBean tomeBean = new TomeBean();
+        String requete = "SELECT * FROM " + TOMES +
+                " JOIN " + DETENIR +
+                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + "=" + selectAllFromProfilActif() +
+                " AND " + TOMES + "." + COLUMN_TOME_ID + " = " + tome_id_voulu + " LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -584,17 +611,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 int tome_id = cursor.getInt(0);
                 String tome_titre = cursor.getString(1);
                 int tome_numero = cursor.getInt(2);
-                double tome_prix_achat = cursor.getDouble(3);
-                double tome_valeur_connue = cursor.getDouble(4);
-                String tome_date_edition = cursor.getString(5);
-                String tome_isbn = cursor.getString(6);
-                String tome_image = cursor.getString(7);
+                String tome_isbn = cursor.getString(3);
+                String tome_image = cursor.getString(4);
+                double tome_prix_achat = cursor.getDouble(5);
+                double tome_valeur_connue = cursor.getDouble(6);
+                String tome_date_edition = cursor.getString(7);
                 boolean tome_dedicace = cursor.getInt(8) == 1 ? true: false;
                 boolean tome_edition_speciale = cursor.getInt(9) == 1 ? true: false;
                 String tome_edition_speciale_libelle = cursor.getString(10);
                 int serie_id = cursor.getInt(11);
-                TomeTitreBean tomeTitreBean = new TomeTitreBean(tome_id, tome_titre, tome_isbn, tome_numero, tome_image, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id);
-                returnList.add(tomeTitreBean);
+                tomeBean = new TomeBean(tome_id, tome_titre, tome_numero, tome_isbn,  tome_image, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id);
             } while (cursor.moveToNext()); //on passe au tuple suivant
         } else {
             // pas de résultats on ne fait rien
@@ -602,6 +628,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // fermeture db et cursor
         cursor.close();
         db.close();
-        return returnList;
+        return tomeBean;
     }
 }

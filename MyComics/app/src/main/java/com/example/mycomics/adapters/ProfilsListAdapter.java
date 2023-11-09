@@ -8,17 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.mycomics.R;
-import com.example.mycomics.beans.ProfilNomBean;
+import com.example.mycomics.beans.ProfilBean;
 
 import java.util.List;
 
-public class ProfilsListAdapter extends ArrayAdapter<ProfilNomBean> {
+public class ProfilsListAdapter extends ArrayAdapter<ProfilBean> {
 
     private Context mContext;
     private int id;
-    private List <ProfilNomBean>items ;
+    private List <ProfilBean>items ;
 
-    public ProfilsListAdapter(Context context, int textViewResourceId , List<ProfilNomBean> list )
+    public ProfilsListAdapter(Context context, int textViewResourceId , List<ProfilBean> list )
     {
         super(context, textViewResourceId, list);
         mContext = context;
@@ -35,7 +35,7 @@ public class ProfilsListAdapter extends ArrayAdapter<ProfilNomBean> {
             mView = vi.inflate(id, null);
         }
 
-        TextView text = (TextView) mView.findViewById(R.id.tvListviewTemplate);
+        TextView text = (TextView) mView.findViewById(R.id.tvListview_row_1col_col1);
 
         if(items.get(position) != null )
         {
