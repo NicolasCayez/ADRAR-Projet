@@ -64,11 +64,13 @@
                     android:layout_weight="1"
                     android:background="@drawable/rounded_corner_custom_beige"
                     android:padding="5dp">
+
                     <ListView
                         android:id="@+id/lvTomesListeTomes"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
-                        android:background="#eee" />
+                        android:background="#eee"
+                        android:nestedScrollingEnabled="true" />
                 </LinearLayout>
                 <!-- Bouton plus -->
                 <LinearLayout

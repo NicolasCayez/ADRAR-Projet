@@ -140,10 +140,12 @@ public class TomesFragment extends Fragment {
                         System.out.println("insertion TOMES" + successInsertTomes);
                         boolean successInsertDetenir = dataBaseHelper.insertIntoDetenir(dataBaseHelper.selectTOMEIDFromTomesDernierAjout(tomeBean));
                         System.out.println("insertion DETENIR" + successInsertDetenir);
+                        afficherListeTomes();
+
                     }
                 });
                 popupAddDialog.build();
-//                afficherListeTomes();
+                afficherListeTomes();
             }
         });
 

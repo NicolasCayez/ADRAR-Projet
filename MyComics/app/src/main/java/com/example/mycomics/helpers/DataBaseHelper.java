@@ -136,6 +136,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + COLUMN_TOME_ID + ") REFERENCES " + TOMES + "(" + COLUMN_TOME_ID + ")," +
                 "FOREIGN KEY(" + COLUMN_AUTEUR_ID + ") REFERENCES " + AUTEURS + "(" + COLUMN_AUTEUR_ID + "))");
 
+
+
+
+
+        /* -------------------------------------- */
+        // Entrées de Test
+        /* -------------------------------------- */
+            // AUTEURS
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Buchet\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Crisse\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Duval\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Eiichiro Oda\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Goscinny\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Gotlib\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Hugo Pratt\");\n");
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Uderzo\");\n");
+
+            // EDITEURS
+            db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Casterman\");\n");
+            db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Dargaud\");\n");
+            db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Delcourt\");\n");
+            db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Glenat\");\n");
+            db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Pilote\");\n");
+            db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Soleil Editions\");\n");
+
+            // SERIES
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Asterix\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Carmen Mc Callum\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Clifton\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Kookaburra\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Lanfeust de Troy\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Lanfeust des étoiles\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Lucky Luke\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"One Piece\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Sillage\");\n");
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Trolls de Troy\");\n");
+
+
     }
 
 
@@ -155,9 +193,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-/* ************************************** */
+/* ********************************************************************************************** */
 // REQUETES UPDATE
-/* ************************************** */
+/* ********************************************************************************************** */
 
     /* -------------------------------------- */
     // UPDATE PROFIL_ACTIF SET PROFIL_ID = x
@@ -178,7 +216,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // UPDATE PROFIL_ACTIF SET PROFIL_ID = x
+    // UPDATE PROFIL SET PROFIL_nom = profil_nom WHERE PROFIL_ID = profil_id
     /* -------------------------------------- */
     public boolean updateProfil(DataBaseHelper dataBaseHelper, ProfilBean profil){
         SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
@@ -223,9 +261,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-/* ************************************** */
+    /* -------------------------------------- */
+    // UPDATE EDITER SET EDITEUR_ID = editeur_id WHERE TOME_ID = tome_id
+    /* -------------------------------------- */
+    public boolean updateEditeurTome(DataBaseHelper dataBaseHelper, int editeur_id, int tome_id){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_EDITEUR_ID, editeur_id);
+        long update = db.update(EDITER,cv,"TOME_ID = ?",new String[]{String.valueOf(tome_id)});
+        if (update == -1){ // Test si insertion ok
+            System.out.println("update request : non");
+            return false;
+        } else {
+            System.out.println("update request : OK");
+            return true;
+        }
+    }
+
+/* ********************************************************************************************** */
 // REQUETES INSERT INTO
-/* ************************************** */
+/* ********************************************************************************************** */
 
     /* -------------------------------------- */
     // INSERT INTO PROFILS NOM SEUL
@@ -258,6 +313,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
+    // INSERT INTO EDITER (tome_id, editeur_id)
+    /* -------------------------------------- */
+    public boolean insertIntoEditer(int tome_id, int editeur_id){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        cv.put(COLUMN_TOME_ID, tome_id); //ajout dans la pile
+        cv.put(COLUMN_EDITEUR_ID, editeur_id); //ajout dans la pile
+        long insert = db.insert(EDITER, null, cv); //insertion en base
+        if (insert == -1){ // Test si insertion ok
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    /* -------------------------------------- */
     // INSERT INTO AUTEURS PSEUDO SEUL
     /* -------------------------------------- */
     public boolean insertIntoAuteurs(AuteurBean auteurBean){
@@ -265,6 +337,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
         cv.put(COLUMN_AUTEUR_PSEUDO, auteurBean.getAuteur_pseudo()); //ajout dans la pile
         long insert = db.insert(AUTEURS, null, cv); //insertion en base
+        if (insert == -1){ // Test si insertion ok
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /* -------------------------------------- */
+    // INSERT INTO ECRIRE (tome_id, auteur_id)
+    /* -------------------------------------- */
+    public boolean insertIntoEcrire(int tome_id, int auteur_id){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        cv.put(COLUMN_TOME_ID, tome_id); //ajout dans la pile
+        cv.put(COLUMN_AUTEUR_ID, auteur_id); //ajout dans la pile
+        long insert = db.insert(ECRIRE, null, cv); //insertion en base
         if (insert == -1){ // Test si insertion ok
             return false;
         } else {
@@ -326,9 +414,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-/* ************************************** */
+/* ********************************************************************************************** */
 // REQUETES SELECT
-/* ************************************** */
+/* ********************************************************************************************** */
 
     /* -------------------------------------- */
     // SELECT * FROM PROFILS
@@ -355,6 +443,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
+    // SELECT COUNT (*) FROM SERIES
+    // WHERE COLUMN_SERIE_NOM = serie_nom
+    /* -------------------------------------- */
+    public boolean verifDoubonProfil(String profil_nom){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        String requete = "SELECT COUNT(*) FROM " + PROFILS + " WHERE " + COLUMN_PROFIL_NOM + " = \"" + profil_nom + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
     // SELECT * FROM PROFIL_ACTIF, une seule entrée
     /* -------------------------------------- */
     public ProfilActifBean selectAllFromProfilActif(){
@@ -375,7 +490,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return profilActifBean;
     }
     /* -------------------------------------- */
-    // SELECT * FROM PROFILS WHERE PROFIL_ID = PROFIL_ACTIF_ID
+    // SELECT * FROM PROFILS
+    // WHERE PROFIL_ID = PROFIL_ACTIF_ID
     /* -------------------------------------- */
     public ProfilBean selectFromProfilProfilActif(){
         ProfilBean profilBean = null;
@@ -421,6 +537,88 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
+    // SELECT COUNT (*) FROM EDITEUR
+    // WHERE COLUMN_EDITEUR_NOM = editeur_nom
+    /* -------------------------------------- */
+    public boolean verifDoubonEditeur(String editeur_nom){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        String requete = "SELECT COUNT(*) FROM " + EDITEURS + " WHERE " + COLUMN_EDITEUR_NOM + " = \"" + editeur_nom + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM EDITEURS
+    // INNER JOIN EDITER ON EDITER.EDITEUR_ID = EDITEUR.EDITEUR_ID
+    // WHERE EDITER.TOME_ID = tome_id LIMIT 1
+    // 1 seul résultat
+    /* -------------------------------------- */
+        public EditeurBean selectEditeurTomeId(int tome_id){
+        EditeurBean editeurBean = null;
+        String requete = "SELECT * FROM " + EDITEURS +
+                " INNER JOIN " + EDITER + " ON " + EDITEURS + "." + COLUMN_EDITEUR_ID + " = " + EDITER + "." + COLUMN_EDITEUR_ID +
+                " WHERE " + EDITER + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\" LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            int editeur_id = cursor.getInt(0);
+            String editeur_nom = cursor.getString(1);
+            editeurBean = new EditeurBean(editeur_id, editeur_nom);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return editeurBean;
+    }
+
+    /* -------------------------------------- */
+    // SELECT COUNT (*) FROM EDITER
+    // WHERE COLUMN_TOME_ID = tome_id
+    /* -------------------------------------- */
+    public boolean selectFromEditerTomeExistant(int tome_id){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+
+        String requete = "SELECT COUNT(*) FROM " + EDITER + " WHERE " + COLUMN_TOME_ID + " = \"" + tome_id + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+
+    /* -------------------------------------- */
     // SELECT * FROM AUTEURS
     /* -------------------------------------- */
     public List<AuteurBean> selectAllFromAuteurs(){
@@ -431,9 +629,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) { // true si il y a des résultats
             do { // pour chaque tuple
                 int auteur_id = cursor.getInt(0);
-                String auteur_nom = cursor.getString(1);
+                String auteur_pseudo = cursor.getString(1);
                 String auteur_prenom = cursor.getString(2);
-                String auteur_pseudo = cursor.getString(3);
+                String auteur_nom = cursor.getString(3);
                 AuteurBean auteurBean = new AuteurBean(auteur_id, auteur_nom, auteur_prenom, auteur_pseudo);
                 returnList.add(auteurBean);
             } while (cursor.moveToNext()); //on passe au tuple suivant
@@ -445,6 +643,87 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    /* -------------------------------------- */
+    // SELECT COUNT (*) FROM AUTEURS
+    // WHERE COLUMN_AUTEUR_PSEUDO = auteur_pseudo
+    /* -------------------------------------- */
+    public boolean verifDoubonAuteur(String auteur_pseudo){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        String requete = "SELECT COUNT(*) FROM " + AUTEURS + " WHERE " + COLUMN_AUTEUR_PSEUDO + " = \"" + auteur_pseudo + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM AUTEURS
+    // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
+    // WHERE ECRIRE.TOME_ID = tome_id
+    /* -------------------------------------- */
+    public List<AuteurBean> selectAllFromAuteursTomeId(int tome_id){
+        List<AuteurBean> returnList = new ArrayList<>();
+        AuteurBean auteurBean = null;
+        String requete = "SELECT * FROM " + AUTEURS +
+                " INNER JOIN " + ECRIRE +
+                " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
+                " WHERE " + ECRIRE + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\"";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int auteur_id = cursor.getInt(0);
+                String auteur_pseudo = cursor.getString(1);
+                auteurBean = new AuteurBean(auteur_id, auteur_pseudo);
+                returnList.add(auteurBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /* -------------------------------------- */
+    // "SELECT COLUMN_TOME_ID FROM TOMES
+    // WHERE COLUMN_TOME_TITRE = tomeBean.getTome_titre()
+    // ORDER BY COLUMN_TOME_ID DESC LIMIT 1"
+    /* -------------------------------------- */
+    public AuteurBean selectAUTEURIDFromAuteursDernierAjout(AuteurBean auteurBean){
+        String requete = "SELECT " + COLUMN_AUTEUR_ID + " FROM " + AUTEURS +
+                " WHERE " + COLUMN_AUTEUR_PSEUDO + " = \"" + auteurBean.getAuteur_pseudo() +
+                "\" ORDER BY " + COLUMN_AUTEUR_ID +" DESC LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        AuteurBean result = new AuteurBean();
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            result.setAuteur_id(cursor.getInt(0));
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return result;
+    }
+
 
     /* -------------------------------------- */
     // SELECT * FROM SERIES
@@ -469,6 +748,89 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+    /***********************************************************************************************/
+    /* -------------------------------------- */
+    // SELECT * FROM SERIES
+    // INNER JOIN TOMES ON TOMES.SERIE_ID = SERIE.SERIE_ID
+    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
+    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    /* -------------------------------------- */
+    public List<SerieBean> selectAllFromSeriesAuteurId(){
+        List<SerieBean> returnList = new ArrayList<>();
+        String requete = "SELECT * FROM " + SERIES;
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int serie_id = cursor.getInt(0);
+                String serie_nom = cursor.getString(1);
+                SerieBean serieBean = new SerieBean(serie_id, serie_nom);
+                returnList.add(serieBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+    /***********************************************************************************************/
+
+    /* -------------------------------------- */
+    // SELECT COUNT (*) FROM SERIES
+    // WHERE COLUMN_SERIE_NOM = serie_nom
+    /* -------------------------------------- */
+    public boolean verifDoubonSerie(String serie_nom){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        String requete = "SELECT COUNT(*) FROM " + SERIES + " WHERE " + COLUMN_SERIE_NOM + " = \"" + serie_nom + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM SERIES
+    // INNER JOIN TOME ON SERIES.SERIE_ID = TOMES.SERIE_ID
+    // WHERE TOMES.TOME_ID = tome_id LIMIT 1
+    // 1 seul résultat
+    /* -------------------------------------- */
+    public EditeurBean selectSerieTomeId(int tome_id){
+        EditeurBean editeurBean = null;
+        String requete = "SELECT * FROM " + SERIES +
+                " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
+                " WHERE " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\" LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            int editeur_id = cursor.getInt(0);
+            String editeur_nom = cursor.getString(1);
+            editeurBean = new EditeurBean(editeur_id, editeur_nom);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return editeurBean;
+    }
+
+
 
     /* -------------------------------------- */
     // SELECT * FROM TOMES
@@ -511,8 +873,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM TOMES JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
-    // WHERE DETENIR.PROFIL_ID = selectAllFromProfilActif().getProfil_id();    /* -------------------------------------- */
+    // SELECT COUNT (*) FROM TOMES
+    // WHERE COLUMN_TOME_TITRE = tome_titre
+    /* -------------------------------------- */
+    public boolean verifDoubonTome(String tome_titre){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        String requete = "SELECT COUNT(*) FROM " + TOMES + " WHERE " + COLUMN_TOME_TITRE + " = \"" + tome_titre + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM TOMES
+    // JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectAllFromProfilActif().getProfil_id();
     public List<TomeSerieBean> selectAllFromTomesEtNomSerie(){
         List<TomeSerieBean> returnList = new ArrayList<>();
         String requete = "SELECT * FROM " + TOMES +
@@ -544,7 +934,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // "SELECT COLUMN_TOME_ID FROM TOMES WHERE COLUMN_TOME_TITRE = + tomeBean.getTome_titre() +
+    // "SELECT COLUMN_TOME_ID FROM TOMES
+    // WHERE COLUMN_TOME_TITRE = + tomeBean.getTome_titre() +
     // ORDER BY COLUMN_TOME_ID DESC LIMIT 1"
     /* -------------------------------------- */
     public TomeBean selectTOMEIDFromTomesDernierAjout(TomeBean tomeBean){
@@ -566,15 +957,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT COUNT (*) FROM DETENIR WHERE COLUMN_TOME_ID = selectTOMEIDFromTomesDernierAjout(tomeBean)
+    // SELECT COUNT(*) FROM DETENIR
+    // WHERE COLUMN_TOME_ID = selectTOMEIDFromTomesDernierAjout(tomeBean)
     /* -------------------------------------- */
-
     public boolean selectFromDetenirDernierTomeOk(TomeBean tomeBean){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
 
-//        SELECT COUNT (*) FROM DETENIR WHERE COLUMN_TOME_ID = selectFromTomesDernierAjout(tomeBean)
-        String requete = "SELECT COUNT(*) FROM " + DETENIR + " WHERE " + COLUMN_TOME_ID + " = " + selectTOMEIDFromTomesDernierAjout(tomeBean);
+        String requete = "SELECT COUNT(*) FROM " + DETENIR + " WHERE " + COLUMN_TOME_ID + " = \"" + selectTOMEIDFromTomesDernierAjout(tomeBean) + "\"";
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         int nbResult = 0;
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -595,15 +985,46 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM TOMES WHERE TOME_ID = tome_id
+    // SELECT COUNT (*) FROM ECRIRE
+    // WHERE COLUMN_TOME_ID = tome_id
+    // AND COLUMN_AUTEUR_ID = auteur_id
+    /* -------------------------------------- */
+    public boolean verifDoubonTomeAuteur(int tome_id, int auteur_id){
+        SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
+        ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
+        String requete = "SELECT COUNT(*) FROM " + ECRIRE +
+                " WHERE " + COLUMN_TOME_ID + " = \"" + tome_id +
+                "\" AND " + COLUMN_AUTEUR_ID + " = \"" + auteur_id + "\"";
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        int nbResult = 0;
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            nbResult = cursor.getInt(0);
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        if (nbResult == 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM TOMES
+    // WHERE TOME_ID = tome_id
     /* -------------------------------------- */
     public TomeBean selectTome(int tome_id_voulu){
         TomeBean tomeBean = new TomeBean();
         String requete = "SELECT * FROM " + TOMES +
                 " JOIN " + DETENIR +
                 " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
-                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + "=" + selectAllFromProfilActif() +
-                " AND " + TOMES + "." + COLUMN_TOME_ID + " = " + tome_id_voulu + " LIMIT 1";
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id_voulu + "\" LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats

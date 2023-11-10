@@ -407,21 +407,25 @@
                             android:layout_height="25dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/kronika"
-                            android:text="Auteurs qui ont travaillé ensemble"
+                            android:text="Auteurs"
                             android:textAlignment="textStart"
                             android:textColor="@color/custom_blue"
                             android:textSize="14sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_height="130dp">
 
                             <ListView
                                 android:id="@+id/lvDetailTomeAuteurs"
                                 android:layout_width="match_parent"
-                                android:layout_height="80dp"
-                                android:background="#eee" />
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="20dp"
+                                android:nestedScrollingEnabled="true"
+                                android:background="#eee"
+                                android:fontFamily="@font/kronika"
+                                android:textColor="@color/custom_blue"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -463,7 +467,7 @@
                             android:layout_height="25dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/kronika"
-                            android:text="Editeurs"
+                            android:text="Editeur"
                             android:textAlignment="textStart"
                             android:textColor="@color/custom_blue"
                             android:textSize="14sp" />
@@ -473,11 +477,17 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ListView
-                                android:id="@+id/lvDetailTomeEditeurs"
+                            <TextView
+                                android:id="@+id/tvDetailTomeEditeur"
                                 android:layout_width="match_parent"
-                                android:layout_height="80dp"
-                                android:background="#eee" />
+                                android:layout_height="wrap_content"
+                                android:background="#eee"
+                                android:hint="Editeur"
+                                android:fontFamily="@font/kronika"
+                                android:textAlignment="center"
+                                android:textColor="@color/custom_blue"
+                                android:textSize="14sp" />
+
                         </LinearLayout>
 
                         <LinearLayout

@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/custom_blue"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:background="@color/custom_blue"
         tools:context=".AuteursDetailActivity">
 
         <!-- Bandeau DETAIL SERIE -->
@@ -18,23 +18,25 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginVertical="5dp"
-            android:orientation="horizontal"
-            android:background="@color/custom_beige">
+            android:background="@color/custom_beige"
+            android:orientation="horizontal">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:src="@drawable/series_bleu" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDetailAuteurTitreBandeau"
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/kronika"
-                android:text="DETAIL AUTEUR"
                 android:gravity="center_vertical"
                 android:paddingStart="50dp"
-                android:layout_weight="1"
+                android:text="DETAIL AUTEUR"
                 android:textColor="@color/custom_blue"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -43,11 +45,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
                 android:weightSum="1">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,15 +63,15 @@
                     <!-- Titre série -->
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvDetailAuteurPseudo"
-                        android:layout_height="30dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="30dp"
                         android:layout_marginBottom="20dp"
-                        android:fontFamily="@font/kronika"
-                        android:text="Nom Auteur"
-                        android:gravity="center_horizontal"
-                        android:textColor="@color/custom_blue"
+                        android:layout_weight="1"
                         android:background="@drawable/rounded_corner_search"
+                        android:fontFamily="@font/kronika"
+                        android:gravity="center_horizontal"
+                        android:text="Nom Auteur"
+                        android:textColor="@color/custom_blue"
                         android:textSize="16sp" />
                     <!-- Liste Séries -->
                     <androidx.appcompat.widget.AppCompatTextView
@@ -80,15 +84,18 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/custom_blue"
                         android:textSize="14sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <ListView
                             android:id="@+id/lvDetailAuteurListeSeries"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                     <!-- Liste tomes -->
                     <androidx.appcompat.widget.AppCompatTextView
@@ -101,15 +108,18 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/custom_blue"
                         android:textSize="14sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <ListView
                             android:id="@+id/lvDetailAuteurListeTomes"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                     <!-- Liste Editeurs -->
                     <androidx.appcompat.widget.AppCompatTextView
@@ -122,10 +132,12 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/custom_blue"
                         android:textSize="12sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <ListView
                             android:id="@+id/lvDetailAuteurListeEditeurs"
                             android:layout_width="match_parent"
@@ -143,15 +155,18 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/custom_blue"
                         android:textSize="14sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <ListView
                             android:id="@+id/lvDetailAuteurListeAuteurs"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                 </LinearLayout>
                 <!-- Boutons -->
@@ -160,10 +175,11 @@
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    android:padding="5dp"
                     android:background="@drawable/rounded_corner_custom_beige"
                     android:gravity="end"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/btnDetailAuteurSaveAuteur"
                         android:layout_width="wrap_content"
@@ -171,6 +187,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:src="@drawable/btn_save_bleu" />
+
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/btnDetailAuteurDeleteAuteur"
                         android:layout_width="wrap_content"

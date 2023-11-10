@@ -17,9 +17,17 @@ import android.view.ViewGroup;
 import com.example.mycomics.R;
 
 import com.example.mycomics.databinding.FragmentAccueilBinding;
+import com.example.mycomics.helpers.DataBaseHelper;
 
 public class AccueilFragment extends Fragment{
     FragmentAccueilBinding binding;
+
+    /* -------------------------------------- */
+    // Variable BDD
+    /* -------------------------------------- */
+    DataBaseHelper dataBaseHelper;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,7 +38,10 @@ public class AccueilFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        /* -------------------------------------- */
+        // Initialisation Base de données
+        /* -------------------------------------- */
+        dataBaseHelper = new DataBaseHelper(getActivity());
     }
     @Override
     public void onDestroyView() {

@@ -82,16 +82,6 @@ public class ReglagesFragment extends Fragment {
         /* -------------------------------------- */
         dataBaseHelper = new DataBaseHelper(getActivity());
 
-
-
-
-
-
-
-
-
-
-
     }
     private void afficherProfilActif() {
         try {
@@ -119,7 +109,7 @@ public class ReglagesFragment extends Fragment {
         afficherProfilActif();
 
         /* -------------------------------------- */
-        // Clic Enregistrer Tome
+        // Clic Enregistrer Profil
         /* -------------------------------------- */
         binding.btnSaveProfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,8 +216,7 @@ public class ReglagesFragment extends Fragment {
                 //Création Popup
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez un profil dans la liste");
-                ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupListe);
-//                profilsArrayAdapter = new ArrayAdapter<>(ReglagesActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.selectAllFromProfilsNomSeul());
+                ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
                 profilsArrayAdapter = new ProfilsListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromProfils());
                 listView.setAdapter(profilsArrayAdapter);
                 //Clic Profil choisi pour modification
@@ -243,7 +232,7 @@ public class ReglagesFragment extends Fragment {
                         }
                         popupListDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
-                        dataBaseHelper = new DataBaseHelper(getActivity());
+//                        dataBaseHelper = new DataBaseHelper(getActivity());
                     }
                 });
                 popupListDialog.Build();

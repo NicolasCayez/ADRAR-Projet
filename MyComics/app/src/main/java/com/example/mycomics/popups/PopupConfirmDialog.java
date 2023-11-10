@@ -24,9 +24,9 @@ public class PopupConfirmDialog extends Dialog {
         super(context, androidx.appcompat.R.style.Theme_AppCompat_Dialog);
         setContentView(R.layout.dialog_popup_confirm);
         this.titre = "Mon titre";
-        this.tvPopupConfirmTitle = findViewById(R.id.tvPopupConfirmTitle);
-        this.btnPopupConfirmValider = findViewById(R.id.btnPopupConfirmValider);
-        this.btnPopupConfirmAnnuler = findViewById(R.id.btnPopupConfirmAnnuler);
+        this.tvPopupConfirmTitle = findViewById(R.id.tvPopupTitle);
+        this.btnPopupConfirmValider = findViewById(R.id.btnPopupValider);
+        this.btnPopupConfirmAnnuler = findViewById(R.id.btnPopupAnnuler);
     }
 
     /* -------------------------------------- */

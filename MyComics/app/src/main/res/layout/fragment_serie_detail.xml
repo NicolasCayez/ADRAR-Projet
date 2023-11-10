@@ -121,7 +121,8 @@
                             android:id="@+id/lvDetailSerieListeTomes"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                     <!-- Liste auteurs -->
                     <androidx.appcompat.widget.AppCompatTextView
@@ -144,7 +145,8 @@
                             android:id="@+id/lvDetailSerieListeAuteurs"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                     <!-- Liste éditeurs -->
                     <androidx.appcompat.widget.AppCompatTextView
@@ -167,7 +169,8 @@
                             android:id="@+id/lvDetailSerieListeEditeurs"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                 </LinearLayout>
                 <!-- Boutons -->

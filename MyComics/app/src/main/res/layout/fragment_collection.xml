@@ -206,10 +206,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <ListView
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                 </LinearLayout>
                 <!-- enregistrements sans lien -->
@@ -236,10 +238,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <ListView
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

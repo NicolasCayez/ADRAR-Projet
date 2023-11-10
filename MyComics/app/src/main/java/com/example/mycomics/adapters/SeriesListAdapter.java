@@ -39,7 +39,7 @@ public class SeriesListAdapter extends ArrayAdapter<SerieBean> {
 
         if(items.get(position) != null )
         {
-            text.setText(items.get(position).getSerie_nom());
+            text.setText(items.get(position).getSerie_nom().toString());
         }
 
         return mView;
