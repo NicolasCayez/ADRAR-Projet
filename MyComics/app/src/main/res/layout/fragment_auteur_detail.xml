@@ -142,7 +142,8 @@
                             android:id="@+id/lvDetailAuteurListeEditeurs"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
-                            android:background="#eee" />
+                            android:background="#eee"
+                            android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                     <!-- Liste auteurs qui ont travaillé ensemble -->
                     <androidx.appcompat.widget.AppCompatTextView
@@ -151,10 +152,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/kronika"
-                        android:text="Auteurs qui ont travaillé ensemble"
+                        android:text="Auteurs Partenaires"
                         android:textAlignment="textStart"
                         android:textColor="@color/custom_blue"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

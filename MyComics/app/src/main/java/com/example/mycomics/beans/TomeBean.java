@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class TomeBean {
 
-    private Integer tome_id, tome_numero, serie_id;
+    private Integer tome_id, tome_numero, serie_id, editeur_id;
     private String tome_titre, tome_isbn, tome_image, tome_date_edition, tome_edition_speciale_libelle;
     private double tome_prix_editeur, tome_valeur_connue;
     private boolean tome_dedicace, tome_edition_speciale;
@@ -12,7 +12,7 @@ public class TomeBean {
     /* -------------------------------------- */
     // Constructor
     /* -------------------------------------- */
-    public TomeBean(int tome_id, String tome_titre, int tome_numero, String tome_isbn,  String tome_image, double tome_prix_editeur, double tome_valeur_connue, String tome_date_edition, boolean tome_dedicace, boolean tome_edition_speciale, String tome_edition_speciale_libelle, int serie_id) {
+    public TomeBean(Integer tome_id, String tome_titre, int tome_numero, String tome_isbn,  String tome_image, double tome_prix_editeur, double tome_valeur_connue, String tome_date_edition, boolean tome_dedicace, boolean tome_edition_speciale, String tome_edition_speciale_libelle, Integer serie_id, Integer editeur_id) {
         this.tome_id = tome_id;
         this.tome_titre = tome_titre;
         this.tome_numero = tome_numero;
@@ -25,8 +25,9 @@ public class TomeBean {
         this.tome_edition_speciale = tome_edition_speciale;
         this.tome_edition_speciale_libelle = tome_edition_speciale_libelle;
         this.serie_id = serie_id;
+        this.editeur_id = editeur_id;
     }
-    public TomeBean(int tome_id, String tome_titre) {
+    public TomeBean(Integer tome_id, String tome_titre) {
         this.tome_id = tome_id;
         this.tome_titre = tome_titre;
     }
@@ -109,6 +110,14 @@ public class TomeBean {
         this.tome_edition_speciale = tome_edition_speciale;
     }
 
+    public Integer getEditeur_id() {
+        return editeur_id;
+    }
+
+    public void setEditeur_id(Integer editeur_id) {
+        this.editeur_id = editeur_id;
+    }
+
     /* -------------------------------------- */
     // ToString
     /* -------------------------------------- */
@@ -118,6 +127,7 @@ public class TomeBean {
                 "tome_id=" + tome_id +
                 ", tome_numero=" + tome_numero +
                 ", serie_id=" + serie_id +
+                ", editeur_id=" + editeur_id +
                 ", tome_titre='" + tome_titre + '\'' +
                 ", tome_isbn='" + tome_isbn + '\'' +
                 ", tome_image='" + tome_image + '\'' +

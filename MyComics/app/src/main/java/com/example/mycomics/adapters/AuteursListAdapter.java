@@ -39,7 +39,7 @@ public class AuteursListAdapter extends ArrayAdapter<AuteurBean> {
 
         if(items.get(position) != null )
         {
-            text.setText(items.get(position).getAuteur_pseudo().toString());
+            text.setText(items.get(position).getAuteur_pseudo());
         }
 
         return mView;

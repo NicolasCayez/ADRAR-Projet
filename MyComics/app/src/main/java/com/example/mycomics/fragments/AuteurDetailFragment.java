@@ -13,6 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.mycomics.R;
+import com.example.mycomics.adapters.AuteursListAdapter;
+import com.example.mycomics.adapters.EditeursListAdapter;
+import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.adapters.TomesListAdapter;
+import com.example.mycomics.adapters.TomesSerieListAdapter;
+import com.example.mycomics.beans.AuteurBean;
+import com.example.mycomics.beans.TomeBean;
 import com.example.mycomics.databinding.FragmentAuteurDetailBinding;
 import com.example.mycomics.databinding.FragmentAuteursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
@@ -29,7 +36,10 @@ public class AuteurDetailFragment extends Fragment {
     // Variable BDD
     /* -------------------------------------- */
     DataBaseHelper dataBaseHelper;
+    ArrayAdapter tomesSerieArrayAdapter;
+    ArrayAdapter seriesArrayAdapter;
     ArrayAdapter auteursArrayAdapter;
+    ArrayAdapter editeursArrayAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,16 +98,21 @@ public class AuteurDetailFragment extends Fragment {
         /* -------------------------------------- */
         // Récupération données
         /* -------------------------------------- */
-        int auteur_id = getArguments().getInt("auteur_id");
+        Integer auteur_id = getArguments().getInt("auteur_id");
         String auteur_pseudo = getArguments().getString("auteur_pseudo");
-        String auteur_nom = getArguments().getString("auteur_nom");
         String auteur_prenom = getArguments().getString("auteur_prenom");
-
+        String auteur_nom = getArguments().getString("auteur_nom");
+        /* -------------------------------------- */
+        // Initialisation affichage
+        /* -------------------------------------- */
+        AuteurBean auteur = dataBaseHelper.selectAuteurSelonAuteurId(auteur_id);
+        afficherDetailAuteur(auteur);
 
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
         binding.tvDetailAuteurPseudo.setText(auteur_pseudo);
+
 
         /* -------------------------------------- */
         // Clic Liste Détail Séries *************************************************** A revoir avec BDD
@@ -149,4 +164,23 @@ public class AuteurDetailFragment extends Fragment {
         super.onDestroy();
         binding = null;
     }
+
+    private void afficherDetailAuteur(AuteurBean auteur){
+        binding.tvDetailAuteurPseudo.setText(auteur.getAuteur_pseudo());
+
+        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeriesSelonAuteurId(auteur.getAuteur_id()));
+        binding.lvDetailAuteurListeSeries.setAdapter(seriesArrayAdapter);
+
+        tomesSerieArrayAdapter = new TomesSerieListAdapter(getActivity(), R.layout.listview_row_3col, dataBaseHelper.selectAllFromTomesEtSerieSelonAuteurId(auteur.getAuteur_id()));
+        binding.lvDetailAuteurListeTomes.setAdapter(tomesSerieArrayAdapter);
+
+        editeursArrayAdapter = new EditeursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromEditeursSelonAuteurId(auteur.getAuteur_id()));
+        binding.lvDetailAuteurListeEditeurs.setAdapter(editeursArrayAdapter);
+
+        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursPartenaires(auteur.getAuteur_id()));
+        binding.lvDetailAuteurListeAuteurs.setAdapter(auteursArrayAdapter);
+
+
+    }
 }
+

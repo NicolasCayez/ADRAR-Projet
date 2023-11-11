@@ -42,13 +42,14 @@ public class TomesSerieListAdapter extends ArrayAdapter<TomeSerieBean> {
 
         if(items.get(position) != null )
         {
-            text1.setText(items.get(position).getSerie_nom().toString());
+            text1.setText(items.get(position).getSerie_nom());
             if (items.get(position).getTome_numero() == 0) {
                 text2.setText("");
             }else{
+                text1.setText(items.get(position).getSerie_nom());
                 text2.setText("T "+String.valueOf(items.get(position).getTome_numero()));
             }
-            text3.setText(items.get(position).getTome_titre().toString());
+            text3.setText(items.get(position).getTome_titre());
         }
 
         return mView;

@@ -149,6 +149,7 @@ public class AuteursFragment extends Fragment {
                 bundle.putString("auteur_pseudo", auteurBean.getAuteur_pseudo());
                 bundle.putString("auteur_nom", auteurBean.getAuteur_nom());
                 bundle.putString("auteur_prenom", auteurBean.getAuteur_prenom());
+
                 findNavController(AuteursFragment.this).navigate(R.id.action_auteurs_to_auteurDetail, bundle);
 
             }
