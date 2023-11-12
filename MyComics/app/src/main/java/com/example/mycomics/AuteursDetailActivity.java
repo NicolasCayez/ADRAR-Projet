@@ -1,19 +1,15 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.mycomics.databinding.ActivityAuteursDetailBinding;
-import com.example.mycomics.databinding.ActivityEditeursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
 public class AuteursDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -69,28 +65,28 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AuteursDetailActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
-
-                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
-                }
-            }
-        }));
+//        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
+//
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
+//                } else {
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
+//                }
+//            }
+//        }));
 
         /* -------------------------------------- */
         // Clic Bouton menu Collection
@@ -98,8 +94,8 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.btnMenuCollection).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, CollectionActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AuteursDetailActivity.this, CollectionActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -109,8 +105,8 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.btnMenuSeries).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, SeriesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AuteursDetailActivity.this, SeriesActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -120,8 +116,8 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.btnMenuTomes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, TomesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AuteursDetailActivity.this, TomesActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -131,8 +127,8 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.btnMenuAuteurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, AuteursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AuteursDetailActivity.this, AuteursActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -142,8 +138,8 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.btnMenuEditeurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, EditeursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AuteursDetailActivity.this, EditeursActivitypourfonctionbdd.class);
+//                startActivity(intent);
             }
         });
 
@@ -153,8 +149,8 @@ public class AuteursDetailActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.btnMenuReglages).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuteursDetailActivity.this, ReglagesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(AuteursDetailActivity.this, ReglagesActivity.class);
+//                startActivity(intent);
             }
         });
 

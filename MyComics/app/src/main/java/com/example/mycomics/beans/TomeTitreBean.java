@@ -7,8 +7,8 @@ public class TomeTitreBean extends TomeBean {
     // Constructor
     /* -------------------------------------- */
 
-    public TomeTitreBean(int tome_id, String tome_titre, String tome_isbn, int tome_numero, String tome_image, double tome_prix_achat, double tome_valeur_connue, String tome_date_edition, boolean tome_dedicace, boolean tome_edition_speciale, String tome_edition_speciale_libelle, int serie_id) {
-        super(tome_id, tome_titre, tome_isbn, tome_numero, tome_image, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id);
+    public TomeTitreBean(int tome_id, String tome_titre, int tome_numero, String tome_isbn, String tome_image, double tome_prix_achat, double tome_valeur_connue, String tome_date_edition, boolean tome_dedicace, boolean tome_edition_speciale, String tome_edition_speciale_libelle, int serie_id) {
+        super(tome_id, tome_titre,tome_numero, tome_isbn,  tome_image, tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace, tome_edition_speciale, tome_edition_speciale_libelle, serie_id);
     }
 
     public TomeTitreBean() {
@@ -17,27 +17,27 @@ public class TomeTitreBean extends TomeBean {
     // Get/Set
     /* -------------------------------------- */
     @Override
-    public int getTome_id() {
+    public Integer getTome_id() {
         return super.getTome_id();
     }
     @Override
-    public void setTome_id(int tome_id) {
+    public void setTome_id(Integer tome_id) {
         super.setTome_id(tome_id);
     }
     @Override
-    public int getTome_numero() {
+    public Integer getTome_numero() {
         return super.getTome_numero();
     }
     @Override
-    public void setTome_numero(int tome_numero) {
+    public void setTome_numero(Integer tome_numero) {
         super.setTome_numero(tome_numero);
     }
     @Override
-    public int getSerie_id() {
+    public Integer getSerie_id() {
         return super.getSerie_id();
     }
     @Override
-    public void setSerie_id(int serie_id) {
+    public void setSerie_id(Integer serie_id) {
         super.setSerie_id(serie_id);
     }
     @Override

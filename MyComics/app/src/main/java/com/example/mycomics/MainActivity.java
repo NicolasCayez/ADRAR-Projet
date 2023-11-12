@@ -14,6 +14,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.mycomics.databinding.ActivityMainBinding;
@@ -24,7 +26,6 @@ import com.example.mycomics.helpers.DataBaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,8 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 binding.menuHamburger.setVisibility(View.INVISIBLE);
             }
         });
+        
+
 
     }
+
+
 
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {

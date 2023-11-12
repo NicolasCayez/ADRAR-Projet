@@ -69,7 +69,8 @@
                         android:id="@+id/tvDetailEditeurNom"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="15dp"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_corner_search"
                         android:fontFamily="@font/kronika"
@@ -82,6 +83,7 @@
                         android:id="@+id/tvDetailEditeurListeSeries"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/kronika"
                         android:text="Séries"
@@ -92,12 +94,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:orientation="horizontal">
 
                         <ListView
                             android:id="@+id/lvDetailEditeurListeSeries"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="300dp"
                             android:background="#eee"
                             android:nestedScrollingEnabled="true" />
                     </LinearLayout>
@@ -106,6 +109,7 @@
                         android:id="@+id/tvDetailEditeurListeTomes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/kronika"
                         android:text="Tomes"
@@ -116,12 +120,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:orientation="horizontal">
 
                         <ListView
                             android:id="@+id/lvDetailEditeurListeTomes"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="300dp"
                             android:background="#eee"
                             android:nestedScrollingEnabled="true" />
                     </LinearLayout>
@@ -130,6 +135,7 @@
                         android:id="@+id/tvDetailEditeurListeAuteurs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/kronika"
                         android:text="Auteurs"
@@ -140,12 +146,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:orientation="horizontal">
 
                         <ListView
                             android:id="@+id/lvDetailEditeurListelAuteurs"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
+                            android:layout_marginBottom="15dp"
                             android:background="#eee"
                             android:nestedScrollingEnabled="true" />
                     </LinearLayout>
@@ -156,6 +164,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/rounded_corner_custom_beige"
                     android:gravity="end"
                     android:orientation="horizontal"
@@ -175,6 +184,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
+                        android:paddingEnd="15dp"
                         android:src="@drawable/btn_delete_bleu" />
                 </LinearLayout>
             </LinearLayout>

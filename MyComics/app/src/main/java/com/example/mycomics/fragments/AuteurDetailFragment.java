@@ -36,7 +36,7 @@ public class AuteurDetailFragment extends Fragment {
     // Variable BDD
     /* -------------------------------------- */
     DataBaseHelper dataBaseHelper;
-    ArrayAdapter tomesSerieArrayAdapter;
+    ArrayAdapter tomesArrayAdapter;
     ArrayAdapter seriesArrayAdapter;
     ArrayAdapter auteursArrayAdapter;
     ArrayAdapter editeursArrayAdapter;
@@ -171,8 +171,8 @@ public class AuteurDetailFragment extends Fragment {
         seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeriesSelonAuteurId(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeSeries.setAdapter(seriesArrayAdapter);
 
-        tomesSerieArrayAdapter = new TomesSerieListAdapter(getActivity(), R.layout.listview_row_3col, dataBaseHelper.selectAllFromTomesEtSerieSelonAuteurId(auteur.getAuteur_id()));
-        binding.lvDetailAuteurListeTomes.setAdapter(tomesSerieArrayAdapter);
+        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromTomesSelonAuteurIdSansSerie(auteur.getAuteur_id()));
+        binding.lvDetailAuteurListeTomes.setAdapter(tomesArrayAdapter);
 
         editeursArrayAdapter = new EditeursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromEditeursSelonAuteurId(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeEditeurs.setAdapter(editeursArrayAdapter);

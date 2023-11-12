@@ -70,7 +70,8 @@
                         android:id="@+id/tvDetailSerieNom"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="15dp"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_corner_search"
                         android:fontFamily="@font/kronika"
@@ -82,6 +83,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -105,6 +107,7 @@
                         android:id="@+id/tvDetailSerieListeTomes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/kronika"
                         android:text="Tomes"
@@ -115,63 +118,82 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:orientation="horizontal">
 
                         <ListView
                             android:id="@+id/lvDetailSerieListeTomes"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="500dp"
                             android:background="#eee"
                             android:nestedScrollingEnabled="true" />
                     </LinearLayout>
                     <!-- Liste auteurs -->
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDetailSerieListeAuteurs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/kronika"
-                        android:text="Auteurs"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/custom_blue"
-                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <ListView
-                            android:id="@+id/lvDetailSerieListeAuteurs"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#eee"
-                            android:nestedScrollingEnabled="true" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvDetailSerieListeAuteurs"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/kronika"
+                                android:text="Auteurs"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/custom_blue"
+                                android:textSize="14sp" />
+
+                            <ListView
+                                android:id="@+id/lvDetailSerieListeAuteurs"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:background="#eee"
+                                android:nestedScrollingEnabled="true" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvDetailSerieListeEditeurs"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/kronika"
+                                android:text="Editeurs"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/custom_blue"
+                                android:textSize="14sp" />
+
+                            <ListView
+                                android:id="@+id/lvDetailSerieListeEditeurs"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:background="#eee"
+                                android:nestedScrollingEnabled="true" />
+                        </LinearLayout>
                     </LinearLayout>
+
                     <!-- Liste éditeurs -->
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDetailSerieListeEditeurs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/kronika"
-                        android:text="Editeurs"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/custom_blue"
-                        android:textSize="14sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <ListView
-                            android:id="@+id/lvDetailSerieListeEditeurs"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#eee"
-                            android:nestedScrollingEnabled="true" />
-                    </LinearLayout>
                 </LinearLayout>
                 <!-- Boutons -->
                 <LinearLayout
@@ -179,6 +201,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/rounded_corner_custom_beige"
                     android:gravity="end"
                     android:orientation="horizontal"
@@ -198,6 +221,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
+                        android:paddingEnd="15dp"
                         android:src="@drawable/btn_delete_bleu" />
                 </LinearLayout>
             </LinearLayout>

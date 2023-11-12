@@ -12,7 +12,7 @@ public class TomeBean {
     /* -------------------------------------- */
     // Constructor
     /* -------------------------------------- */
-    public TomeBean(Integer tome_id, String tome_titre, int tome_numero, String tome_isbn,  String tome_image, double tome_prix_editeur, double tome_valeur_connue, String tome_date_edition, boolean tome_dedicace, boolean tome_edition_speciale, String tome_edition_speciale_libelle, Integer serie_id, Integer editeur_id) {
+    public TomeBean(Integer tome_id, String tome_titre, Integer tome_numero, String tome_isbn,  String tome_image, Double tome_prix_editeur, Double tome_valeur_connue, String tome_date_edition, boolean tome_dedicace, boolean tome_edition_speciale, String tome_edition_speciale_libelle, Integer serie_id, Integer editeur_id) {
         this.tome_id = tome_id;
         this.tome_titre = tome_titre;
         this.tome_numero = tome_numero;
@@ -79,16 +79,16 @@ public class TomeBean {
     public void setTome_edition_speciale_libelle(String tome_edition_speciale_libelle) {
         this.tome_edition_speciale_libelle = tome_edition_speciale_libelle;
     }
-    public double getTome_prix_editeur() {
+    public Double getTome_prix_editeur() {
         return tome_prix_editeur;
     }
-    public void setTome_prix_editeur(double tome_prix_editeur) {
+    public void setTome_prix_editeur(Double tome_prix_editeur) {
         this.tome_prix_editeur = tome_prix_editeur;
     }
-    public double getTome_valeur_connue() {
+    public Double getTome_valeur_connue() {
         return tome_valeur_connue;
     }
-    public void setTome_valeur_connue(double tome_valeur_connue) {
+    public void setTome_valeur_connue(Double tome_valeur_connue) {
         this.tome_valeur_connue = tome_valeur_connue;
     }
     public String getTome_date_edition() {

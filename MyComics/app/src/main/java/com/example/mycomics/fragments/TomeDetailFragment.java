@@ -1,5 +1,7 @@
 package com.example.mycomics.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -133,29 +135,10 @@ public class TomeDetailFragment extends Fragment {
         binding.btnDetailTomeSaveTome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TomeBean tomeModif = new TomeBean(
-                        tome_id,
-                        binding.etDetailTomeTitre.getText().toString(),
-                        Integer.parseInt(binding.etDetailTomeNumero.getText().toString()),
-                        binding.etDetailTomeISBN.getText().toString(),
-                        tome_image,
-                        Double.parseDouble(binding.etDetailTomePrixEditeur.getText().toString()),
-                        Double.parseDouble(binding.etDetailTomeValeurActuelle.getText().toString()),
-                        binding.etDetailTomeDateEdition.getText().toString(),
-                        binding.chkDetailTomeDedicace.isChecked(),
-                        binding.chkDetailTomeEditionSpeciale.isChecked(),
-                        binding.etDetailTomeEditionSpecialeLibelle.getText().toString(),
-                        dataBaseHelper.selectSerieSelonTomeId(tome_id).getSerie_id(),
-                        dataBaseHelper.selectEditeurSelonTomeId(tome_id).getEditeur_id());
-                boolean updateOk = dataBaseHelper.updateTome(dataBaseHelper, tomeModif);
-                if (updateOk) {
-                    Toast.makeText(getActivity(),"Tome modifié avec succès" , Toast.LENGTH_SHORT);
-                } else {
-                    Toast.makeText(getActivity(),"Erreur modification tome" , Toast.LENGTH_SHORT);
-
-                }
+                saveTome(tome_id);
             }
         });
+
 
         /* -------------------------------------- */
         // Clic sur bouton AddAuteur
@@ -163,6 +146,8 @@ public class TomeDetailFragment extends Fragment {
         binding.btnDetailTomeAddAuteur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
                 //Création Popup
                 PopupAddListDialog popupAddListDialog = new PopupAddListDialog(getActivity());
                 popupAddListDialog.setTitre("Choisissez un Auteur dans la liste ou créez-en un nouveau");
@@ -213,6 +198,12 @@ public class TomeDetailFragment extends Fragment {
                         }
                     }
                 });
+                popupAddListDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupAddListDialog.dismiss(); // Fermeture Popup
+                    }
+                });
 
                 popupAddListDialog.Build();
                 popupAddListDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -230,6 +221,8 @@ public class TomeDetailFragment extends Fragment {
         binding.tvDetailTomeEditeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
                 //Création Popup
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez un Editeur dans la liste");
@@ -254,6 +247,12 @@ public class TomeDetailFragment extends Fragment {
 //                        dataBaseHelper = new DataBaseHelper(getActivity());
                     }
                 });
+                popupListDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupListDialog.dismiss(); // Fermeture Popup
+                    }
+                });
                 popupListDialog.Build();
                 afficherDetailTome(tome_id);
 
@@ -266,6 +265,8 @@ public class TomeDetailFragment extends Fragment {
         binding.btnDetailTomeAddEditeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
                 //Création Popup
                 PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
                 popupAddDialog.setTitre("Entrez un nouvel éditeur");
@@ -297,22 +298,52 @@ public class TomeDetailFragment extends Fragment {
                         afficherDetailTome(tome_id);
                     }
                 });
+                popupAddDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupAddDialog.dismiss(); // Fermeture Popup
+                    }
+                });
                 popupAddDialog.build();
                 afficherDetailTome(tome_id);
             }
         });
 
         /* -------------------------------------- */
-        // Clic sur l'éditeur pour avoir la liste
+        // Clic sur la série pour voir le détail
         /* -------------------------------------- */
         binding.tvDetailTomeSerie.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 //sauvegarde modifications non enregistrées
+                 saveTome(tome_id);
+                 SerieBean serieBean;
+                 try {
+                     serieBean = dataBaseHelper.selectSerieSelonTomeId(tome_id);
+                 } catch (Exception e) {
+                     serieBean = new SerieBean(-1,"error");
+                 }
+                 Bundle bundle = new Bundle();
+                 bundle.putInt("serie_id", serieBean.getSerie_id());
+                 bundle.putString("serie_nom", serieBean.getSerie_nom());
+
+                 findNavController(TomeDetailFragment.this).navigate(R.id.action_tomeDetail_to_serieDetail, bundle);
+             }
+        });
+
+        /* -------------------------------------- */
+        // Clic sur chhanger la série pour avoir la liste
+        /* -------------------------------------- */
+        binding.btnDetailTomeChangeSerie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
                 //Création Popup
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez une série dans la liste");
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
-                seriesArrayAdapter = new SeriesListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeries());
+                seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeries());
                 listView.setAdapter(seriesArrayAdapter);
                 //Clic Editeur choisi pour modification
                 popupListDialog.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -323,13 +354,19 @@ public class TomeDetailFragment extends Fragment {
                             serieBean = (SerieBean) popupListDialog.getLvPopupListe().getItemAtPosition(position);
                             dataBaseHelper.updateSerieTome(dataBaseHelper, serieBean, tome_id);
                         } catch (Exception e) {
-                            serieBean = new SerieBean(-1, "error" );
+                            serieBean = new SerieBean(-1, "error");
                         }
                         popupListDialog.dismiss(); // Fermeture Popup
                         afficherDetailTome(tome_id);
 
                         //Appel DataBaseHelper
 //                        dataBaseHelper = new DataBaseHelper(getActivity());
+                    }
+                });
+                popupListDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupListDialog.dismiss(); // Fermeture Popup
                     }
                 });
                 popupListDialog.Build();
@@ -339,11 +376,13 @@ public class TomeDetailFragment extends Fragment {
         });
 
         /* -------------------------------------- */
-        // Clic sur bouton AddEditeur
+        // Clic sur bouton AddSerie
         /* -------------------------------------- */
         binding.btnDetailTomeAddSerie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
                 //Création Popup
                 PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
                 popupAddDialog.setTitre("Entrez une nouvelle série");
@@ -375,8 +414,37 @@ public class TomeDetailFragment extends Fragment {
                         afficherDetailTome(tome_id);
                     }
                 });
+                popupAddDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupAddDialog.dismiss(); // Fermeture Popup
+                    }
+                });
                 popupAddDialog.build();
                 afficherDetailTome(tome_id);
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic Element liste Auteur
+        /* -------------------------------------- */
+        binding.lvDetailTomeAuteurs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AuteurBean auteurBean;
+                try {
+                    auteurBean = (AuteurBean) binding.lvDetailTomeAuteurs.getItemAtPosition(position);
+                } catch (Exception e) {
+                    auteurBean = new AuteurBean(-1,"error","error","error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("auteur_id", auteurBean.getAuteur_id());
+                bundle.putString("auteur_pseudo", auteurBean.getAuteur_pseudo());
+                bundle.putString("auteur_nom", auteurBean.getAuteur_nom());
+                bundle.putString("auteur_prenom", auteurBean.getAuteur_prenom());
+
+                findNavController(TomeDetailFragment.this).navigate(R.id.action_tomeDetail_to_auteurDetail, bundle);
+
             }
         });
 
@@ -390,20 +458,50 @@ public class TomeDetailFragment extends Fragment {
     private void afficherDetailTome(int tome_id){
         TomeBean tome = dataBaseHelper.selectTomeSelonTome_id(tome_id);
         binding.etDetailTomeTitre.setText(tome.getTome_titre());
-        binding.etDetailTomeNumero.setText(String.valueOf(tome.getTome_numero()));
+        if (tome.getTome_numero() == 0 || tome.getTome_numero() == null) {
+            binding.etDetailTomeNumero.setText("");
+        } else {
+            binding.etDetailTomeNumero.setText(String.valueOf(tome.getTome_numero()));
+        }
         binding.tvDetailTomeSerie.setText(dataBaseHelper.selectSerieSelonTomeId(tome_id).getSerie_nom());
-        binding.etDetailTomeISBN.setText(String.valueOf(tome.getTome_isbn()));
-        binding.etDetailTomePrixEditeur.setText(String.valueOf(tome.getTome_prix_editeur()));
-        binding.etDetailTomeValeurActuelle.setText(String.valueOf(tome.getTome_valeur_connue()));
-        binding.etDetailTomeDateEdition.setText(String.valueOf(tome.getTome_date_edition()));
+        System.out.println(tome.getTome_isbn().equals("null"));
+        System.out.println(String.valueOf(tome.getTome_isbn()).equals("null"));
+        binding.etDetailTomeISBN.setText(tome.getTome_isbn().equals("null") ? "" : String.valueOf(tome.getTome_isbn()));
+        binding.etDetailTomePrixEditeur.setText(tome.getTome_prix_editeur() == 0 ? "" : String.valueOf(tome.getTome_prix_editeur()));
+        binding.etDetailTomeValeurActuelle.setText(tome.getTome_valeur_connue() == 0 ? "" : String.valueOf(tome.getTome_valeur_connue()));
+        binding.etDetailTomeDateEdition.setText(tome.getTome_date_edition().equals("null") ? "" : String.valueOf(tome.getTome_date_edition()));
         binding.chkDetailTomeDedicace.setChecked(Boolean.valueOf(tome.isTome_dedicace()));
         binding.chkDetailTomeEditionSpeciale.setChecked(Boolean.valueOf(tome.isTome_edition_speciale()));
-        binding.etDetailTomeEditionSpecialeLibelle.setText(tome.getTome_edition_speciale_libelle());
+        binding.etDetailTomeEditionSpecialeLibelle.setText(tome.getTome_edition_speciale_libelle().equals("null") ? "" : String.valueOf( tome.getTome_edition_speciale_libelle()));
         //image ici
         auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursSelonTomeId(tome_id));
         binding.lvDetailTomeAuteurs.setAdapter(auteursArrayAdapter);
         binding.tvDetailTomeEditeur.setText(dataBaseHelper.selectEditeurSelonTomeId(tome_id).getEditeur_nom());
-
     }
+
+    private void saveTome(int tome_id){
+        TomeBean tomeModif = new TomeBean(
+                tome_id,
+                binding.etDetailTomeTitre.getText().toString(),
+                binding.etDetailTomeNumero.getText().length() == 0 ? null : Integer.parseInt(binding.etDetailTomeNumero.getText().toString()),
+                binding.etDetailTomeISBN.getText().toString(),
+                "pas d'image",
+                binding.etDetailTomePrixEditeur.getText().length() == 0 ? 0.0 : Double.parseDouble(binding.etDetailTomePrixEditeur.getText().toString()),
+                binding.etDetailTomeValeurActuelle.getText().length() == 0 ? 0.0 : Double.parseDouble(binding.etDetailTomeValeurActuelle.getText().toString()),
+                binding.etDetailTomeDateEdition.getText().toString(),
+                binding.chkDetailTomeDedicace.isChecked(),
+                binding.chkDetailTomeEditionSpeciale.isChecked(),
+                binding.etDetailTomeEditionSpecialeLibelle.getText().toString(),
+                dataBaseHelper.selectSerieSelonTomeId(tome_id).getSerie_id(),
+                dataBaseHelper.selectEditeurSelonTomeId(tome_id).getEditeur_id());
+        boolean updateOk = dataBaseHelper.updateTome(dataBaseHelper, tomeModif);
+        if (updateOk) {
+            Toast.makeText(getActivity(),"Tome modifié avec succès" , Toast.LENGTH_SHORT);
+        } else {
+            Toast.makeText(getActivity(),"Erreur modification tome" , Toast.LENGTH_SHORT);
+        }
+    }
+
+
 
 }

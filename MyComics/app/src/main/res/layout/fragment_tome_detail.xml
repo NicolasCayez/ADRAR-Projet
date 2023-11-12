@@ -64,7 +64,8 @@
                         android:id="@+id/etDetailTomeTitre"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="15dp"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_corner_search"
                         android:fontFamily="@font/kronika"
@@ -77,39 +78,48 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvDetailTomeNumero"
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Numéro"
-                            android:fontFamily="@font/kronika"
-                            android:textColor="@color/custom_blue"
-                            android:textSize="14sp" />
+                            android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/etDetailTomeNumero"
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:background="#eee"
-                            android:ems="10"
-                            android:fontFamily="@font/kronika"
-                            android:hint="Numéro tome"
-                            android:inputType="number"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/custom_blue"
-                            android:textColorHint="#999"
-                            android:textSize="14sp" />
+                            <TextView
+                                android:id="@+id/tvDetailTomeNumero"
+                                android:layout_width="0dp"
+                                android:layout_height="25dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/kronika"
+                                android:text="Numéro"
+                                android:textColor="@color/custom_blue"
+                                android:textSize="14sp" />
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/etDetailTomeNumero"
+                                android:layout_width="0dp"
+                                android:layout_height="25dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:background="#eee"
+                                android:ems="10"
+                                android:fontFamily="@font/kronika"
+                                android:hint="Numéro tome"
+                                android:inputType="number"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/custom_blue"
+                                android:textColorHint="#999"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -134,8 +144,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#eee"
-                                android:hint="Série"
                                 android:fontFamily="@font/kronika"
+                                android:hint="Série"
                                 android:textAlignment="center"
                                 android:textColor="@color/custom_blue"
                                 android:textSize="14sp" />
@@ -148,6 +158,13 @@
                             android:layout_gravity="end"
                             android:layout_weight="1"
                             android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btnDetailTomeChangeSerie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/btn_changer_bleu" />
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/btnDetailTomeAddSerie"
@@ -171,6 +188,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -204,6 +222,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -235,6 +254,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -266,6 +286,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -300,6 +321,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -325,6 +347,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -369,6 +392,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -407,6 +431,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -430,9 +455,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="20dp"
-                                android:nestedScrollingEnabled="true"
                                 android:background="#eee"
                                 android:fontFamily="@font/kronika"
+                                android:nestedScrollingEnabled="true"
                                 android:textColor="@color/custom_blue"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -467,6 +492,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -491,8 +517,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#eee"
-                                android:hint="Editeur"
                                 android:fontFamily="@font/kronika"
+                                android:hint="Editeur"
                                 android:textAlignment="center"
                                 android:textColor="@color/custom_blue"
                                 android:textSize="14sp" />
@@ -530,7 +556,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="10dp"
                     android:background="@drawable/rounded_corner_custom_beige"
                     android:gravity="end"
                     android:orientation="horizontal"
@@ -550,6 +576,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
+                        android:paddingEnd="15dp"
                         android:src="@drawable/btn_delete_bleu" />
                 </LinearLayout>
             </LinearLayout>

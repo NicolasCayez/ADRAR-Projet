@@ -35,13 +35,11 @@ public class TomesListAdapter extends ArrayAdapter<TomeBean> {
             mView = vi.inflate(id, null);
         }
 
-        TextView text1 = (TextView) mView.findViewById(R.id.tvListview_row_2col_col1);
-        TextView text2 = (TextView) mView.findViewById(R.id.tvListview_row_2col_col2);
+        TextView text1 = (TextView) mView.findViewById(R.id.tvListview_row_1col_col1);
 
         if(items.get(position) != null )
         {
-            text1.setText(String.valueOf(items.get(position).getTome_numero()));
-            text2.setText(items.get(position).getTome_titre().toString());
+            text1.setText(items.get(position).getTome_titre().toString());
         }
 
         return mView;

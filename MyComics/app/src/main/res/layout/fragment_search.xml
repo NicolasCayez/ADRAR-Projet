@@ -10,11 +10,14 @@
     android:background="@drawable/rounded_corner_custom_beige"
     android:orientation="vertical"
     tools:context=".fragments.SearchFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svSearch"
             android:layout_width="match_parent"
@@ -23,12 +26,15 @@
             android:background="@drawable/rounded_corner_search"
             app:queryBackground="@android:color/transparent" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
+        android:gravity="end"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:paddingHorizontal="15dp">
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btFilter"
             android:layout_width="wrap_content"
@@ -40,6 +46,7 @@
             android:textColor="@color/custom_beige"
             android:textColorHighlight="@color/custom_blue"
             android:textColorLink="@color/custom_blue" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btSearch"
             android:layout_width="wrap_content"
@@ -47,7 +54,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/rounded_corner_button_blue"
             android:fontFamily="@font/kronika"
-            android:textColor="@color/custom_beige"
-            android:text="Chercher" />
+            android:text="Chercher"
+            android:textColor="@color/custom_beige" />
     </LinearLayout>
 </LinearLayout>

@@ -3,14 +3,12 @@ package com.example.mycomics;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
-import com.example.mycomics.databinding.ActivityAuteursBinding;
 import com.example.mycomics.databinding.ActivityCollectionBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
@@ -61,28 +59,28 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CollectionActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(CollectionActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
-
-                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
-                }
-            }
-        }));
+//        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
+//
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
+//                } else {
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
+//                }
+//            }
+//        }));
 
 
         /* -------------------------------------- */
@@ -113,8 +111,8 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btnMenuAuteurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CollectionActivity.this, AuteursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(CollectionActivity.this, AuteursActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -124,8 +122,8 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btnMenuEditeurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CollectionActivity.this, EditeursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(CollectionActivity.this, EditeursActivitypourfonctionbdd.class);
+//                startActivity(intent);
             }
         });
 
@@ -135,8 +133,8 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.btnMenuReglages).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CollectionActivity.this, ReglagesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(CollectionActivity.this, ReglagesActivity.class);
+//                startActivity(intent);
             }
         });
     }

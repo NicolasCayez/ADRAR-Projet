@@ -109,43 +109,6 @@ public class ReglagesFragment extends Fragment {
         afficherProfilActif();
 
         /* -------------------------------------- */
-        // Clic Enregistrer Profil
-        /* -------------------------------------- */
-//        binding.btnSaveProfil.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Création Popup
-//                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-//                popupAddDialog.setTitre("Entrez le nouveau nom de profil");
-//                popupAddDialog.setHint("Nom de profil");
-//                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        ProfilBean profilBean;
-//                        try {
-//                            profilBean = new ProfilBean(dataBaseHelper.selectAllFromProfilSelonProfilActif().getProfil_id(), popupAddDialog.getEtPopupText().getText().toString());
-//                        } catch (Exception e) {
-////                            Toast.makeText(ReglagesActivity.this, "Erreur création profil", Toast.LENGTH_SHORT).show();
-//                            profilBean = dataBaseHelper.selectAllFromProfilSelonProfilActif();
-//                        }
-//                        popupAddDialog.dismiss(); // Fermeture Popup
-//                        //Appel DataBaseHelper
-//                        dataBaseHelper = new DataBaseHelper(getActivity());
-//                        boolean updateOk = dataBaseHelper.updateProfil(dataBaseHelper, profilBean);
-//                        if (updateOk) {
-//                            Toast.makeText(getActivity(),"Profil modifié avec succès" , Toast.LENGTH_SHORT);
-//                        } else {
-//                            Toast.makeText(getActivity(),"Erreur modification profil" , Toast.LENGTH_SHORT);
-//                        }
-//                        afficherProfilActif();
-//                    }
-//                });
-//                popupAddDialog.build();
-//                afficherProfilActif();
-//            }
-//        });
-
-        /* -------------------------------------- */
         // Clic sur bouton AddProfil
         /* -------------------------------------- */
         binding.btnAddProfil.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +133,12 @@ public class ReglagesFragment extends Fragment {
                         dataBaseHelper = new DataBaseHelper(getActivity());
                         boolean success = dataBaseHelper.insertIntoProfils(profilBean);
 //                        afficherListeProfils();
+                    }
+                });
+                popupAddDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupAddDialog.dismiss(); // Fermeture Popup
                     }
                 });
                 popupAddDialog.build();
@@ -228,6 +197,12 @@ public class ReglagesFragment extends Fragment {
                         popupListDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
 //                        dataBaseHelper = new DataBaseHelper(getActivity());
+                    }
+                });
+                popupListDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupListDialog.dismiss(); // Fermeture Popup
                     }
                 });
                 popupListDialog.Build();

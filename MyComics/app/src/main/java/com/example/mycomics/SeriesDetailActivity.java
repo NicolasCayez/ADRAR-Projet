@@ -1,23 +1,19 @@
 package com.example.mycomics;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.example.mycomics.databinding.ActivityEditeursBinding;
 import com.example.mycomics.databinding.ActivitySeriesDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 
 public class SeriesDetailActivity extends AppCompatActivity implements View.OnClickListener {
-    private ActivitySeriesDetailBinding binding = null;
+//    private ActivitySeriesDetailBinding binding = null;
 
     /* -------------------------------------- */
     // Référence vers les éléments de la page
@@ -34,8 +30,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_series_detail);
-        binding = ActivitySeriesDetailBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+//        binding = ActivitySeriesDetailBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
 
         /* -------------------------------------- */
         // Récupération données
@@ -67,28 +63,28 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SeriesDetailActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
-
-                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
-                }
-            }
-        }));
+//        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
+//
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
+//                } else {
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
+//                }
+//            }
+//        }));
 
         /* -------------------------------------- */
         // Clic Bouton menu Collection
@@ -96,8 +92,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.btnMenuCollection).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, CollectionActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesDetailActivity.this, CollectionActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -107,8 +103,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.btnMenuSeries).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, SeriesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesDetailActivity.this, SeriesActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -118,8 +114,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.btnMenuTomes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, TomesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesDetailActivity.this, TomesActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -129,8 +125,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.btnMenuAuteurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, AuteursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesDetailActivity.this, AuteursActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -140,8 +136,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.btnMenuEditeurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, EditeursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesDetailActivity.this, EditeursActivitypourfonctionbdd.class);
+//                startActivity(intent);
             }
         });
 
@@ -151,15 +147,15 @@ public class SeriesDetailActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.btnMenuReglages).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesDetailActivity.this, ReglagesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesDetailActivity.this, ReglagesActivity.class);
+//                startActivity(intent);
             }
         });
 
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
-        binding.tvSerieDetailNom.setText(intentAvecDonnees.getStringExtra("serie_nom"));
+//        binding.tvSerieDetailNom.setText(intentAvecDonnees.getStringExtra("serie_nom"));
         /* -------------------------------------- */
         // Clic Liste Détail Tomes *************************************************** A revoir avec BDD
         /* -------------------------------------- */

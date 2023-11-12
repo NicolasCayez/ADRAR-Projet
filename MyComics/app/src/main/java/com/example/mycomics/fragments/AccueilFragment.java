@@ -33,6 +33,7 @@ public class AccueilFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAccueilBinding.inflate(inflater, container, false);
+        binding.sbSearch.btFilter.setVisibility(View.GONE);
         return binding.getRoot();
     }
     @Override
@@ -103,6 +104,13 @@ public class AccueilFragment extends Fragment{
                 findNavController(AccueilFragment.this).navigate(R.id.action_accueil_to_editeurs);
             }
         });
+
+
+
+
+
     }
+
+
 
 }

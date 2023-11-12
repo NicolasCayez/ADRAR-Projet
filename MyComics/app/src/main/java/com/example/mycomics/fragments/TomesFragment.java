@@ -174,6 +174,7 @@ public class TomesFragment extends Fragment {
                 bundle.putBoolean("tome_edition_speciale", tomeSerieBean.isTome_edition_speciale());
                 bundle.putString("tome_edition_speciale_libelle", tomeSerieBean.getTome_edition_speciale_libelle());
                 bundle.putInt("serie_id", tomeSerieBean.getSerie_id());
+                bundle.putString("serie_nom", tomeSerieBean.getSerie_nom());
                 bundle.putInt("editeur_id", tomeSerieBean.getEditeur_id());
 
                 findNavController(TomesFragment.this).navigate(R.id.action_tomes_to_tomeDetail, bundle);
@@ -189,6 +190,7 @@ public class TomesFragment extends Fragment {
     }
 
     private void afficherListeTomes(){
+        System.out.println(dataBaseHelper.selectAllFromTomesEtSerieSelonProfilId().get(2));
         tomesSerieArrayAdapter = new TomesSerieListAdapter(getActivity() , R.layout.listview_row_3col, dataBaseHelper.selectAllFromTomesEtSerieSelonProfilId());
         binding.lvTomesListeTomes.setAdapter(tomesSerieArrayAdapter);
     }

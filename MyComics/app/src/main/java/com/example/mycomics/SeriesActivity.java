@@ -63,28 +63,28 @@ public class SeriesActivity extends AppCompatActivity implements View.OnClickLis
         /* -------------------------------------- */
         // Clic sur le logo
         /* -------------------------------------- */
-        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SeriesActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        binding.tbMenu.ivLogoMyComics.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SeriesActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         /* -------------------------------------- */
         // Clic Menu Hamburger
         /* -------------------------------------- */
-        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
-
-                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
-                }
-            }
-        }));
+//        binding.tbMenu.ivHamburgLines.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (findViewById(R.id.fragViewMenu).getVisibility() == View.GONE) {
+//
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.VISIBLE);
+//                } else {
+//                    findViewById(R.id.fragViewMenu).setVisibility(View.GONE);
+//                }
+//            }
+//        }));
 
         /* -------------------------------------- */
         // Clic Bouton menu Collection
@@ -114,8 +114,8 @@ public class SeriesActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btnMenuAuteurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesActivity.this, AuteursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesActivity.this, AuteursActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -125,8 +125,8 @@ public class SeriesActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btnMenuEditeurs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesActivity.this, EditeursActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesActivity.this, EditeursActivitypourfonctionbdd.class);
+//                startActivity(intent);
             }
         });
 
@@ -136,8 +136,8 @@ public class SeriesActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btnMenuReglages).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeriesActivity.this, ReglagesActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SeriesActivity.this, ReglagesActivity.class);
+//                startActivity(intent);
             }
         });
         /* -------------------------------------- */

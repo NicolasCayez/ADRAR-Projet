@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.mycomics.R;
+import com.example.mycomics.adapters.AuteursListAdapter;
+import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.adapters.TomesListAdapter;
+import com.example.mycomics.beans.SerieBean;
 import com.example.mycomics.databinding.FragmentAuteurDetailBinding;
 import com.example.mycomics.databinding.FragmentSerieDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
@@ -29,7 +33,10 @@ public class SerieDetailFragment extends Fragment {
     // Variable BDD
     /* -------------------------------------- */
     DataBaseHelper dataBaseHelper;
+    ArrayAdapter tomesArrayAdapter;
     ArrayAdapter seriesArrayAdapter;
+    ArrayAdapter auteursArrayAdapter;
+    ArrayAdapter editeursArrayAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,7 +101,7 @@ public class SerieDetailFragment extends Fragment {
         /* -------------------------------------- */
         // Initialisation Nom fiche
         /* -------------------------------------- */
-        binding.tvDetailSerieNom.setText(serie_nom);
+        afficherDetailSerie(serie_id);
         /* -------------------------------------- */
         // Clic Liste Détail Tomes *************************************************** A revoir avec BDD
         /* -------------------------------------- */
@@ -133,5 +140,12 @@ public class SerieDetailFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         binding = null;
+    }
+
+    private void afficherDetailSerie(int serie_id) {
+        SerieBean serieBean = dataBaseHelper.selectAllFromSeriesSelonSerieId(serie_id);
+        binding.tvDetailSerieNom.setText(serieBean.getSerie_nom());
+        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromTomesSelonSerieId(serie_id));
+        binding.lvDetailSerieListeTomes.setAdapter(tomesArrayAdapter);
     }
 }
