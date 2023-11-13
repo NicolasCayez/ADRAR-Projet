@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 
 import androidx.annotation.Nullable;
 
@@ -144,6 +145,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Gotlib\");\n"); //auteur_id 6
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Hugo Pratt\");\n"); //auteur_id 7
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Uderzo\");\n"); //auteur_id 8
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Arleston\");\n"); //auteur_id 9
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Mourier\");\n"); //auteur_id 10
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Tarquin\");\n"); //auteur_id 11
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Vatine\");\n"); //auteur_id 12
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Color Twins\");\n"); //auteur_id 13
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Morvan\");\n"); //auteur_id 14
+
 
             // EDITEURS
             db.execSQL("INSERT INTO EDITEURS(EDITEUR_NOM) VALUES(\"Casterman\");\n"); //editeur_id 1
@@ -164,53 +172,166 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"One Piece\");\n"); //serie_id 8
             db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Sillage\");\n"); //serie_id 9
             db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Trolls de Troy\");\n"); //serie_id 10
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Les feux d'Askell\");\n"); //serie_id 11
 
-            // TOMES et DETENIR
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix Le Gaulois\", 1, 1);\n"); //tome_id 1
+            // TOMES et DETENIR id numero serie
+            //Lanfeust de Troy serie 5
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"L'ivoire du Magohamoth\", 1, 5, 6);\n"); //tome_id 1
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(1, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"La serpe d'or\", 2, 1);\n"); //tome_id 2
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Thanos l'incongru\", 2, 5, 6);\n"); //tome_id 2
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(2, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix et les Goths\", 3, 1);\n"); //tome_id 3
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Castel Or-Azur\", 3, 5, 6);\n"); //tome_id 3
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(3, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix Gladiateur\", 4, 1);\n"); //tome_id 4
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le paladin d'Eckmül\", 4, 5, 6);\n"); //tome_id 4
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(4, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Le tour de Gaule d'Asterix\", 5, 1);\n"); //tome_id 5
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le frisson de l'haruspice\", 5, 5, 6);\n"); //tome_id 5
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(5, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix et Cléopâtre\", 6, 1);\n"); //tome_id 6
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Cixi impératrice\", 6, 5, 6);\n"); //tome_id 6
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(6, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Le combat des chefs\", 7, 1);\n"); //tome_id 7
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Les pétaures se cachent pour mourir\", 7, 5, 6);\n"); //tome_id 7
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(7, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix Chez les bretons\", 8, 1);\n"); //tome_id 8
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"La bête fabuleuse\", 8, 5, 6);\n"); //tome_id 8
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(8, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix et les Normands\", 9, 1);\n"); //tome_id 9
+            //Trolls de Troy serie 10
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Histoires Trolles\", 1, 10, 6);\n"); //tome_id 9
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(9, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID) VALUES(\"Asterix légionnaire\", 10, 1);\n"); //tome_id 10
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le scalp du vénérable\", 2, 10, 6);\n"); //tome_id 10
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(10, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Comme un vol de pétaures\", 3, 10, 6);\n"); //tome_id 11
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(11, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le feu occulte\", 4, 10, 6);\n"); //tome_id 12
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(12, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Les maléfices de la thaumaturge\", 5, 10, 6);\n"); //tome_id 13
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(13, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Trolls dans la brume\", 6, 10, 6);\n"); //tome_id 14
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(14, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Plume de sage\", 7, 10, 6);\n"); //tome_id 15
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(15, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Rock'n Troll attitude\", 8, 10, 6);\n"); //tome_id 16
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(16, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Les prisonniers du Darshan I\", 9, 10, 6);\n"); //tome_id 17
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(17, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Les prisonniers du Darshan II\", 10, 10, 6);\n"); //tome_id 18
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(18, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Trollympiades\", 11, 10, 6);\n"); //tome_id 19
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(19, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Sang famille I\", 12, 10, 6);\n"); //tome_id 20
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(20, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Boules de poils I\", 15, 10, 6);\n"); //tome_id 21
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(21, 1);\n");
+            //Les feux d'askell série 11
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"L'onguent admirable\", 1, 11, 6);\n"); //tome_id 22
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(22, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Retour à Vocable\", 2, 11, 6);\n"); //tome_id 23
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(23, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Corail sanglant\", 3, 11, 6);\n"); //tome_id 24
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(24, 1);\n");
+            //Sillage série 9
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"A feu et à cendres\", 1, 9, 3);\n"); //tome_id 25
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(25, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Collection privée\", 2, 9, 3);\n"); //tome_id 26
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(26, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Engrenages\", 3, 9, 3);\n"); //tome_id 27
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(27, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le signe des démons\", 4, 9, 3);\n"); //tome_id 28
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(28, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"FToRoSs\", 5, 9, 3);\n"); //tome_id 29
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(29, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Artifices\", 6, 9, 3);\n"); //tome_id 30
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(30, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Q.H.I.\", 7, 9, 3);\n"); //tome_id 31
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(31, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Nature humaine\", 8, 9, 3);\n"); //tome_id 32
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(32, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Infiltrations\", 9, 9, 3);\n"); //tome_id 33
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(33, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Retour de flammes - Edition spéciale\", 10, 9, 3);\n"); //tome_id 34
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(34, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Monde flottant\", 11, 9, 3);\n"); //tome_id 35
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(35, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Zone franche\", 12, 9, 3);\n"); //tome_id 36
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(36, 1);\n");
+
+
 
             // ECRIRE
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(1, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(2, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(3, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(4, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(5, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(6, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(7, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(8, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(9, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(10, 5);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(1, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(2, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(3, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(4, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(5, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(6, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(7, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(8, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(9, 8);\n");
-            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(10, 8);\n");
-
-
-
+            //Lanfeust de Troy Arleston 9 Tarquin 11
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(1,9);\n"); //1
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(1,11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(2, 9);\n"); //2
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(2, 11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(3, 9);\n"); //3
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(3, 11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(4, 9);\n"); //4
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(4, 11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(5, 9);\n"); //5
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(5, 11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(6, 9);\n"); //6
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(6, 11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(7, 9);\n"); //7
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(7, 11);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(8, 9);\n"); //8
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(8, 11);\n");
+            //Trolls de Troy Arleston 9 Mourier 10
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(9, 9);\n"); //1
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(9, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(10, 9);\n"); //2
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(10, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(11, 9);\n"); //3
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(11, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(12, 9);\n"); //4
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(12, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(13, 9);\n"); //5
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(13, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(14, 9);\n"); //6
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(14, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(15, 9);\n"); //7
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(15, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(16, 9);\n"); //8
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(16, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(17, 9);\n"); //9
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(17, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(18, 9);\n"); //10
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(18, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(19, 9);\n"); //11
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(19, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(20, 9);\n"); //12
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(20, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(21, 9);\n"); //15
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(21, 10);\n");
+            //Les feux d'Askell Arleston 9 Mourier 10
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(22, 9);\n"); //1
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(22, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(23, 9);\n"); //2
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(23, 10);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(24, 9);\n"); //3
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(24, 10);\n");
+            //Sillage Buchet 1 Morvan 14 Color Twins 13
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(25, 1);\n"); //1
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(25, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(26, 1);\n"); //2
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(26, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(26, 13);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(27, 1);\n"); //3
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(27, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(28, 1);\n"); //4
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(28, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(29, 1);\n"); //5
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(29, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(30, 1);\n"); //6
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(30, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(31, 1);\n"); //7
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(31, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(32, 1);\n"); //8
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(32, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(33, 1);\n"); //9
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(33, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(34, 1);\n"); //10
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(34, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(35, 1);\n"); //11
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(35, 14);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(36, 1);\n"); //12
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(36, 14);\n");
         }
 
 
@@ -729,6 +850,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    /* -------------------------------------- */
+    // SELECT * FROM TOMES
+    // WHERE TOME_ID = tome_id
+    /* -------------------------------------- */
+    public List<EditeurBean> selectAllFromEditeursSelonSerieId(int serie_id_voulu){
+        List<EditeurBean> returnList = new ArrayList<>();
+        EditeurBean editeurBean;
+        String requete = "SELECT * FROM " + EDITEURS +
+                " JOIN " + TOMES +
+                " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+                " JOIN " + DETENIR +
+                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu + "\"";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int editeur_id = cursor.getInt(0);
+                String editeur_nom = cursor.getString(1);
+                editeurBean = new EditeurBean(editeur_id, editeur_nom);
+                returnList.add(editeurBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
 
     /* -------------------------------------- */
     // SELECT * FROM AUTEURS
@@ -822,6 +975,72 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 " INNER JOIN " + ECRIRE +
                 " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
                 " WHERE " + ECRIRE + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\"";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int auteur_id = cursor.getInt(0);
+                String auteur_pseudo = cursor.getString(1);
+                auteurBean = new AuteurBean(auteur_id, auteur_pseudo);
+                returnList.add(auteurBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM AUTEURS
+    // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
+    // WHERE ECRIRE.TOME_ID = tome_id
+    /* -------------------------------------- */
+    public List<AuteurBean> selectAllFromAuteursSelonEditeurId(int editeur_id_voulu){
+        List<AuteurBean> returnList = new ArrayList<>();
+        AuteurBean auteurBean = null;
+        String requete = "SELECT * FROM " + AUTEURS +
+                " INNER JOIN " + ECRIRE +
+                " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + TOMES +
+                " ON " + ECRIRE + "." + COLUMN_TOME_ID + " = " + TOMES + "." + COLUMN_TOME_ID +
+                " WHERE " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu + "\"";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int auteur_id = cursor.getInt(0);
+                String auteur_pseudo = cursor.getString(1);
+                auteurBean = new AuteurBean(auteur_id, auteur_pseudo);
+                returnList.add(auteurBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM AUTEURS
+    // WHERE SERIE_ID = serie_id
+    /* -------------------------------------- */
+    public List<AuteurBean> selectAllFromAuteursSelonSerieId(int serie_id_voulu){
+        List<AuteurBean> returnList = new ArrayList<>();
+        AuteurBean auteurBean = new AuteurBean();
+        String requete = "SELECT * FROM " + AUTEURS +
+                " JOIN " + ECRIRE +
+                " ON " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " JOIN " + TOMES +
+                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+                " JOIN " + DETENIR +
+                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu + "\"";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -947,6 +1166,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return serieBean;
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM SERIES
+    // WHERE SERIE_ID = serie_id
+    /* -------------------------------------- */
+    public List<SerieBean> selectAllFromSeriesSelonEditeurId(int editeur_id_voulu){
+        List<SerieBean> returnList = new ArrayList<>();
+        SerieBean serieBean;
+        String requete = "SELECT * FROM " + SERIES +
+                " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
+                " WHERE " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu + "\" LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int serie_id = cursor.getInt(0);
+                String serie_nom = cursor.getString(1);
+                serieBean = new SerieBean(serie_id, serie_nom);
+                returnList.add(serieBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
     }
 
     /* -------------------------------------- */
@@ -1083,6 +1330,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+
 
     /* -------------------------------------- */
     // SELECT * FROM TOMES
@@ -1232,6 +1481,50 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    /* -------------------------------------- */
+    // SELECT * FROM TOMES
+    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
+    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    /* -------------------------------------- */
+    public List<TomeBean> selectAllFromTomesSelonEditeurIdSansSerie(int editeur_id_voulu){
+        List<TomeBean> returnList = new ArrayList<>();
+        String requete = "SELECT * FROM " + TOMES +
+                " WHERE " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu +
+                "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " IS NULL";
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                Integer tome_id = cursor.getInt(0);
+                String tome_titre = cursor.getString(1);
+                int tome_numero = cursor.getInt(2);
+                String tome_isbn = cursor.getString(3);
+                double tome_prix_achat = cursor.getDouble(4);
+                double tome_valeur_connue = cursor.getDouble(5);
+                String tome_date_edition = cursor.getString(6);
+                String tome_image = cursor.getString(7);
+                boolean tome_dedicace = cursor.getInt(8) == 1 ? true: false;
+                boolean tome_edition_speciale = cursor.getInt(9) == 1 ? true: false;
+                String tome_edition_speciale_libelle = cursor.getString(10);
+                Integer serie_id = cursor.getInt(11);
+                Integer editeur_id = cursor.getInt(12);
+
+                TomeSerieBean tomeSerieBean = new TomeSerieBean(tome_id, tome_titre, tome_numero, tome_isbn, tome_image,
+                        tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace,
+                        tome_edition_speciale, tome_edition_speciale_libelle, serie_id, editeur_id);
+                returnList.add(tomeSerieBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+
     /* -------------------------------------- */
     // SELECT * FROM TOMES
     // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID

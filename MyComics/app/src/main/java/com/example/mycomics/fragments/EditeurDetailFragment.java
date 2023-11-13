@@ -1,5 +1,7 @@
 package com.example.mycomics.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,9 +12,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.mycomics.R;
+import com.example.mycomics.adapters.AuteursListAdapter;
+import com.example.mycomics.adapters.EditeursListAdapter;
+import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.adapters.TomesListAdapter;
+import com.example.mycomics.adapters.TomesSerieListAdapter;
+import com.example.mycomics.beans.AuteurBean;
+import com.example.mycomics.beans.EditeurBean;
+import com.example.mycomics.beans.SerieBean;
+import com.example.mycomics.beans.TomeBean;
 import com.example.mycomics.databinding.FragmentAuteurDetailBinding;
 import com.example.mycomics.databinding.FragmentEditeurDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
@@ -25,11 +37,16 @@ import com.example.mycomics.helpers.DataBaseHelper;
 public class EditeurDetailFragment extends Fragment {
     FragmentEditeurDetailBinding binding;
 
+
     /* -------------------------------------- */
     // Variable BDD
     /* -------------------------------------- */
     DataBaseHelper dataBaseHelper;
     ArrayAdapter editeursArrayAdapter;
+    ArrayAdapter tomesArrayAdapter;
+    ArrayAdapter seriesArrayAdapter;
+    ArrayAdapter auteursArrayAdapter;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,43 +110,92 @@ public class EditeurDetailFragment extends Fragment {
         int editeur_id = getArguments().getInt("editeur_id");
         String editeur_nom = getArguments().getString("editeur_nom");
 
+        /* -------------------------------------- */
+        // Initialisation affichage
+        /* -------------------------------------- */
+        EditeurBean editeurBean = dataBaseHelper.selectEditeurSelonEditeurId(editeur_id);
+        afficherDetailEditeur(editeurBean);
 
-        /* -------------------------------------- */
-        // Initialisation Nom fiche
-        /* -------------------------------------- */
         binding.tvDetailEditeurNom.setText(editeur_nom);
         /* -------------------------------------- */
-        // Clic Liste Détail Séries *************************************************** A revoir avec BDD
+        // Clic Element liste Serie
         /* -------------------------------------- */
-//        findViewById(R.id.lvEditeursDetailSéries).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EditeursDetailActivity.this, SeriesDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailEditeurListeSeries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SerieBean serieBean;
+                try {
+                    serieBean = (SerieBean) binding.lvDetailEditeurListeSeries.getItemAtPosition(position);
+                } catch (Exception e) {
+                    serieBean = new SerieBean(-1,"error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("serie_id", serieBean.getSerie_id());
+                bundle.putString("serie_nom", serieBean.getSerie_nom());
+
+                findNavController(EditeurDetailFragment.this).navigate(R.id.action_editeurDetail_to_serieDetail, bundle);
+
+            }
+        });
 
         /* -------------------------------------- */
-        // Clic Liste Détail Tomes *************************************************** A revoir avec BDD
+        // Clic Element liste Tomes
         /* -------------------------------------- */
-//        findViewById(R.id.lvEditeursDetailTomes).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EditeursDetailActivity.this, TomesDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailEditeurListeTomes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TomeBean tome;
+                TomeBean tomeBean;
+                try {
+                    tome = (TomeBean) binding.lvDetailEditeurListeTomes.getItemAtPosition(position);
+                    tomeBean = dataBaseHelper.selectTomeSelonTome_id(tome.getTome_id());
+                } catch (Exception e) {
+                    tome = new TomeBean(-1,"error");
+                    tomeBean = new TomeBean(-1,"error");
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("tome_id", tomeBean.getTome_id());
+                bundle.putInt("tome_numero", tomeBean.getTome_id());
+                bundle.putString("tome_titre", tomeBean.getTome_titre());
+                bundle.putDouble("tome_prix_editeur", tomeBean.getTome_prix_editeur());
+                bundle.putDouble("tome_valeur_connue", tomeBean.getTome_valeur_connue());
+                bundle.putString("tome_date_edition", tomeBean.getTome_date_edition());
+                bundle.putString("tome_isbn", tomeBean.getTome_isbn());
+                bundle.putString("tome_image", tomeBean.getTome_image());
+                bundle.putBoolean("tome_dedicace", tomeBean.isTome_dedicace());
+                bundle.putBoolean("tome_edition_speciale", tomeBean.isTome_edition_speciale());
+                bundle.putString("tome_edition_speciale_libelle", tomeBean.getTome_edition_speciale_libelle());
+                bundle.putInt("serie_id", tomeBean.getSerie_id());
+                bundle.putInt("editeur_id", tomeBean.getEditeur_id());
+
+                findNavController(EditeurDetailFragment.this).navigate(R.id.action_editeurDetail_to_tomeDetail, bundle);
+
+            }
+        });
 
         /* -------------------------------------- */
-        // Clic Liste Détail Auteurs *************************************************** A revoir avec BDD
+        // Clic Element liste Auteur
         /* -------------------------------------- */
-//        findViewById(R.id.lvEditeursDetailAuteurs).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EditeursDetailActivity.this, AuteursDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailEditeurListelAuteurs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AuteurBean auteurBean;
+                try {
+                    auteurBean = (AuteurBean) binding.lvDetailEditeurListelAuteurs.getItemAtPosition(position);
+                } catch (Exception e) {
+                    auteurBean = new AuteurBean(-1,"error","error","error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("auteur_id", auteurBean.getAuteur_id());
+                bundle.putString("auteur_pseudo", auteurBean.getAuteur_pseudo());
+                bundle.putString("auteur_nom", auteurBean.getAuteur_nom());
+                bundle.putString("auteur_prenom", auteurBean.getAuteur_prenom());
+
+                findNavController(EditeurDetailFragment.this).navigate(R.id.action_editeurDetail_to_auteurDetail, bundle);
+
+            }
+        });
 
     }
 
@@ -137,5 +203,18 @@ public class EditeurDetailFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         binding = null;
+    }
+
+    private void afficherDetailEditeur(EditeurBean editeurBean){
+        binding.tvDetailEditeurNom.setText(editeurBean.getEditeur_nom());
+
+        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeriesSelonEditeurId(editeurBean.getEditeur_id()));
+        binding.lvDetailEditeurListeSeries.setAdapter(seriesArrayAdapter);
+
+        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.selectAllFromTomesSelonEditeurIdSansSerie(editeurBean.getEditeur_id()));
+        binding.lvDetailEditeurListeTomes.setAdapter(tomesArrayAdapter);
+
+        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursSelonEditeurId(editeurBean.getEditeur_id()));
+        binding.lvDetailEditeurListelAuteurs.setAdapter(auteursArrayAdapter);
     }
 }

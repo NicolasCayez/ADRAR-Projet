@@ -216,9 +216,31 @@ public class TomeDetailFragment extends Fragment {
         });
 
         /* -------------------------------------- */
-        // Clic sur l'éditeur pour avoir la liste
+        // Clic sur l'éditeur' pour voir le détail
         /* -------------------------------------- */
         binding.tvDetailTomeEditeur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
+                EditeurBean editeurBean;
+                try {
+                    editeurBean = dataBaseHelper.selectEditeurSelonTomeId(tome_id);
+                } catch (Exception e) {
+                    editeurBean = new EditeurBean  (-1,"error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("editeur_id", editeurBean.getEditeur_id());
+                bundle.putString("editeur_nom", editeurBean.getEditeur_nom());
+
+                findNavController(TomeDetailFragment.this).navigate(R.id.action_tomeDetail_to_editeurDetai, bundle);
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic sur changer l'éditeur pour avoir la liste
+        /* -------------------------------------- */
+        binding.btnDetailTomeChangeEditeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //sauvegarde modifications non enregistrées
@@ -464,15 +486,13 @@ public class TomeDetailFragment extends Fragment {
             binding.etDetailTomeNumero.setText(String.valueOf(tome.getTome_numero()));
         }
         binding.tvDetailTomeSerie.setText(dataBaseHelper.selectSerieSelonTomeId(tome_id).getSerie_nom());
-        System.out.println(tome.getTome_isbn().equals("null"));
-        System.out.println(String.valueOf(tome.getTome_isbn()).equals("null"));
-        binding.etDetailTomeISBN.setText(tome.getTome_isbn().equals("null") ? "" : String.valueOf(tome.getTome_isbn()));
+        binding.etDetailTomeISBN.setText(tome.getTome_isbn() == null ? "" : String.valueOf(tome.getTome_isbn()));//---------------
         binding.etDetailTomePrixEditeur.setText(tome.getTome_prix_editeur() == 0 ? "" : String.valueOf(tome.getTome_prix_editeur()));
         binding.etDetailTomeValeurActuelle.setText(tome.getTome_valeur_connue() == 0 ? "" : String.valueOf(tome.getTome_valeur_connue()));
-        binding.etDetailTomeDateEdition.setText(tome.getTome_date_edition().equals("null") ? "" : String.valueOf(tome.getTome_date_edition()));
+        binding.etDetailTomeDateEdition.setText(tome.getTome_date_edition() == null ? "" : String.valueOf(tome.getTome_date_edition()));//---------------
         binding.chkDetailTomeDedicace.setChecked(Boolean.valueOf(tome.isTome_dedicace()));
         binding.chkDetailTomeEditionSpeciale.setChecked(Boolean.valueOf(tome.isTome_edition_speciale()));
-        binding.etDetailTomeEditionSpecialeLibelle.setText(tome.getTome_edition_speciale_libelle().equals("null") ? "" : String.valueOf( tome.getTome_edition_speciale_libelle()));
+        binding.etDetailTomeEditionSpecialeLibelle.setText(tome.getTome_edition_speciale_libelle() == null ? "" : String.valueOf( tome.getTome_edition_speciale_libelle()));//---------------
         //image ici
         auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursSelonTomeId(tome_id));
         binding.lvDetailTomeAuteurs.setAdapter(auteursArrayAdapter);

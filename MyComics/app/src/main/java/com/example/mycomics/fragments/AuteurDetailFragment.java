@@ -1,5 +1,7 @@
 package com.example.mycomics.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.mycomics.R;
@@ -19,6 +22,8 @@ import com.example.mycomics.adapters.SeriesListAdapter;
 import com.example.mycomics.adapters.TomesListAdapter;
 import com.example.mycomics.adapters.TomesSerieListAdapter;
 import com.example.mycomics.beans.AuteurBean;
+import com.example.mycomics.beans.EditeurBean;
+import com.example.mycomics.beans.SerieBean;
 import com.example.mycomics.beans.TomeBean;
 import com.example.mycomics.databinding.FragmentAuteurDetailBinding;
 import com.example.mycomics.databinding.FragmentAuteursBinding;
@@ -115,48 +120,104 @@ public class AuteurDetailFragment extends Fragment {
 
 
         /* -------------------------------------- */
-        // Clic Liste Détail Séries *************************************************** A revoir avec BDD
+        // Clic Element liste Serie
         /* -------------------------------------- */
-//        findViewById(R.id.lvAuteursDetailSeries).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(AuteursDetailActivity.this, SeriesDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailAuteurListeSeries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SerieBean serieBean;
+                try {
+                    serieBean = (SerieBean) binding.lvDetailAuteurListeSeries.getItemAtPosition(position);
+                } catch (Exception e) {
+                    serieBean = new SerieBean(-1,"error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("serie_id", serieBean.getSerie_id());
+                bundle.putString("serie_nom", serieBean.getSerie_nom());
+
+                findNavController(AuteurDetailFragment.this).navigate(R.id.action_auteurDetail_to_serieDetail, bundle);
+
+            }
+        });
 
         /* -------------------------------------- */
-        // Clic Liste Détail Tomes *************************************************** A revoir avec BDD
+        // Clic Element liste Tomes
         /* -------------------------------------- */
-//        findViewById(R.id.lvAuteursDetailTomes).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(AuteursDetailActivity.this, TomesDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailAuteurListeTomes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TomeBean tome;
+                TomeBean tomeBean;
+                try {
+                    tome = (TomeBean) binding.lvDetailAuteurListeTomes.getItemAtPosition(position);
+                    tomeBean = dataBaseHelper.selectTomeSelonTome_id(tome.getTome_id());
+                } catch (Exception e) {
+                    tome = new TomeBean(-1,"error");
+                    tomeBean = new TomeBean(-1,"error");
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("tome_id", tomeBean.getTome_id());
+                bundle.putInt("tome_numero", tomeBean.getTome_id());
+                bundle.putString("tome_titre", tomeBean.getTome_titre());
+                bundle.putDouble("tome_prix_editeur", tomeBean.getTome_prix_editeur());
+                bundle.putDouble("tome_valeur_connue", tomeBean.getTome_valeur_connue());
+                bundle.putString("tome_date_edition", tomeBean.getTome_date_edition());
+                bundle.putString("tome_isbn", tomeBean.getTome_isbn());
+                bundle.putString("tome_image", tomeBean.getTome_image());
+                bundle.putBoolean("tome_dedicace", tomeBean.isTome_dedicace());
+                bundle.putBoolean("tome_edition_speciale", tomeBean.isTome_edition_speciale());
+                bundle.putString("tome_edition_speciale_libelle", tomeBean.getTome_edition_speciale_libelle());
+                bundle.putInt("serie_id", tomeBean.getSerie_id());
+                bundle.putInt("editeur_id", tomeBean.getEditeur_id());
+
+                findNavController(AuteurDetailFragment.this).navigate(R.id.action_auteurDetail_to_tomeDetail, bundle);
+
+            }
+        });
 
         /* -------------------------------------- */
-        // Clic Liste Détail Editeurs *************************************************** A revoir avec BDD
+        // Clic Element liste Editeur
         /* -------------------------------------- */
-//        findViewById(R.id.lvAuteursDetailEditeurs).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(AuteursDetailActivity.this, EditeursDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailAuteurListeEditeurs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EditeurBean editeurBean;
+                try {
+                    editeurBean = (EditeurBean) binding.lvDetailAuteurListeEditeurs.getItemAtPosition(position);
+                } catch (Exception e) {
+                    editeurBean = new EditeurBean(-1,"error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("editeur_id", editeurBean.getEditeur_id());
+                bundle.putString("editeur_nom", editeurBean.getEditeur_nom());
+                findNavController(AuteurDetailFragment.this).navigate(R.id.action_auteurDetail_to_editeurDetail, bundle);
+
+            }
+        });
 
         /* -------------------------------------- */
-        // Clic Liste Détail Auteurs *************************************************** A revoir avec BDD
+        // Clic Element liste Auteur
         /* -------------------------------------- */
-//        findViewById(R.id.lvAuteursDetailAuteurs).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(AuteursDetailActivity.this, AuteursDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding.lvDetailAuteurListeAuteurs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AuteurBean auteurBean;
+                try {
+                    auteurBean = (AuteurBean) binding.lvDetailAuteurListeAuteurs.getItemAtPosition(position);
+                } catch (Exception e) {
+                    auteurBean = new AuteurBean(-1,"error","error","error");
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("auteur_id", auteurBean.getAuteur_id());
+                bundle.putString("auteur_pseudo", auteurBean.getAuteur_pseudo());
+                bundle.putString("auteur_nom", auteurBean.getAuteur_nom());
+                bundle.putString("auteur_prenom", auteurBean.getAuteur_prenom());
+
+                findNavController(AuteurDetailFragment.this).navigate(R.id.auteurDetailFragment, bundle);
+
+            }
+        });
     }
 
     @Override
@@ -179,8 +240,6 @@ public class AuteurDetailFragment extends Fragment {
 
         auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursPartenaires(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeAuteurs.setAdapter(auteursArrayAdapter);
-
-
     }
 }
 
