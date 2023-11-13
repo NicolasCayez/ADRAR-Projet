@@ -148,7 +148,7 @@ public class EditeurDetailFragment extends Fragment {
                 TomeBean tomeBean;
                 try {
                     tome = (TomeBean) binding.lvDetailEditeurListeTomes.getItemAtPosition(position);
-                    tomeBean = dataBaseHelper.selectTomeSelonTome_id(tome.getTome_id());
+                    tomeBean = dataBaseHelper.selectTomeSelonTomeId(tome.getTome_id());
                 } catch (Exception e) {
                     tome = new TomeBean(-1,"error");
                     tomeBean = new TomeBean(-1,"error");
@@ -208,13 +208,13 @@ public class EditeurDetailFragment extends Fragment {
     private void afficherDetailEditeur(EditeurBean editeurBean){
         binding.tvDetailEditeurNom.setText(editeurBean.getEditeur_nom());
 
-        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeriesSelonEditeurId(editeurBean.getEditeur_id()));
+        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeSeriesSelonEditeurId(editeurBean.getEditeur_id()));
         binding.lvDetailEditeurListeSeries.setAdapter(seriesArrayAdapter);
 
-        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.selectAllFromTomesSelonEditeurIdSansSerie(editeurBean.getEditeur_id()));
+        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.listeTomesSelonEditeurIdSansSerie(editeurBean.getEditeur_id()));
         binding.lvDetailEditeurListeTomes.setAdapter(tomesArrayAdapter);
 
-        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursSelonEditeurId(editeurBean.getEditeur_id()));
+        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeAuteursSelonEditeurId(editeurBean.getEditeur_id()));
         binding.lvDetailEditeurListelAuteurs.setAdapter(auteursArrayAdapter);
     }
 }

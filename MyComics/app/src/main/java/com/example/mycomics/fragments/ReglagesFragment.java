@@ -85,8 +85,8 @@ public class ReglagesFragment extends Fragment {
     }
     private void afficherProfilActif() {
         try {
-            System.out.println("test: " + dataBaseHelper.selectAllFromProfilSelonProfilActif().getProfil_nom());
-            binding.tvProfilActif.setText(dataBaseHelper.selectAllFromProfilSelonProfilActif().getProfil_nom());
+            System.out.println("test: " + dataBaseHelper.selectProfilSelonProfilActif().getProfil_nom());
+            binding.tvProfilActif.setText(dataBaseHelper.selectProfilSelonProfilActif().getProfil_nom());
         } catch (Exception e) {
 
         }
@@ -181,7 +181,7 @@ public class ReglagesFragment extends Fragment {
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez un profil dans la liste");
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
-                profilsArrayAdapter = new ProfilsListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromProfils());
+                profilsArrayAdapter = new ProfilsListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeProfils());
                 listView.setAdapter(profilsArrayAdapter);
                 //Clic Profil choisi pour modification
                 popupListDialog.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {

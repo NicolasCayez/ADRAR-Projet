@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 
 import com.example.mycomics.R;
 import com.example.mycomics.adapters.AuteursListAdapter;
+import com.example.mycomics.adapters.SeriesListAdapter;
 import com.example.mycomics.beans.AuteurBean;
 import com.example.mycomics.databinding.FragmentAuteursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
@@ -89,14 +91,20 @@ public class AuteursFragment extends Fragment {
         // Initialisation affichage
         /* -------------------------------------- */
         afficherListeAuteurs();
+        binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
-        // clic searchBar
+        // saisie searchBar
         /* -------------------------------------- */
-        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                binding.sbSearch.svSearch.setIconified(false);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                afficherListeAuteurs();
+                return false;
             }
         });
         /* -------------------------------------- */
@@ -162,7 +170,11 @@ public class AuteursFragment extends Fragment {
         binding = null;
     }
     private void afficherListeAuteurs(){
-        auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteurs());
+        if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
+            auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeAuteursFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+        } else {
+            auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeAuteurs());
+        }
         binding.lvAuteursListeAuteurs.setAdapter(auteursArrayAdapter);
     }
 }

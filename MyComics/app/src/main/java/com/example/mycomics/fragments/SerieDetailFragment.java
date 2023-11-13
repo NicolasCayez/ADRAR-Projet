@@ -121,7 +121,7 @@ public class SerieDetailFragment extends Fragment {
                 TomeBean tomeBean;
                 try {
                     tome = (TomeBean) binding.lvDetailSerieListeTomes.getItemAtPosition(position);
-                    tomeBean = dataBaseHelper.selectTomeSelonTome_id(tome.getTome_id());
+                    tomeBean = dataBaseHelper.selectTomeSelonTomeId(tome.getTome_id());
                 } catch (Exception e) {
                     tome = new TomeBean(-1,"error");
                     tomeBean = new TomeBean(-1,"error");
@@ -198,13 +198,13 @@ public class SerieDetailFragment extends Fragment {
     }
 
     private void afficherDetailSerie(int serie_id) {
-        SerieBean serieBean = dataBaseHelper.selectAllFromSeriesSelonSerieId(serie_id);
+        SerieBean serieBean = dataBaseHelper.selectSerieSelonSerieId(serie_id);
         binding.tvDetailSerieNom.setText(serieBean.getSerie_nom());
-        tomesArrayAdapter = new TomesNumeroListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.selectAllFromTomesSelonSerieId(serie_id));
+        tomesArrayAdapter = new TomesNumeroListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.listeTomesSelonSerieId(serie_id));
         binding.lvDetailSerieListeTomes.setAdapter(tomesArrayAdapter);
-        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursSelonSerieId(serie_id));
+        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeAuteursSelonSerieId(serie_id));
         binding.lvDetailSerieListeAuteurs.setAdapter(auteursArrayAdapter);
-        editeursArrayAdapter = new EditeursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromEditeursSelonSerieId(serie_id));
+        editeursArrayAdapter = new EditeursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeEditeursSelonSerieId(serie_id));
         binding.lvDetailSerieListeEditeurs.setAdapter(editeursArrayAdapter);
 
     }

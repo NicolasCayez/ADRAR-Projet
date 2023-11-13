@@ -33,7 +33,6 @@ public class AccueilFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAccueilBinding.inflate(inflater, container, false);
-        binding.sbSearch.btFilter.setVisibility(View.GONE);
         return binding.getRoot();
     }
     @Override
@@ -53,21 +52,11 @@ public class AccueilFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /* -------------------------------------- */
-        // clic searchBar
-        /* -------------------------------------- */
-        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                binding.sbSearch.svSearch.setIconified(false);
-            }
-        });
 
+        binding.sbSearch.svSearch.setQueryHint("Rechercher");
         /* -------------------------------------- */
         // Clic Bouton Accueil Series
         /* -------------------------------------- */
-
         binding.btnAccueilSeries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

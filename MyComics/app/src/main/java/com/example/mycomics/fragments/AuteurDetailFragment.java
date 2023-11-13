@@ -150,7 +150,7 @@ public class AuteurDetailFragment extends Fragment {
                 TomeBean tomeBean;
                 try {
                     tome = (TomeBean) binding.lvDetailAuteurListeTomes.getItemAtPosition(position);
-                    tomeBean = dataBaseHelper.selectTomeSelonTome_id(tome.getTome_id());
+                    tomeBean = dataBaseHelper.selectTomeSelonTomeId(tome.getTome_id());
                 } catch (Exception e) {
                     tome = new TomeBean(-1,"error");
                     tomeBean = new TomeBean(-1,"error");
@@ -229,16 +229,16 @@ public class AuteurDetailFragment extends Fragment {
     private void afficherDetailAuteur(AuteurBean auteur){
         binding.tvDetailAuteurPseudo.setText(auteur.getAuteur_pseudo());
 
-        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeriesSelonAuteurId(auteur.getAuteur_id()));
+        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeSeriesSelonAuteurId(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeSeries.setAdapter(seriesArrayAdapter);
 
-        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromTomesSelonAuteurIdSansSerie(auteur.getAuteur_id()));
+        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeTomesSelonAuteurIdSansSerie(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeTomes.setAdapter(tomesArrayAdapter);
 
-        editeursArrayAdapter = new EditeursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromEditeursSelonAuteurId(auteur.getAuteur_id()));
+        editeursArrayAdapter = new EditeursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeEditeursSelonAuteurId(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeEditeurs.setAdapter(editeursArrayAdapter);
 
-        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursPartenaires(auteur.getAuteur_id()));
+        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeAuteursPartenaires(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeAuteurs.setAdapter(auteursArrayAdapter);
     }
 }

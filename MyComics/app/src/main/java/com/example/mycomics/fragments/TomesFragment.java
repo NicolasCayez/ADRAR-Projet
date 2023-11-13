@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.mycomics.R;
+import com.example.mycomics.adapters.AuteursListAdapter;
 import com.example.mycomics.adapters.TomesListAdapter;
 import com.example.mycomics.adapters.TomesSerieListAdapter;
 import com.example.mycomics.beans.TomeBean;
@@ -102,14 +105,20 @@ public class TomesFragment extends Fragment {
         // Initialisation affichage
         /* -------------------------------------- */
         afficherListeTomes();
+        binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
-        // clic searchBar
+        // saisie searchBar
         /* -------------------------------------- */
-        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                binding.sbSearch.svSearch.setIconified(false);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                afficherListeTomes();
+                return false;
             }
         });
         /* -------------------------------------- */
@@ -135,13 +144,17 @@ public class TomesFragment extends Fragment {
                         popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(getActivity());
-                        // insertion dans la table TOMES
-                        boolean successInsertTomes = dataBaseHelper.insertIntoTomes(tomeBean);
-                        System.out.println("insertion TOMES" + successInsertTomes);
-                        boolean successInsertDetenir = dataBaseHelper.insertIntoDetenir(dataBaseHelper.selectFromTomesDernierAjout(tomeBean));
-                        System.out.println("insertion DETENIR" + successInsertDetenir);
+                        if (dataBaseHelper.verifDoublonTome(tomeBean.getTome_titre())) {
+                            // Tome déjà existant
+                            Toast.makeText(TomesFragment.super.getContext(), "Tome " + tomeBean.getTome_titre() + " déjà existant", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // on enregiste
+                            boolean successInsertTomes = dataBaseHelper.insertIntoTomes(tomeBean);
+                            System.out.println("insertion TOMES" + successInsertTomes);
+                            boolean successInsertDetenir = dataBaseHelper.insertIntoDetenir(dataBaseHelper.selectDernierTomeAjoute(tomeBean));
+                            System.out.println("insertion DETENIR" + successInsertDetenir);
+                        }
                         afficherListeTomes();
-
                     }
                 });
                 popupAddDialog.build();
@@ -190,8 +203,11 @@ public class TomesFragment extends Fragment {
     }
 
     private void afficherListeTomes(){
-        System.out.println(dataBaseHelper.selectAllFromTomesEtSerieSelonProfilId().get(2));
-        tomesSerieArrayAdapter = new TomesSerieListAdapter(getActivity() , R.layout.listview_row_3col, dataBaseHelper.selectAllFromTomesEtSerieSelonProfilId());
+        if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
+            tomesSerieArrayAdapter = new TomesSerieListAdapter(getActivity() , R.layout.listview_row_3col, dataBaseHelper.listeTomesEtSerieSelonProfilIdFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+        } else {
+            tomesSerieArrayAdapter = new TomesSerieListAdapter(getActivity() , R.layout.listview_row_3col, dataBaseHelper.listeTomesEtSerieSelonProfilId());
+        }
         binding.lvTomesListeTomes.setAdapter(tomesSerieArrayAdapter);
     }
 }

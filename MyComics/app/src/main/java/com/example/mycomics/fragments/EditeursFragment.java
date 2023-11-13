@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.mycomics.R;
+import com.example.mycomics.adapters.AuteursListAdapter;
 import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.beans.EditeurBean;
 import com.example.mycomics.databinding.FragmentEditeursBinding;
@@ -92,14 +94,20 @@ public class EditeursFragment extends Fragment {
         // Initialisation affichage
         /* -------------------------------------- */
         afficherListeEditeurs();
+        binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
-        // clic searchBar
+        // saisie searchBar
         /* -------------------------------------- */
-        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                binding.sbSearch.svSearch.setIconified(false);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                afficherListeEditeurs();
+                return false;
             }
         });
         /* -------------------------------------- */
@@ -162,7 +170,11 @@ public class EditeursFragment extends Fragment {
         binding = null;
     }
     private void afficherListeEditeurs(){
-        editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromEditeurs());
+        if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
+            editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeEditeursFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+        } else {
+            editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeEditeurs());
+        }
         binding.lvEditeursListeEditeurs.setAdapter(editeursArrayAdapter);
     }
 }

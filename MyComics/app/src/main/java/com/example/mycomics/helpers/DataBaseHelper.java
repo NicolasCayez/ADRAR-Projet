@@ -21,7 +21,7 @@ import com.example.mycomics.fragments.ReglagesFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-//*********************** Convention noms SQLITE : UPPERCASE et undersores
+//*********************** Convention noms SQLITE : UPPERCASE et underscores
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -112,7 +112,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 COLUMN_TOME_EDITION_SPECIALE_LIBELLE + " TEXT, " +
                 COLUMN_SERIE_ID + " INTEGER," +
                 COLUMN_EDITEUR_ID + " INTEGER," +
-                " FOREIGN KEY(" + COLUMN_SERIE_ID + ") REFERENCES " + SERIES + "(" + COLUMN_SERIE_ID + ")" +
+                " FOREIGN KEY(" + COLUMN_SERIE_ID + ") REFERENCES " + SERIES + "(" + COLUMN_SERIE_ID + ")," +
                 " FOREIGN KEY(" + COLUMN_EDITEUR_ID + ") REFERENCES " + EDITEURS + "(" + COLUMN_EDITEUR_ID + "))");
 
         //Table d'association DETENIR (tome_id, profil_id)
@@ -133,9 +133,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + COLUMN_AUTEUR_ID + ") REFERENCES " + AUTEURS + "(" + COLUMN_AUTEUR_ID + "))");
 
 
-        /* -------------------------------------- */
-        // Entrées de Test
-        /* -------------------------------------- */
+/**************************************************************************************************/
+/** Entrées de Test
+/**************************************************************************************************/
             // AUTEURS
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Buchet\");\n"); //auteur_id 1
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Crisse\");\n"); //auteur_id 2
@@ -151,6 +151,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Vatine\");\n"); //auteur_id 12
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Color Twins\");\n"); //auteur_id 13
             db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Morvan\");\n"); //auteur_id 14
+            db.execSQL("INSERT INTO AUTEURS(AUTEUR_PSEUDO) VALUES(\"Keramidas\");\n"); //auteur_id 15
 
 
             // EDITEURS
@@ -173,6 +174,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Sillage\");\n"); //serie_id 9
             db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Trolls de Troy\");\n"); //serie_id 10
             db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Les feux d'Askell\");\n"); //serie_id 11
+            db.execSQL("INSERT INTO SERIES(SERIE_NOM) VALUES(\"Luuna\");\n"); //serie_id 12
 
             // TOMES et DETENIR id numero serie
             //Lanfeust de Troy serie 5
@@ -245,12 +247,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(32, 1);\n");
             db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Infiltrations\", 9, 9, 3);\n"); //tome_id 33
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(33, 1);\n");
-            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Retour de flammes - Edition spéciale\", 10, 9, 3);\n"); //tome_id 34
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, TOME_DEDICACE, SERIE_ID, EDITEUR_ID) VALUES(\"Retour de flammes - Edition spéciale\", 10, true, 9, 3);\n"); //tome_id 34
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(34, 1);\n");
             db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Monde flottant\", 11, 9, 3);\n"); //tome_id 35
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(35, 1);\n");
             db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Zone franche\", 12, 9, 3);\n"); //tome_id 36
             db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(36, 1);\n");
+            //Luuna série 12
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"La nuit des totems\", 1, 12, 6);\n"); //tome_id 37
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(37, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le crépuscule du Lynx\", 2, 12, 6);\n"); //tome_id 38
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(38, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Dans les traces d'Oh-mah-ah\", 3, 12, 6);\n"); //tome_id 39
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(39, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Pok-ta-pok\", 4, 12, 6);\n"); //tome_id 40
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(40, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"Le cercle des miroirs\", 5, 12, 6);\n"); //tome_id 41
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(41, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"La reine des loups\", 6, 12, 6);\n"); //tome_id 42
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(42, 1);\n");
+            db.execSQL("INSERT INTO TOMES(TOME_TITRE, TOME_NUMERO, SERIE_ID, EDITEUR_ID) VALUES(\"La source du temps\", 7, 12, 6);\n"); //tome_id 43
+            db.execSQL("INSERT INTO DETENIR(TOME_ID, PROFIL_ID) VALUES(43, 1);\n");
 
 
 
@@ -332,6 +349,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(35, 14);\n");
             db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(36, 1);\n"); //12
             db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(36, 14);\n");
+            // Luuna Crisse 2 Keramidas 15
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(37, 2);\n"); //1
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(37, 15);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(38, 2);\n"); //2
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(38, 15);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(39, 2);\n"); //3
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(39, 15);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(40, 2);\n"); //4
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(40, 15);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(41, 2);\n"); //5
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(41, 15);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(42, 2);\n"); //6
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(42, 15);\n");
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(43, 2);\n"); //7
+            db.execSQL("INSERT INTO ECRIRE(TOME_ID, AUTEUR_ID) VALUES(43, 15);\n");
+
+
+
+
+
+
         }
 
 
@@ -350,12 +388,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-/* ********************************************************************************************** */
-// REQUETES UPDATE
-/* ********************************************************************************************** */
+/**************************************************************************************************/
+/** REQUETES UPDATE
+/**************************************************************************************************/
 
     /* -------------------------------------- */
-    // UPDATE PROFIL_ACTIF SET PROFIL_ID = x
+    // UPDATE PROFIL_ACTIF SET PROFIL_ID = profil_id
     /* -------------------------------------- */
     public boolean updateProfilActif(DataBaseHelper dataBaseHelper, long nouvelId){
         SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
@@ -367,13 +405,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             System.out.println("update request : OK");
-            System.out.println("Id profil actif: " + dataBaseHelper.selectAllFromProfilActif().toString());
+            System.out.println("Id profil actif: " + dataBaseHelper.selectProfilActif().toString());
             return true;
         }
     }
 
     /* -------------------------------------- */
-    // UPDATE PROFIL SET PROFIL_nom = profil_nom WHERE PROFIL_ID = profil_id
+    // UPDATE PROFIL SET PROFIL_NOM = profil_nom WHERE PROFIL_ID = profil_id
     /* -------------------------------------- */
     public boolean updateProfil(DataBaseHelper dataBaseHelper, ProfilBean profil){
         SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
@@ -385,7 +423,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             System.out.println("update request : OK");
-            System.out.println("Id profil actif: " + dataBaseHelper.selectAllFromProfilActif().toString());
+            System.out.println("Id profil actif: " + dataBaseHelper.selectProfilActif().toString());
             return true;
         }
     }
@@ -413,7 +451,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             System.out.println("update request : OK");
-            System.out.println("Id profil actif: " + dataBaseHelper.selectAllFromProfilActif().toString());
+            System.out.println("Id profil actif: " + dataBaseHelper.selectProfilActif().toString());
             return true;
         }
     }
@@ -421,7 +459,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     // UPDATE TOMES SET SERIE_ID = serie_id WHERE TOME_ID = tome_id
     /* -------------------------------------- */
-    public boolean updateSerieTome(DataBaseHelper dataBaseHelper, SerieBean serieBean, Integer tome_id){
+    public boolean updateSerieDuTome(DataBaseHelper dataBaseHelper, SerieBean serieBean, Integer tome_id){
         SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_SERIE_ID, serieBean.getSerie_id());
@@ -438,7 +476,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     // UPDATE TOMES SET EDITEUR_ID = editeur_id WHERE TOME_ID = tome_id
     /* -------------------------------------- */
-    public boolean updateEditeurTome(DataBaseHelper dataBaseHelper, EditeurBean editeurBean, Integer tome_id){
+    public boolean updateEditeurDuTome(DataBaseHelper dataBaseHelper, EditeurBean editeurBean, Integer tome_id){
         SQLiteDatabase db = this.getWritableDatabase(); // accès lecture BDD
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_EDITEUR_ID, editeurBean.getEditeur_id());
@@ -452,12 +490,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-/* ********************************************************************************************** */
-// REQUETES INSERT INTO
-/* ********************************************************************************************** */
+/**************************************************************************************************/
+/** REQUETES INSERT INTO
+/**************************************************************************************************/
 
     /* -------------------------------------- */
-    // INSERT INTO PROFILS NOM SEUL
+    // INSERT INTO PROFILS (profil_nom)
     /* -------------------------------------- */
     public boolean insertIntoProfils(ProfilBean profilBean){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
@@ -472,7 +510,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // INSERT INTO EDITEURS NOM SEUL
+    // INSERT INTO EDITEURS (editeur_nom)
     /* -------------------------------------- */
     public boolean insertIntoEditeurs(EditeurBean editeurBean){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
@@ -487,7 +525,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // INSERT INTO AUTEURS PSEUDO SEUL
+    // INSERT INTO AUTEURS (auteur_pseudo)
     /* -------------------------------------- */
     public boolean insertIntoAuteurs(AuteurBean auteurBean){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
@@ -518,7 +556,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // INSERT INTO SERIES NOM SEUL
+    // INSERT INTO SERIES (serie_nom)
     /* -------------------------------------- */
     public boolean insertIntoSeries(SerieBean serieBean){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
@@ -533,7 +571,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // INSERT INTO TOMES TITRE SEUL
+    // INSERT INTO TOMES (tome_titre)
     /* -------------------------------------- */
     public boolean insertIntoTomes(TomeBean tomeBean){
         //Table Tomes
@@ -551,11 +589,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // INSERT INTO DETENIR
+    // INSERT INTO DETENIR (tome_id, profil_id)
+    // a faire sur le profil actif
     /* -------------------------------------- */
-//     = INSERT INTO DETENIR (tome_id, profil_id) VALUES (Tome.tome_titre, selectAllformProfilActif.getprofil.id())
     public boolean insertIntoDetenir(TomeBean tomeBean){
-        int profil_id = this.selectAllFromProfilActif().getProfil_id();
+        int profil_id = this.selectProfilActif().getProfil_id();
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
         cv.put(COLUMN_TOME_ID, tomeBean.getTome_id()); //ajout dans la pile
@@ -571,16 +609,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-/* ********************************************************************************************** */
-// REQUETES SELECT
-/* ********************************************************************************************** */
+/**************************************************************************************************/
+/** REQUETES SELECT
+/**************************************************************************************************/
 
     /* -------------------------------------- */
     // SELECT * FROM PROFILS
     /* -------------------------------------- */
-    public List<ProfilBean> selectAllFromProfils(){
+    public List<ProfilBean> listeProfils(){
         List<ProfilBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + PROFILS;
+        String requete = "SELECT * FROM " + PROFILS +
+                " ORDER BY " + PROFILS + "." + COLUMN_PROFIL_NOM;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -629,7 +668,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     // SELECT * FROM PROFIL_ACTIF, une seule entrée
     /* -------------------------------------- */
-    public ProfilActifBean selectAllFromProfilActif(){
+    public ProfilActifBean selectProfilActif(){
         ProfilActifBean profilActifBean = null;
 //        String requete = "SELECT * FROM " + PROFIL_ACTIF + " WHERE " + COLUMN_PROFIL_ACTIF_ID + " = 0";
         String requete = "SELECT * FROM " + PROFIL_ACTIF;
@@ -648,11 +687,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     /* -------------------------------------- */
     // SELECT * FROM PROFILS
-    // WHERE PROFIL_ID = PROFIL_ACTIF_ID
+    // INNER JOIN PROFIL_ACTIF ON PROFILS.PROFIL_ID = PROFIL_ACTIF.PROFIL_ID
+    // WHERE PROFILS.PROFIL_ID = PROFIL_ACTIF.PROFIL_ID
     /* -------------------------------------- */
-    public ProfilBean selectAllFromProfilSelonProfilActif(){
+    public ProfilBean selectProfilSelonProfilActif(){
         ProfilBean profilBean = null;
-        String requete = "SELECT " + PROFILS + "." + COLUMN_PROFIL_ID + ", "+ PROFILS + "." + COLUMN_PROFIL_NOM + " FROM " + PROFILS + " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFILS + "." + COLUMN_PROFIL_ID + " = " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " WHERE " + PROFILS + "." + COLUMN_PROFIL_ID + " = " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID;
+        String requete = "SELECT * FROM " + PROFILS +
+                " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFILS + "." + COLUMN_PROFIL_ID + " = " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " " +
+                "WHERE " + PROFILS + "." + COLUMN_PROFIL_ID + " = " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -670,11 +712,57 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM EDITEURS
+    // SELECT DISTINCT * FROM EDITEURS
+    // INNER JOIN TOMES ON TOMES.EDITEUR_ID = EDITEURS.EDITEUR_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // GROUP BY TOMES.EDITEUR_ID
+    // ORDER BY EDITEURS.EDITEUR_NOM
     /* -------------------------------------- */
-    public List<EditeurBean> selectAllFromEditeurs(){
+    public List<EditeurBean> listeEditeurs(){
         List<EditeurBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + EDITEURS;
+        String requete = "SELECT DISTINCT * FROM " + EDITEURS +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" GROUP BY " + TOMES + "." + COLUMN_EDITEUR_ID +
+                " ORDER BY " + EDITEURS + "." + COLUMN_EDITEUR_NOM;
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int editeur_id = cursor.getInt(0);
+                String editeur_nom = cursor.getString(1);
+                EditeurBean editeurBean = new EditeurBean(editeur_id, editeur_nom);
+                returnList.add(editeurBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /* -------------------------------------- */
+    // SELECT DISTINCT * FROM EDITEURS
+    // INNER JOIN TOMES ON TOMES.EDITEUR_ID = EDITEURS.EDITEUR_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND EDITEURS.EDITEUR_NOM LIKE '%filtre%'
+    // GROUP BY TOMES.EDITEUR_ID
+    // ORDER BY EDITEURS.EDITEUR_NOM
+    /* -------------------------------------- */
+    public List<EditeurBean> listeEditeursFiltre(String filtre){
+        List<EditeurBean> returnList = new ArrayList<>();
+        String requete = "SELECT DISTINCT * FROM " + EDITEURS +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + EDITEURS + "." + COLUMN_EDITEUR_NOM + " LIKE \'%" + filtre +
+                "%\' GROUP BY " + TOMES + "." + COLUMN_EDITEUR_ID +
+                " ORDER BY " + EDITEURS + "." + COLUMN_EDITEUR_NOM;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -695,7 +783,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM EDITEURS
-    // WHERE EDITEUR_ID = editeur_id
+    // WHERE EDITEUR_ID = editeur_id LIMIT 1
     /* -------------------------------------- */
     public EditeurBean selectEditeurSelonEditeurId(int editeur_id_voulu){
         EditeurBean editeurBean = new EditeurBean();
@@ -720,12 +808,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT COUNT (*) FROM EDITEUR
-    // WHERE COLUMN_EDITEUR_NOM = editeur_nom
+    // INNER JOIN TOMES ON TOMES.EDITEUR_ID = EDITEURS.EDITEUR_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND COLUMN_EDITEUR_NOM = editeur_nom
     /* -------------------------------------- */
     public boolean verifDoublonEditeur(String editeur_nom){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
-        String requete = "SELECT COUNT(*) FROM " + EDITEURS + " WHERE " + COLUMN_EDITEUR_NOM + " = \"" + editeur_nom + "\"";
+        String requete = "SELECT COUNT(*) FROM " + EDITEURS +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + COLUMN_EDITEUR_NOM + " = \"" + editeur_nom + "\"";
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         int nbResult = 0;
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -747,14 +842,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM EDITEURS
-    // INNER JOIN EDITER ON EDITER.EDITEUR_ID = EDITEUR.EDITEUR_ID
-    // WHERE EDITER.TOME_ID = tome_id LIMIT 1
-    // 1 seul résultat
+    // INNER JOIN TOMES ON TOMES.EDITEUR_ID = EDITEURS.EDITEUR_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND EDITEURS.EDITEUR_NOM = editeur_nom_voulu LIMIT 1
     /* -------------------------------------- */
-        public EditeurBean selectEditeurSelonEditeurNom(String nom){
+    public EditeurBean selectEditeurSelonEditeurNom(String editeur_nom_voulu){
         EditeurBean editeurBean = null;
         String requete = "SELECT * FROM " + EDITEURS +
-                " WHERE " + EDITEURS + "." + COLUMN_EDITEUR_NOM + " = \"" + nom + "\" LIMIT 1";
+        " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+        " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+        " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+        "\" AND " + EDITEURS + "." + COLUMN_EDITEUR_NOM + " = \"" + editeur_nom_voulu+ "\" LIMIT 1";
+
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -773,8 +873,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM EDITEURS
-    // WHERE EDITEURS.EDITEUR_NOM = editeur_nom LIMIT 1
-    // 1 seul résultat
+    // INNER JOIN TOMES ON EDITEURS.EDITEUR_ID = TOMES.EDITEUR_ID
+    // WHERE TOMES.TOME_ID = tome_id LIMIT 1
     /* -------------------------------------- */
     public EditeurBean selectEditeurSelonTomeId(int tome_id){
         EditeurBean editeurBean;
@@ -798,11 +898,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // "SELECT COLUMN_EDITEUR_ID FROM EDITEURS
-    // WHERE COLUMN_EDITEUR_NOM = + editeurBean.getEditeur_nom() +
-    // ORDER BY COLUMN_EDITEUR DESC LIMIT 1"
+    // SELECT EDITEUR_ID FROM EDITEURS
+    // WHERE EDITEUR_NOM = editeurBean.getEditeur_nom()
+    // ORDER BY EDITEUR_ID DESC LIMIT 1"
     /* -------------------------------------- */
-    public EditeurBean selectFromEditeursDernierAjout(EditeurBean editeurBean){
+    public EditeurBean selectDernierEditeurAjoute(EditeurBean editeurBean){
         String requete = "SELECT " + COLUMN_EDITEUR_ID + " FROM " + EDITEURS +
                 " WHERE " + COLUMN_EDITEUR_NOM + " = \"" + editeurBean.getEditeur_nom() +
                 "\" ORDER BY " + COLUMN_EDITEUR_ID +" DESC LIMIT 1";
@@ -822,16 +922,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM TOMES
-    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
-    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    // SELECT * FROM EDITEURS
+    // INNER JOIN TOMES ON TOMES.EDITEUR_ID = EDITEURS.EDITEUR_ID
+    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID = TOMES.TOME_ID
+    // JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID +
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif() +
+    // AND ECRIRE.AUTEUR_ID = auteur_id
+    // GROUP BY EDITEURS.EDITEUR_ID
+    // ORDER BY EDITEURS.EDITEUR_NOM;
+
     /* -------------------------------------- */
-    public List<EditeurBean> selectAllFromEditeursSelonAuteurId(int auteur_id){
+    public List<EditeurBean> listeEditeursSelonAuteurId(int auteur_id){
         List<EditeurBean> returnList = new ArrayList<>();
         String requete = "SELECT * FROM " + EDITEURS +
                 " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
                 " INNER JOIN " + ECRIRE + " ON " + ECRIRE + "." + COLUMN_TOME_ID + " = " + TOMES + "." + COLUMN_TOME_ID +
-                " WHERE " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id + "\"";
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id +
+                "\" GROUP BY " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+                " ORDER BY " + EDITEURS + "." + COLUMN_EDITEUR_NOM;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -851,18 +961,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM TOMES
-    // WHERE TOME_ID = tome_id
+    // SELECT * FROM EDITEURS +
+    // JOIN TOMES ON TOMES.EDITEUR_ID = EDITEURS.EDITEUR_ID +
+    // JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID +
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif() +
+    // AND TOMES.SERIE_ID = serie_id_voulu
     /* -------------------------------------- */
-    public List<EditeurBean> selectAllFromEditeursSelonSerieId(int serie_id_voulu){
+    public List<EditeurBean> listeEditeursSelonSerieId(int serie_id_voulu){
         List<EditeurBean> returnList = new ArrayList<>();
         EditeurBean editeurBean;
         String requete = "SELECT * FROM " + EDITEURS +
-                " JOIN " + TOMES +
-                " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
-                " JOIN " + DETENIR +
-                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
-                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_EDITEUR_ID + " = " + EDITEURS + "." + COLUMN_EDITEUR_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
                 "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu + "\"";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
@@ -882,13 +993,64 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    /* -------------------------------------- */
+    // SELECT * FROM AUTEURS
+    // INNER JOIN ECRIRE ON ECRIRE.AUTEUR_ID = AUTEURS.AUTEUR_ID
+    // INNER JOIN TOMES ON TOMES.TOME_ID = ECRIRE.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // GROUP BY AUTEURS.AUTEUR_ID
+    // ORDER BY AUTEURS.AUTEUR_PSEUDO
+    /* -------------------------------------- */
+    public List<AuteurBean> listeAuteurs(){
+        List<AuteurBean> returnList = new ArrayList<>();
+        String requete = "SELECT * FROM " + AUTEURS +
+        " INNER JOIN " + ECRIRE + " ON " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+        " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+        " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+        " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+        "\" GROUP BY " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " ORDER BY " + AUTEURS + "." + COLUMN_AUTEUR_PSEUDO;
+        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int auteur_id = cursor.getInt(0);
+                String auteur_pseudo = cursor.getString(1);
+                String auteur_prenom = cursor.getString(2);
+                String auteur_nom = cursor.getString(3);
+                AuteurBean auteurBean = new AuteurBean(auteur_id, auteur_nom, auteur_prenom, auteur_pseudo);
+                returnList.add(auteurBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 
     /* -------------------------------------- */
     // SELECT * FROM AUTEURS
+    // INNER JOIN ECRIRE ON ECRIRE.AUTEUR_ID = AUTEURS.AUTEUR_ID
+    // INNER JOIN TOMES ON TOMES.TOME_ID = ECRIRE.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND AUTEURS.AUTEURS_PSEUDO LIKE '%filtre%'
+    // GROUP BY AUTEURS.AUTEUR_ID
+    // ORDER BY AUTEURS.AUTEUR_PSEUDO
     /* -------------------------------------- */
-    public List<AuteurBean> selectAllFromAuteurs(){
+    public List<AuteurBean> listeAuteursFiltre(String filtre){
         List<AuteurBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + AUTEURS;
+        String requete = "SELECT * FROM " + AUTEURS +
+                " INNER JOIN " + ECRIRE + " ON " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + AUTEURS + "." + COLUMN_AUTEUR_PSEUDO + " LIKE \'%" + filtre +
+                "%\' GROUP BY " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " ORDER BY " + AUTEURS + "." + COLUMN_AUTEUR_PSEUDO;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -938,12 +1100,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT COUNT (*) FROM AUTEURS
+    // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
+    // INNER JOIN TOMES ON TOMES.TOME_ID = ECRIRE.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID +
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
     // WHERE COLUMN_AUTEUR_PSEUDO = auteur_pseudo
     /* -------------------------------------- */
     public boolean verifDoublonAuteur(String auteur_pseudo){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
-        String requete = "SELECT COUNT(*) FROM " + AUTEURS + " WHERE " + COLUMN_AUTEUR_PSEUDO + " = \"" + auteur_pseudo + "\"";
+        String requete = "SELECT COUNT(*) FROM " + AUTEURS +
+                " INNER JOIN " + ECRIRE + " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + COLUMN_AUTEUR_PSEUDO + " = \"" + auteur_pseudo + "\"";
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         int nbResult = 0;
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -966,15 +1137,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     // SELECT * FROM AUTEURS
     // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
-    // WHERE ECRIRE.TOME_ID = tome_id
+    // INNER JOIN TOMES ON TOMES.TOME_ID = ECRIRE.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID +
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND ECRIRE.TOME_ID = tome_id
+    // GROUP BY AUTEURS.AUTEUR_ID
+    // ORDER BY AUTEURS.AUTEUR_PSEUDO
     /* -------------------------------------- */
-    public List<AuteurBean> selectAllFromAuteursSelonTomeId(int tome_id){
+    public List<AuteurBean> listeAuteursSelonTomeId(int tome_id){
         List<AuteurBean> returnList = new ArrayList<>();
         AuteurBean auteurBean = null;
         String requete = "SELECT * FROM " + AUTEURS +
-                " INNER JOIN " + ECRIRE +
-                " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
-                " WHERE " + ECRIRE + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\"";
+                " INNER JOIN " + ECRIRE + " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + ECRIRE + "." + COLUMN_TOME_ID + " = \"" + tome_id +
+                "\" GROUP BY " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " ORDER BY " + AUTEURS + "." + COLUMN_AUTEUR_PSEUDO;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -996,17 +1176,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     // SELECT * FROM AUTEURS
     // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
-    // WHERE ECRIRE.TOME_ID = tome_id
+    // INNER JOIN TOMES ON ECRIRE.TOME_ID = TOMES.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND TOMES.EDITEUR_ID = editeur_id_voulu
+    // GROUP BY AUTEURS.AUTEUR_ID
+    // ORDER BY AUTEURS.AUTEUR_PSEUDO
     /* -------------------------------------- */
-    public List<AuteurBean> selectAllFromAuteursSelonEditeurId(int editeur_id_voulu){
+    public List<AuteurBean> listeAuteursSelonEditeurId(int editeur_id_voulu){
         List<AuteurBean> returnList = new ArrayList<>();
         AuteurBean auteurBean = null;
         String requete = "SELECT * FROM " + AUTEURS +
-                " INNER JOIN " + ECRIRE +
-                " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
-                " INNER JOIN " + TOMES +
-                " ON " + ECRIRE + "." + COLUMN_TOME_ID + " = " + TOMES + "." + COLUMN_TOME_ID +
-                " WHERE " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu + "\"";
+                " INNER JOIN " + ECRIRE + " ON " + AUTEURS + "." + COLUMN_AUTEUR_ID + " = " + ECRIRE + "." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + TOMES + " ON " + ECRIRE + "." + COLUMN_TOME_ID + " = " + TOMES + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu +
+                "\" GROUP BY " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " ORDER BY " + AUTEURS + "." + COLUMN_AUTEUR_PSEUDO;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1027,20 +1214,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM AUTEURS
-    // WHERE SERIE_ID = serie_id
+    // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
+    // INNER JOIN TOMES ON ECRIRE.TOME_ID = TOMES.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND TOMES.SERIE_ID = serie_id_voulu
+    // GROUP BY AUTEURS.AUTEUR_ID
+    // ORDER BY AUTEURS.AUTEUR_PSEUDO
     /* -------------------------------------- */
-    public List<AuteurBean> selectAllFromAuteursSelonSerieId(int serie_id_voulu){
+    public List<AuteurBean> listeAuteursSelonSerieId(int serie_id_voulu){
         List<AuteurBean> returnList = new ArrayList<>();
         AuteurBean auteurBean = new AuteurBean();
         String requete = "SELECT * FROM " + AUTEURS +
-                " JOIN " + ECRIRE +
-                " ON " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = " + AUTEURS + "." + COLUMN_AUTEUR_ID +
-                " JOIN " + TOMES +
-                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
-                " JOIN " + DETENIR +
-                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
-                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
-                "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu + "\"";
+                " JOIN " + ECRIRE + " ON " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+                " JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu +
+                "\" GROUP BY " + AUTEURS + "." + COLUMN_AUTEUR_ID +
+                " ORDER BY " + AUTEURS + "." + COLUMN_AUTEUR_PSEUDO;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1060,21 +1252,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM AUTEURS
-    // INNER JOIN ECRIRE ON AUTEUR.AUTEUR_ID = ECRIRE.AUTEUR_ID
-    // WHERE ECRIRE.TOME_ID IN
-    //                  (SELECT * FROM TOMES
-    //                   INNER JOIN ECRIRE ON TOMES.TOME_ID = ECRIRE.TOME_ID
-    //                   WHERE ECRIRE.AUTEUR_ID = auteur_id)
-    // EXCEPT
-    // SELECT * FROM AUTEURS
-    // WHERE AUTEURS.AUTEUR_ID = auteur_id
+    // SELECT DISTINCT A1.* FROM AUTEURS A1
+    // INNER JOIN ECRIRE E1 ON A1.AUTEUR_ID = E1.AUTEUR_ID
+    // INNER JOIN ECRIRE E2 ON E1.TOME_ID = E2.TOME_ID
+    // INNER JOIN AUTEURS A2 ON E2.AUTEUR_ID = A2.AUTEUR_ID
+    // INNER JOIN TOMES ON E1.TOME_ID = TOMES.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND A1.AUTEUR_ID <> A2.AUTEUR_ID
+    // AND A2.AUTEUR_ID = auteur_id_voulu
     /* -------------------------------------- */
-    public List<AuteurBean> selectAllFromAuteursPartenaires(int auteur_id_voulu){
+    public List<AuteurBean> listeAuteursPartenaires(int auteur_id_voulu){
         List<AuteurBean> returnList = new ArrayList<>();
-
-        String requete = "SELECT DISTINCT A1.* FROM " + AUTEURS + " A1 INNER JOIN " + ECRIRE + " E1 ON A1." + COLUMN_AUTEUR_ID + " = E1." + COLUMN_AUTEUR_ID + " INNER JOIN " + ECRIRE + " E2 ON E1." + COLUMN_TOME_ID + " = E2." + COLUMN_TOME_ID + " INNER JOIN " + AUTEURS + " A2 ON E2." + COLUMN_AUTEUR_ID + "= A2." + COLUMN_AUTEUR_ID + " WHERE A1." + COLUMN_AUTEUR_ID + " <> A2." + COLUMN_AUTEUR_ID + " AND A2." + COLUMN_AUTEUR_ID + " =\"" + auteur_id_voulu + "\"";
-
+        String requete = "SELECT DISTINCT A1.* FROM " + AUTEURS + " A1" +
+                " INNER JOIN " + ECRIRE + " E1 ON A1." + COLUMN_AUTEUR_ID + " = E1." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + ECRIRE + " E2 ON E1." + COLUMN_TOME_ID + " = E2." + COLUMN_TOME_ID +
+                " INNER JOIN " + AUTEURS + " A2 ON E2." + COLUMN_AUTEUR_ID + "= A2." + COLUMN_AUTEUR_ID +
+                " INNER JOIN " + TOMES + " ON E1." + COLUMN_TOME_ID + " = " + TOMES + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND A1." + COLUMN_AUTEUR_ID + " <> A2." + COLUMN_AUTEUR_ID +
+                " AND A2." + COLUMN_AUTEUR_ID + " =\"" + auteur_id_voulu + "\"";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1100,7 +1298,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // WHERE COLUMN_TOME_TITRE = tomeBean.getTome_titre()
     // ORDER BY COLUMN_TOME_ID DESC LIMIT 1"
     /* -------------------------------------- */
-    public AuteurBean selectFromAuteursDernierAjout(AuteurBean auteurBean){
+    public AuteurBean selectDernierAuteurAjoute(AuteurBean auteurBean){
         String requete = "SELECT " + COLUMN_AUTEUR_ID + " FROM " + AUTEURS +
                 " WHERE " + COLUMN_AUTEUR_PSEUDO + " = \"" + auteurBean.getAuteur_pseudo() +
                 "\" ORDER BY " + COLUMN_AUTEUR_ID +" DESC LIMIT 1";
@@ -1121,10 +1319,56 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM SERIES
+    // INNER JOIN TOMES ON TOMES.SERIE_ID = SERIES.SERIE_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // GROUP BY SERIES.SERIE_ID
+    // ORDER BY SERIES.SERIE_NOM
     /* -------------------------------------- */
-    public List<SerieBean> selectAllFromSeries(){
+    public List<SerieBean> listeSeries(){
         List<SerieBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + SERIES;
+        String requete = "SELECT * FROM " + SERIES +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_SERIE_ID + " = " + SERIES + "." + COLUMN_SERIE_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" GROUP BY " + SERIES + "." + COLUMN_SERIE_ID +
+                " ORDER BY " + SERIES + "." + COLUMN_SERIE_NOM;
+                SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
+        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
+        if (cursor.moveToFirst()) { // true si il y a des résultats
+            do { // pour chaque tuple
+                int serie_id = cursor.getInt(0);
+                String serie_nom = cursor.getString(1);
+                SerieBean serieBean = new SerieBean(serie_id, serie_nom);
+                returnList.add(serieBean);
+            } while (cursor.moveToNext()); //on passe au tuple suivant
+        } else {
+            // pas de résultats on ne fait rien
+        }
+        // fermeture db et cursor
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /* -------------------------------------- */
+    // SELECT * FROM SERIES
+    // INNER JOIN TOMES ON TOMES.SERIE_ID = SERIES.SERIE_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND SERIES.SERIE_NOM LIKE '%filtre%'
+    // GROUP BY SERIES.SERIE_ID
+    // ORDER BY SERIES.SERIE_NOM
+    /* -------------------------------------- */
+    public List<SerieBean> listeSeriesFiltre(String filtre){
+        List<SerieBean> returnList = new ArrayList<>();
+        String requete = "SELECT * FROM " + SERIES +
+                " INNER JOIN " + TOMES + " ON " + TOMES + "." + COLUMN_SERIE_ID + " = " + SERIES + "." + COLUMN_SERIE_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + SERIES + "." + COLUMN_SERIE_NOM + " LIKE \'%" + filtre +
+                "%\' GROUP BY " + SERIES + "." + COLUMN_SERIE_ID +
+                " ORDER BY " + SERIES + "." + COLUMN_SERIE_NOM;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1145,9 +1389,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM SERIES
-    // WHERE SERIE_ID = serie_id
+    // WHERE SERIE_ID = serie_id LIMIT 1
     /* -------------------------------------- */
-    public SerieBean selectAllFromSeriesSelonSerieId(int serie_id_voulu){
+    public SerieBean selectSerieSelonSerieId(int serie_id_voulu){
         SerieBean serieBean = new SerieBean();
         String requete = "SELECT * FROM " + SERIES +
                 " WHERE " + SERIES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu + "\" LIMIT 1";
@@ -1170,14 +1414,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM SERIES
-    // WHERE SERIE_ID = serie_id
+    // INNER JOIN TOMES ON TOMES.SERIE_ID = SERIES.SERIE_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND TOMES.EDITEUR_ID = editeur_id_voulu LIMIT 1
     /* -------------------------------------- */
-    public List<SerieBean> selectAllFromSeriesSelonEditeurId(int editeur_id_voulu){
+    public List<SerieBean> listeSeriesSelonEditeurId(int editeur_id_voulu){
         List<SerieBean> returnList = new ArrayList<>();
         SerieBean serieBean;
         String requete = "SELECT * FROM " + SERIES +
                 " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
-                " WHERE " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu + "\" LIMIT 1";
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu + "\" LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1199,15 +1448,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /* -------------------------------------- */
     // SELECT * FROM SERIES
     // INNER JOIN TOMES ON SERIES.SERIE_ID = TOMES.SERIE_ID
-    // WHERE TOMES.TOME_ID = tome_id
-    // LIMIT 1
-    // 1 seul résultat
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND TOMES.TOME_ID = tome_id LIMIT 1
     /* -------------------------------------- */
     public SerieBean selectSerieSelonTomeId(int tome_id){
         SerieBean serieBean;
         String requete = "SELECT * FROM " + SERIES +
                 " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
-                " WHERE " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\" LIMIT 1";
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\" LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1226,12 +1477,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT COUNT (*) FROM SERIES
-    // WHERE COLUMN_SERIE_NOM = serie_nom
+    // INNER JOIN TOMES ON SERIES.SERIE_ID = TOMES.SERIE_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND COLUMN_SERIE_NOM = serie_nom
     /* -------------------------------------- */
     public boolean verifDoublonSerie(String serie_nom){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
-        String requete = "SELECT COUNT(*) FROM " + SERIES + " WHERE " + COLUMN_SERIE_NOM + " = \"" + serie_nom + "\"";
+        String requete = "SELECT COUNT(*) FROM " + SERIES +
+                " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + COLUMN_SERIE_NOM + " = \"" + serie_nom + "\"";
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         int nbResult = 0;
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1252,37 +1510,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM SERIES
-    // INNER JOIN TOME ON SERIES.SERIE_ID = TOMES.SERIE_ID
-    // WHERE TOMES.TOME_ID = tome_id LIMIT 1
-    // 1 seul résultat
+    // "SELECT SERIE_ID FROM SERIES
+    // WHERE SERIE_NOM = serieBean.getSerie_nom() +
+    // ORDER BY SERIE_ID DESC LIMIT 1"
     /* -------------------------------------- */
-    public EditeurBean selectAllFromSeriesSelonTomeId(int tome_id){
-        EditeurBean editeurBean = null;
-        String requete = "SELECT * FROM " + SERIES +
-                " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
-                " WHERE " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id + "\" LIMIT 1";
-        SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
-        Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
-        if (cursor.moveToFirst()) { // true si il y a des résultats
-            int editeur_id = cursor.getInt(0);
-            String editeur_nom = cursor.getString(1);
-            editeurBean = new EditeurBean(editeur_id, editeur_nom);
-        } else {
-            // pas de résultats on ne fait rien
-        }
-        // fermeture db et cursor
-        cursor.close();
-        db.close();
-        return editeurBean;
-    }
-
-    /* -------------------------------------- */
-    // "SELECT COLUMN_SERIE_ID FROM SERIES
-    // WHERE COLUMN_SERIE_NOM = + serieBean.getSerie_nom() +
-    // ORDER BY COLUMN_SERIE_ID DESC LIMIT 1"
-    /* -------------------------------------- */
-    public SerieBean selectFromSeriesDernierAjout(SerieBean serieBean){
+    public SerieBean DerniereSerieAjoutee(SerieBean serieBean){
         String requete = "SELECT " + COLUMN_SERIE_ID + " FROM " + EDITEURS +
                 " WHERE " + COLUMN_SERIE_NOM + " = \"" + serieBean.getSerie_nom() +
                 "\" ORDER BY " + COLUMN_SERIE_ID +" DESC LIMIT 1";
@@ -1305,14 +1537,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // SELECT DISTINCT * FROM SERIES
     // INNER JOIN TOMES ON SERIES.SERIE_ID = TOMES.SERIE_ID
     // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
-    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND ECRIRE.AUTEUR_ID = auteur_id
+    // GROUP BY SERIES.SERIE_ID
+    // ORDER BY SERIES.SERIE_NOM
     /* -------------------------------------- */
-    public List<SerieBean> selectAllFromSeriesSelonAuteurId(int auteur_id){
+    public List<SerieBean> listeSeriesSelonAuteurId(int auteur_id){
         List<SerieBean> returnList = new ArrayList<>();
         String requete = "SELECT DISTINCT * FROM " + SERIES +
                 " INNER JOIN " + TOMES + " ON " + SERIES + "." + COLUMN_SERIE_ID + " = " + TOMES + "." + COLUMN_SERIE_ID +
                 " INNER JOIN " + ECRIRE + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
-                " WHERE " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id + "\" GROUP BY " + COLUMN_SERIE_NOM;
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id +
+                "\" GROUP BY " + SERIES + "." + COLUMN_SERIE_ID +
+                " ORDER BY " + SERIES + "." + COLUMN_SERIE_NOM;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1331,15 +1571,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-
-
     /* -------------------------------------- */
     // SELECT * FROM TOMES
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // GROUP BY TOMES.SERIE_ID
+    // ORDER BY TOMES.TOME_NUMERO, TOMES.TOME_TITRE
     /* -------------------------------------- */
-    public ArrayList<TomeBean> selectAllFromTomes(){
+    public ArrayList<TomeBean> listeTomes(){
         ArrayList<TomeBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + TOMES;
-
+        String requete = "SELECT * FROM " + TOMES +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" GROUP BY " + TOMES + "." + COLUMN_SERIE_ID +
+                " ORDER BY " + TOMES + "." + COLUMN_TOME_NUMERO + ", " + TOMES + "." + COLUMN_TOME_TITRE;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
 
@@ -1376,12 +1621,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT COUNT (*) FROM TOMES
-    // WHERE COLUMN_TOME_TITRE = tome_titre
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND COLUMN_TOME_TITRE = tome_titre
     /* -------------------------------------- */
     public boolean verifDoublonTome(String tome_titre){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
-        String requete = "SELECT COUNT(*) FROM " + TOMES + " WHERE " + COLUMN_TOME_TITRE + " = \"" + tome_titre + "\"";
+        String requete = "SELECT COUNT(*) FROM " + TOMES +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
+                "\" AND " + COLUMN_TOME_TITRE + " = \"" + tome_titre + "\"";
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         int nbResult = 0;
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1402,18 +1652,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // SELECT * FROM TOMES
-    // JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
-    // WHERE DETENIR.PROFIL_ID = selectAllFromProfilActif().getProfil_id();
-    public List<TomeSerieBean> selectAllFromTomesEtSerieSelonProfilId(){
+    // SELECT TOMES.*, SERIES.SERIE_NOM FROM TOMES , SERIES
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // INNER JOIN PROFIL_ACTIF ON PROFIL_ACTIF.PROFIL_ID = DETENIR.PROFIL_ID
+    // WHERE TOMES.SERIE_ID = SERIES.SERIE_ID
+    // AND DETENIR.PROFIL_ID = selectProfilActif().getProfil_id()
+    // GROUP BY TOMES.SERIE_ID
+    // ORDER BY TOMES.TOME_NUMERO, TOMES.TOME_TITRE
+    /* -------------------------------------- */
+
+    public List<TomeSerieBean> listeTomesEtSerieSelonProfilId(){
         List<TomeSerieBean> returnList = new ArrayList<>();
         String requete = "SELECT " + TOMES + ".*, " + SERIES + "." + COLUMN_SERIE_NOM + " FROM " + TOMES + ", " + SERIES +
                 " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
                 " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = " + DETENIR + "." + COLUMN_PROFIL_ID +
                 " WHERE " + TOMES + "." + COLUMN_SERIE_ID + " = " + SERIES + "." + COLUMN_SERIE_ID +
-                " AND " + DETENIR + "." + COLUMN_PROFIL_ID + " = \"" + selectAllFromProfilActif().getProfil_id() +
-                "\" AND " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = 1";
-//        String requete = "SELECT * FROM " + TOMES + " ORDER BY " + COLUMN_TOME_TITRE;
+                " AND " + DETENIR + "." + COLUMN_PROFIL_ID + " = \"" + selectProfilActif().getProfil_id() +
+                "\" ORDER BY " + SERIES + "." + COLUMN_SERIE_NOM + ", " + TOMES + "." + COLUMN_TOME_NUMERO + ", " + TOMES + "." + COLUMN_TOME_TITRE;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1438,18 +1693,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-
     /* -------------------------------------- */
-    // SELECT * FROM TOMES
-    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
-    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    // SELECT TOMES.*, SERIES.SERIE_NOM FROM TOMES , SERIES
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // INNER JOIN PROFIL_ACTIF ON PROFIL_ACTIF.PROFIL_ID = DETENIR.PROFIL_ID
+    // WHERE TOMES.SERIE_ID = SERIES.SERIE_ID
+    // AND DETENIR.PROFIL_ID = selectProfilActif().getProfil_id()
+    // AND TOMES.TOME_TITRE LIKE '%filtre%'
+    // GROUP BY TOMES.SERIE_ID
+    // ORDER BY TOMES.TOME_NUMERO, TOMES.TOME_TITRE
     /* -------------------------------------- */
-    public List<TomeSerieBean> selectAllFromTomesEtSerieSelonAuteurId(int auteur_id){
+    public List<TomeSerieBean> listeTomesEtSerieSelonProfilIdFiltre(String filtre){
         List<TomeSerieBean> returnList = new ArrayList<>();
-        String requete = "SELECT * FROM " + TOMES +
-                " INNER JOIN " + ECRIRE +
-                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
-                " WHERE " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id + "\"";
+        String requete = "SELECT " + TOMES + ".*, " + SERIES + "." + COLUMN_SERIE_NOM + " FROM " + TOMES + ", " + SERIES +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = " + DETENIR + "." + COLUMN_PROFIL_ID +
+                " WHERE " + TOMES + "." + COLUMN_SERIE_ID + " = " + SERIES + "." + COLUMN_SERIE_ID +
+                " AND " + DETENIR + "." + COLUMN_PROFIL_ID + " = \"" + selectProfilActif().getProfil_id() +
+                "\" AND (" + TOMES + "." + COLUMN_TOME_TITRE + " LIKE \'%" + filtre +
+                "%\' OR " + TOMES + "." + COLUMN_TOME_NUMERO + " LIKE \'%" + filtre +
+                "%\' OR " + SERIES + "." + COLUMN_SERIE_NOM + " LIKE \'%" + filtre +
+                "%\') ORDER BY " + SERIES + "." + COLUMN_SERIE_NOM + ", " + TOMES + "." + COLUMN_TOME_NUMERO + ", " + TOMES + "." + COLUMN_TOME_TITRE;
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1457,20 +1721,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 Integer tome_id = cursor.getInt(0);
                 String tome_titre = cursor.getString(1);
                 int tome_numero = cursor.getInt(2);
-                String tome_isbn = cursor.getString(3);
-                double tome_prix_achat = cursor.getDouble(4);
-                double tome_valeur_connue = cursor.getDouble(5);
-                String tome_date_edition = cursor.getString(6);
-                String tome_image = cursor.getString(7);
-                boolean tome_dedicace = cursor.getInt(8) == 1 ? true: false;
-                boolean tome_edition_speciale = cursor.getInt(9) == 1 ? true: false;
-                String tome_edition_speciale_libelle = cursor.getString(10);
                 Integer serie_id = cursor.getInt(11);
                 Integer editeur_id = cursor.getInt(12);
-
-                TomeSerieBean tomeSerieBean = new TomeSerieBean(tome_id, tome_titre, tome_numero, tome_isbn, tome_image,
-                        tome_prix_achat, tome_valeur_connue, tome_date_edition, tome_dedicace,
-                        tome_edition_speciale, tome_edition_speciale_libelle, serie_id, editeur_id);
+                String serie_nom = cursor.getString(13);
+                TomeSerieBean tomeSerieBean = new TomeSerieBean(tome_id, tome_titre, tome_numero, null,
+                        null, 0, 0, null, false,
+                        false, null, serie_id, editeur_id, serie_nom);
                 returnList.add(tomeSerieBean);
             } while (cursor.moveToNext()); //on passe au tuple suivant
         } else {
@@ -1484,13 +1740,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM TOMES
-    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
-    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // INNER JOIN PROFIL_ACTIF ON PROFIL_ACTIF.PROFIL_ID = DETENIR.PROFIL_ID
+    // AND DETENIR.PROFIL_ID = selectProfilActif().getProfil_id()
+    // AND TOMES.EDITEUR_ID = editeur_id_voulu
+    // AND TOMES.SERIE_ID IS NULL
     /* -------------------------------------- */
-    public List<TomeBean> selectAllFromTomesSelonEditeurIdSansSerie(int editeur_id_voulu){
+    public List<TomeBean> listeTomesSelonEditeurIdSansSerie(int editeur_id_voulu){
         List<TomeBean> returnList = new ArrayList<>();
         String requete = "SELECT * FROM " + TOMES +
-                " WHERE " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = " + DETENIR + "." + COLUMN_PROFIL_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID + " = \"" + selectProfilActif().getProfil_id() +
+                "\" AND " + TOMES + "." + COLUMN_EDITEUR_ID + " = \"" + editeur_id_voulu +
                 "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " IS NULL";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
@@ -1527,15 +1789,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM TOMES
-    // INNER JOIN ECRIRE ON ECRIRE.TOME_ID= TOME.TOME_ID
-    // WHERE ECRIRE.AUTEUR_ID = auteur_id
+    // INNER JOIN ECRIRE ON TOMES.TOME_ID = ECRIRE.TOME_ID
+    // INNER JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // INNER JOIN PROFIL_ACTIF ON PROFIL_ACTIF.PROFIL_ID = DETENIR.PROFIL_ID
+    // AND DETENIR.PROFIL_ID = selectProfilActif().getProfil_id()
+    // AND ECRIRE.AUTEUR_ID = auteur_id
+    // AND TOMES.SERIE_ID IS NULL
     /* -------------------------------------- */
-    public List<TomeBean> selectAllFromTomesSelonAuteurIdSansSerie(int auteur_id){
+    public List<TomeBean> listeTomesSelonAuteurIdSansSerie(int auteur_id){
         List<TomeBean> returnList = new ArrayList<>();
         String requete = "SELECT * FROM " + TOMES +
-                " INNER JOIN " + ECRIRE +
-                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
-                " WHERE " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id +
+                " INNER JOIN " + ECRIRE + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + ECRIRE + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + DETENIR + " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
+                " INNER JOIN " + PROFIL_ACTIF + " ON " + PROFIL_ACTIF + "." + COLUMN_PROFIL_ID + " = " + DETENIR + "." + COLUMN_PROFIL_ID +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID + " = \"" + selectProfilActif().getProfil_id() +
+                "\" AND " + ECRIRE + "." + COLUMN_AUTEUR_ID + " = \"" + auteur_id +
                 "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " IS NULL";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
@@ -1570,11 +1838,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /* -------------------------------------- */
-    // "SELECT COLUMN_TOME_ID FROM TOMES
-    // WHERE COLUMN_TOME_TITRE = + tomeBean.getTome_titre() +
-    // ORDER BY COLUMN_TOME_ID DESC LIMIT 1"
+    // SELECT TOME_ID FROM TOMES
+    // WHERE TOME_TITRE = tomeBean.getTome_titre()
+    // ORDER BY TOME_ID DESC LIMIT 1
     /* -------------------------------------- */
-    public TomeBean selectFromTomesDernierAjout(TomeBean tomeBean){
+    public TomeBean selectDernierTomeAjoute(TomeBean tomeBean){
         String requete = "SELECT " + COLUMN_TOME_ID + " FROM " + TOMES +
                 " WHERE " + COLUMN_TOME_TITRE + " = \"" + tomeBean.getTome_titre() +
                 "\" ORDER BY " + COLUMN_TOME_ID +" DESC LIMIT 1";
@@ -1596,11 +1864,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // SELECT COUNT(*) FROM DETENIR
     // WHERE COLUMN_TOME_ID = selectTOMEIDFromTomesDernierAjout(tomeBean)
     /* -------------------------------------- */
-    public boolean selectFromDetenirDernierTomeOk(TomeBean tomeBean){
+    public boolean selectDetenirIsDernierTomeOk(TomeBean tomeBean){
         SQLiteDatabase db = this.getWritableDatabase(); // accès écriture BDD
         ContentValues cv = new ContentValues(); //stocke des paires clé-valeur
-
-        String requete = "SELECT COUNT(*) FROM " + DETENIR + " WHERE " + COLUMN_TOME_ID + " = \"" + selectFromTomesDernierAjout(tomeBean) + "\"";
+        String requete = "SELECT COUNT(*) FROM " + DETENIR + " WHERE " + COLUMN_TOME_ID + " = \"" + selectDernierTomeAjoute(tomeBean) + "\"";
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         int nbResult = 0;
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1652,15 +1919,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM TOMES
-    // WHERE TOME_ID = tome_id
+    // WHERE TOME_ID = tome_id LIMIT 1
     /* -------------------------------------- */
-    public TomeBean selectTomeSelonTome_id(int tome_id_voulu){
+    public TomeBean selectTomeSelonTomeId(int tome_id_voulu){
         TomeBean tomeBean = new TomeBean();
         String requete = "SELECT * FROM " + TOMES +
-                " JOIN " + DETENIR +
-                " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
-                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
-                "\" AND " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id_voulu + "\" LIMIT 1";
+                " WHERE " + TOMES + "." + COLUMN_TOME_ID + " = \"" + tome_id_voulu + "\" LIMIT 1";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête
         if (cursor.moveToFirst()) { // true si il y a des résultats
@@ -1691,15 +1955,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /* -------------------------------------- */
     // SELECT * FROM TOMES
-    // WHERE TOME_ID = tome_id
+    // JOIN DETENIR ON TOMES.TOME_ID = DETENIR.TOME_ID
+    // WHERE DETENIR.PROFIL_ID = selectProfilActif()
+    // AND TOMES.SERIE_ID = serie_id_voulu
     /* -------------------------------------- */
-    public List<TomeBean> selectAllFromTomesSelonSerieId(int serie_id_voulu){
+    public List<TomeBean> listeTomesSelonSerieId(int serie_id_voulu){
         List<TomeBean> returnList = new ArrayList<>();
         TomeBean tomeBean = new TomeBean();
         String requete = "SELECT * FROM " + TOMES +
                 " JOIN " + DETENIR +
                 " ON " + TOMES + "." + COLUMN_TOME_ID + " = " + DETENIR + "." + COLUMN_TOME_ID +
-                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectAllFromProfilActif() +
+                " WHERE " + DETENIR + "." + COLUMN_PROFIL_ID  + " = \"" + selectProfilActif() +
                 "\" AND " + TOMES + "." + COLUMN_SERIE_ID + " = \"" + serie_id_voulu + "\"";
         SQLiteDatabase db = this.getReadableDatabase(); // accès lecture BDD
         Cursor cursor = db.rawQuery(requete, null); //cursor = résultat de la requête

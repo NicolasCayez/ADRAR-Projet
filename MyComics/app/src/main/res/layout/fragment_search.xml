@@ -24,6 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_corner_search"
+            app:iconifiedByDefault="false"
+            app:defaultQueryHint="filtrer ou rechercher"
             app:queryBackground="@android:color/transparent" />
     </LinearLayout>
 
@@ -34,18 +36,6 @@
         android:gravity="end"
         android:orientation="horizontal"
         android:paddingHorizontal="15dp">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/rounded_corner_button_blue"
-            android:fontFamily="@font/kronika"
-            android:text="Filtrer"
-            android:textColor="@color/custom_beige"
-            android:textColorHighlight="@color/custom_blue"
-            android:textColorLink="@color/custom_blue" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btSearch"

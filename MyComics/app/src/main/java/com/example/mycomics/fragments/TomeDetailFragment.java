@@ -153,7 +153,7 @@ public class TomeDetailFragment extends Fragment {
                 popupAddListDialog.setTitre("Choisissez un Auteur dans la liste ou créez-en un nouveau");
                 popupAddListDialog.setHint("Pseudo nouvel auteur");
                 ListView listView = popupAddListDialog.findViewById(R.id.lvPopupList);
-                auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteurs());
+                auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeAuteurs());
                 listView.setAdapter(auteursArrayAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -193,7 +193,7 @@ public class TomeDetailFragment extends Fragment {
                             //Appel DataBaseHelper
                             dataBaseHelper = new DataBaseHelper(getActivity());
                             boolean successInsertAuteur = dataBaseHelper.insertIntoAuteurs(auteurBean);
-                            boolean successInsertEcrire = dataBaseHelper.insertIntoEcrire(tome_id, dataBaseHelper.selectFromAuteursDernierAjout(auteurBean).getAuteur_id());
+                            boolean successInsertEcrire = dataBaseHelper.insertIntoEcrire(tome_id, dataBaseHelper.selectDernierAuteurAjoute(auteurBean).getAuteur_id());
     //                        afficherDetailTome(tome_id)
                         }
                     }
@@ -249,7 +249,7 @@ public class TomeDetailFragment extends Fragment {
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez un Editeur dans la liste");
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
-                editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromEditeurs());
+                editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeEditeurs());
                 listView.setAdapter(editeursArrayAdapter);
                 //Clic Editeur choisi pour modification
                 popupListDialog.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -258,7 +258,7 @@ public class TomeDetailFragment extends Fragment {
                         EditeurBean editeurBean;
                         try {
                             editeurBean = (EditeurBean) popupListDialog.getLvPopupListe().getItemAtPosition(position);
-                            dataBaseHelper.updateEditeurTome(dataBaseHelper, editeurBean, tome_id);
+                            dataBaseHelper.updateEditeurDuTome(dataBaseHelper, editeurBean, tome_id);
                         } catch (Exception e) {
                             editeurBean = new EditeurBean(-1, "error" );
                         }
@@ -314,7 +314,7 @@ public class TomeDetailFragment extends Fragment {
                         } else {
                             // on enregiste
                             boolean successInsert = dataBaseHelper.insertIntoEditeurs(editeurBean);
-                            boolean successUpdate = dataBaseHelper.updateEditeurTome(dataBaseHelper, dataBaseHelper.selectFromEditeursDernierAjout(editeurBean), tome_id);
+                            boolean successUpdate = dataBaseHelper.updateEditeurDuTome(dataBaseHelper, dataBaseHelper.selectDernierEditeurAjoute(editeurBean), tome_id);
 
                         }
                         afficherDetailTome(tome_id);
@@ -365,7 +365,7 @@ public class TomeDetailFragment extends Fragment {
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez une série dans la liste");
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
-                seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeries());
+                seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeSeries());
                 listView.setAdapter(seriesArrayAdapter);
                 //Clic Editeur choisi pour modification
                 popupListDialog.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -374,7 +374,7 @@ public class TomeDetailFragment extends Fragment {
                         SerieBean serieBean;
                         try {
                             serieBean = (SerieBean) popupListDialog.getLvPopupListe().getItemAtPosition(position);
-                            dataBaseHelper.updateSerieTome(dataBaseHelper, serieBean, tome_id);
+                            dataBaseHelper.updateSerieDuTome(dataBaseHelper, serieBean, tome_id);
                         } catch (Exception e) {
                             serieBean = new SerieBean(-1, "error");
                         }
@@ -430,7 +430,7 @@ public class TomeDetailFragment extends Fragment {
                         } else {
                             // on enregiste
                             boolean successInsert = dataBaseHelper.insertIntoSeries(serieBean);
-                            boolean successUpdate = dataBaseHelper.updateSerieTome(dataBaseHelper, dataBaseHelper.selectFromSeriesDernierAjout(serieBean), tome_id);
+                            boolean successUpdate = dataBaseHelper.updateSerieDuTome(dataBaseHelper, dataBaseHelper.DerniereSerieAjoutee(serieBean), tome_id);
 
                         }
                         afficherDetailTome(tome_id);
@@ -478,7 +478,7 @@ public class TomeDetailFragment extends Fragment {
     }
 
     private void afficherDetailTome(int tome_id){
-        TomeBean tome = dataBaseHelper.selectTomeSelonTome_id(tome_id);
+        TomeBean tome = dataBaseHelper.selectTomeSelonTomeId(tome_id);
         binding.etDetailTomeTitre.setText(tome.getTome_titre());
         if (tome.getTome_numero() == 0 || tome.getTome_numero() == null) {
             binding.etDetailTomeNumero.setText("");
@@ -494,7 +494,7 @@ public class TomeDetailFragment extends Fragment {
         binding.chkDetailTomeEditionSpeciale.setChecked(Boolean.valueOf(tome.isTome_edition_speciale()));
         binding.etDetailTomeEditionSpecialeLibelle.setText(tome.getTome_edition_speciale_libelle() == null ? "" : String.valueOf( tome.getTome_edition_speciale_libelle()));//---------------
         //image ici
-        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.selectAllFromAuteursSelonTomeId(tome_id));
+        auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeAuteursSelonTomeId(tome_id));
         binding.lvDetailTomeAuteurs.setAdapter(auteursArrayAdapter);
         binding.tvDetailTomeEditeur.setText(dataBaseHelper.selectEditeurSelonTomeId(tome_id).getEditeur_nom());
     }

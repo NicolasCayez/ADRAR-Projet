@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -91,14 +92,20 @@ public class SeriesFragment extends Fragment {
         // Initialisation affichage
         /* -------------------------------------- */
         afficherListeSeries();
+        binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
-        // clic searchBar
+        // saisie searchBar
         /* -------------------------------------- */
-        binding.sbSearch.svSearch.setOnClickListener(new View.OnClickListener() {
+        binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                // Active le clic sur toute la zone de la searchBar
-                binding.sbSearch.svSearch.setIconified(false);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                afficherListeSeries();
+                return false;
             }
         });
 
@@ -164,7 +171,11 @@ public class SeriesFragment extends Fragment {
     }
 
     private void afficherListeSeries(){
-        seriesArrayAdapter = new SeriesListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.selectAllFromSeries());
+        if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
+            seriesArrayAdapter = new SeriesListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeSeriesFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+        } else {
+            seriesArrayAdapter = new SeriesListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeSeries());
+        }
         binding.lvSeriesListeSeries.setAdapter(seriesArrayAdapter);
     }
 }
