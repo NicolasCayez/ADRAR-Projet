@@ -19,6 +19,7 @@ import com.example.mycomics.R;
 import com.example.mycomics.adapters.AuteursListAdapter;
 import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.adapters.SeriesNbListAdapter;
 import com.example.mycomics.adapters.TomesListAdapter;
 import com.example.mycomics.adapters.TomesSerieListAdapter;
 import com.example.mycomics.beans.AuteurBean;
@@ -229,7 +230,7 @@ public class AuteurDetailFragment extends Fragment {
     private void afficherDetailAuteur(AuteurBean auteur){
         binding.tvDetailAuteurPseudo.setText(auteur.getAuteur_pseudo());
 
-        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeSeriesSelonAuteurId(auteur.getAuteur_id()));
+        seriesArrayAdapter = new SeriesNbListAdapter(getActivity(), R.layout.listview_row_2col_reverse, dataBaseHelper.listeSeriesSelonAuteurId(auteur.getAuteur_id()));
         binding.lvDetailAuteurListeSeries.setAdapter(seriesArrayAdapter);
 
         tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeTomesSelonAuteurIdSansSerie(auteur.getAuteur_id()));

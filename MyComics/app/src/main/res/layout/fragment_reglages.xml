@@ -132,7 +132,35 @@
 <!--                                 app:thumbTint="@color/custom_blue"
                         app:trackTint="#ccc"           -->
                 </LinearLayout>
+                <!-- Bloc mode sombre -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rounded_corner_custom_beige"
+                    android:padding="5dp">
 
+                    <FrameLayout
+                        android:id="@+id/container"
+                        android:layout_height="200dp"
+                        android:layout_width="300dp"
+                        >
+                        <androidx.camera.view.PreviewView
+                            android:id="@+id/previewView"
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"/>
+                    </FrameLayout>
+
+                    <Button
+                        android:id="@+id/buttonphoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Button" />
+
+
+                </LinearLayout>
 
                 <!-- Bloc de test -->
             </LinearLayout>

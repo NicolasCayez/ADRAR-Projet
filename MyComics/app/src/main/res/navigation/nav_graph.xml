@@ -198,7 +198,20 @@
         android:id="@+id/searchResultFragment"
         android:name="com.example.mycomics.fragments.SearchResultFragment"
         android:label="fragment_search_result"
-        tools:layout="@layout/fragment_search_result" />
+        tools:layout="@layout/fragment_search_result" >
+        <action
+            android:id="@+id/action_searchResult_to_editeurDetail"
+            app:destination="@id/editeurDetailFragment" />
+        <action
+            android:id="@+id/action_searchResult_to_auteurDetail"
+            app:destination="@id/auteurDetailFragment" />
+        <action
+            android:id="@+id/action_searchResult_to_tomeDetail"
+            app:destination="@id/tomeDetailFragment" />
+        <action
+            android:id="@+id/action_searchResult_to_serieDetail"
+            app:destination="@id/serieDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/serieDetailFragment"
         android:name="com.example.mycomics.fragments.SerieDetailFragment"

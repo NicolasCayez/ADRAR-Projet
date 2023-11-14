@@ -13,9 +13,10 @@
             android:id="@+id/tvListview_row_3col_col1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="7"
             android:fontFamily="@font/kronika"
             android:textAlignment="textStart"
+            android:paddingStart="10dp"
             android:textColor="@color/custom_blue"
             android:textSize="10sp" />
 

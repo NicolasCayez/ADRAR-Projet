@@ -107,6 +107,17 @@ public class TomesFragment extends Fragment {
         afficherListeTomes();
         binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
+        // Clic Bouton Chercher
+        /* -------------------------------------- */
+        binding.sbSearch.btSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("filtre", binding.sbSearch.svSearch.getQuery().toString());
+                findNavController(TomesFragment.this).navigate(R.id.searchResultFragment, bundle);
+            }
+        });
+        /* -------------------------------------- */
         // saisie searchBar
         /* -------------------------------------- */
         binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -138,21 +149,20 @@ public class TomesFragment extends Fragment {
                         try {
                             tomeBean = new TomeBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
-//                            Toast.makeText(ReglagesActivity.this, "Erreur création série", Toast.LENGTH_SHORT).show();
                             tomeBean = new TomeBean(-1, "error" );
                         }
                         popupAddDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
-                        dataBaseHelper = new DataBaseHelper(getActivity());
                         if (dataBaseHelper.verifDoublonTome(tomeBean.getTome_titre())) {
                             // Tome déjà existant
-                            Toast.makeText(TomesFragment.super.getContext(), "Tome " + tomeBean.getTome_titre() + " déjà existant", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TomesFragment.super.getContext(), "Tome déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
                         } else {
                             // on enregiste
                             boolean successInsertTomes = dataBaseHelper.insertIntoTomes(tomeBean);
-                            System.out.println("insertion TOMES" + successInsertTomes);
                             boolean successInsertDetenir = dataBaseHelper.insertIntoDetenir(dataBaseHelper.selectDernierTomeAjoute(tomeBean));
-                            System.out.println("insertion DETENIR" + successInsertDetenir);
+                            Toast.makeText(getActivity(), "Tome créé", Toast.LENGTH_SHORT).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
                         }
                         afficherListeTomes();
                     }

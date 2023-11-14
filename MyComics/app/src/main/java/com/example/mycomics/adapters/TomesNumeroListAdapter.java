@@ -40,7 +40,9 @@ public class TomesNumeroListAdapter extends ArrayAdapter<TomeBean> {
 
         if(items.get(position) != null )
         {
-            text1.setText(items.get(position).getTome_numero().toString());
+            if (items.get(position).getTome_numero() > 0) {
+                text1.setText(items.get(position).getTome_numero().toString());
+            }
             text2.setText(items.get(position).getTome_titre().toString());
         }
 

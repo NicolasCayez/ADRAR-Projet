@@ -3,6 +3,7 @@ package com.example.mycomics.fragments;
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
 import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,17 @@ public class AccueilFragment extends Fragment{
 
         binding.sbSearch.svSearch.setQueryHint("Rechercher");
         /* -------------------------------------- */
+        // Clic Bouton Chercher
+        /* -------------------------------------- */
+        binding.sbSearch.btSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("filtre", binding.sbSearch.svSearch.getQuery().toString());
+                findNavController(AccueilFragment.this).navigate(R.id.searchResultFragment, bundle);
+            }
+        });
+        /* -------------------------------------- */
         // Clic Bouton Accueil Series
         /* -------------------------------------- */
         binding.btnAccueilSeries.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +105,6 @@ public class AccueilFragment extends Fragment{
                 findNavController(AccueilFragment.this).navigate(R.id.action_accueil_to_editeurs);
             }
         });
-
 
 
 

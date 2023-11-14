@@ -1,12 +1,21 @@
 package com.example.mycomics.fragments;
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.core.Camera;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +33,9 @@ import com.example.mycomics.databinding.FragmentReglagesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
 import com.example.mycomics.popups.PopupAddDialog;
 import com.example.mycomics.popups.PopupListDialog;
+import com.google.common.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +49,20 @@ public class ReglagesFragment extends Fragment {
     /* -------------------------------------- */
     DataBaseHelper dataBaseHelper;
     ArrayAdapter profilsArrayAdapter;
+
+
+
+
+
+    /**-------------------------------------- */
+    /** TEST
+     /**-------------------------------------- */
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+
+
+
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,6 +107,11 @@ public class ReglagesFragment extends Fragment {
         // Initialisation Base de données
         /* -------------------------------------- */
         dataBaseHelper = new DataBaseHelper(getActivity());
+
+        /**-------------------------------------- */
+        /** TEST
+         /**-------------------------------------- */
+        cameraProviderFuture = ProcessCameraProvider.getInstance(getContext());
 
     }
     private void afficherProfilActif() {
@@ -215,6 +246,31 @@ public class ReglagesFragment extends Fragment {
             }
         });
 
+
+
+
+
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                bindPreview(cameraProvider);
+            } catch (ExecutionException | InterruptedException e) {
+                // No errors need to be handled for this Future.
+                // This should never be reached.
+            }
+        }, ContextCompat.getMainExecutor(getContext()));
+        binding.buttonphoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+
+            }
+        });
+
+
+
+
+
     }
 
     @Override
@@ -222,4 +278,40 @@ public class ReglagesFragment extends Fragment {
         super.onDestroy();
         binding = null;
     }
+
+
+
+
+
+    void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
+        Preview preview = new Preview.Builder()
+                .build();
+
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+
+        preview.setSurfaceProvider(binding.previewView.getSurfaceProvider());
+
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
+    }
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
+        }
+    }
+
+
+
+
+
+
+
+
 }

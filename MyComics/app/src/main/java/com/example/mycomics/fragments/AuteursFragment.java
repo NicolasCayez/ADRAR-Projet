@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.mycomics.R;
 import com.example.mycomics.adapters.AuteursListAdapter;
+import com.example.mycomics.adapters.AuteursNbListAdapter;
 import com.example.mycomics.adapters.SeriesListAdapter;
 import com.example.mycomics.beans.AuteurBean;
 import com.example.mycomics.databinding.FragmentAuteursBinding;
@@ -93,6 +95,17 @@ public class AuteursFragment extends Fragment {
         afficherListeAuteurs();
         binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
+        // Clic Bouton Chercher
+        /* -------------------------------------- */
+        binding.sbSearch.btSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("filtre", binding.sbSearch.svSearch.getQuery().toString());
+                findNavController(AuteursFragment.this).navigate(R.id.searchResultFragment, bundle);
+            }
+        });
+        /* -------------------------------------- */
         // saisie searchBar
         /* -------------------------------------- */
         binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -127,11 +140,15 @@ public class AuteursFragment extends Fragment {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création auteur", Toast.LENGTH_SHORT).show();
                             auteurBean = new AuteurBean(-1, "error" );
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
-                        //Appel DataBaseHelper
-                        dataBaseHelper = new DataBaseHelper(getActivity());
-
-                        boolean success = dataBaseHelper.insertIntoAuteurs(auteurBean);
+                        if(dataBaseHelper.verifDoublonAuteur(auteurBean.getAuteur_pseudo())){
+                            Toast.makeText(getActivity(), "Auteur déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
+                        } else {
+                            //Appel DataBaseHelper
+                            boolean success = dataBaseHelper.insertIntoAuteurs(auteurBean);
+                            Toast.makeText(getActivity(), "Auteur créé", Toast.LENGTH_SHORT).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
+                        }
                         afficherListeAuteurs();
                     }
                 });
@@ -157,9 +174,7 @@ public class AuteursFragment extends Fragment {
                 bundle.putString("auteur_pseudo", auteurBean.getAuteur_pseudo());
                 bundle.putString("auteur_nom", auteurBean.getAuteur_nom());
                 bundle.putString("auteur_prenom", auteurBean.getAuteur_prenom());
-
                 findNavController(AuteursFragment.this).navigate(R.id.action_auteurs_to_auteurDetail, bundle);
-
             }
         });
     }
@@ -171,9 +186,9 @@ public class AuteursFragment extends Fragment {
     }
     private void afficherListeAuteurs(){
         if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
-            auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeAuteursFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+            auteursArrayAdapter = new AuteursNbListAdapter(getActivity() , R.layout.listview_row_2col_reverse, dataBaseHelper.listeAuteursFiltre(binding.sbSearch.svSearch.getQuery().toString()));
         } else {
-            auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeAuteurs());
+            auteursArrayAdapter = new AuteursNbListAdapter(getActivity() , R.layout.listview_row_2col_reverse, dataBaseHelper.listeAuteurs());
         }
         binding.lvAuteursListeAuteurs.setAdapter(auteursArrayAdapter);
     }

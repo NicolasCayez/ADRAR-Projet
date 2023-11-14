@@ -65,47 +65,22 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_accueilFragment_to_auteurDetailFragment">
+                            <entry key="action_accueil_to_auteurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_accueilFragment_to_auteursFragment">
+                            <entry key="action_accueil_to_editeurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_accueilFragment_to_editeurDetailFragment">
+                            <entry key="action_accueil_to_series">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_accueilFragment_to_editeursFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_accueilFragment_to_reglagesFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_accueilFragment_to_serieDetailFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_accueilFragment_to_seriesFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_accueilFragment_to_tomeDetailFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_accueilFragment_to_tomesFragment">
+                            <entry key="action_accueil_to_tomes">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -126,17 +101,17 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_auteurDetailFragment_to_editeurDetailFragment">
+                            <entry key="action_auteurDetail_to_editeurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteurDetailFragment_to_serieDetailFragment">
+                            <entry key="action_auteurDetail_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteurDetailFragment_to_tomeDetailFragment">
+                            <entry key="action_auteurDetail_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -157,32 +132,32 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_auteursFragment_to_auteurDetailFragment">
+                            <entry key="action_auteurs_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteursFragment_to_editeursFragment">
+                            <entry key="action_auteurs_to_editeurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteursFragment_to_serieDetailFragment">
+                            <entry key="action_auteurs_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteursFragment_to_seriesFragment">
+                            <entry key="action_auteurs_to_series">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteursFragment_to_tomeDetailFragment">
+                            <entry key="action_auteurs_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_auteursFragment_to_tomesFragment">
+                            <entry key="action_auteurs_to_tomes">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -203,22 +178,22 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_collectionFragment_to_auteurDetailFragment">
+                            <entry key="action_collection_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_collectionFragment_to_editeurDetailFragment">
+                            <entry key="action_collection_to_editeurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_collectionFragment_to_serieDetailFragment">
+                            <entry key="action_collection_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_collectionFragment_to_tomeDetailFragment">
+                            <entry key="action_collection_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -239,17 +214,17 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_editeurDetailFragment_to_auteurDetailFragment">
+                            <entry key="action_editeurDetail_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeurDetailFragment_to_serieDetailFragment">
+                            <entry key="action_editeurDetail_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeurDetailFragment_to_tomeDetailFragment">
+                            <entry key="action_editeurDetail_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -270,37 +245,37 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_editeursFragment_to_auteurDetailFragment">
+                            <entry key="action_editeurs_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeursFragment_to_auteursFragment">
+                            <entry key="action_editeurs_to_auteurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeursFragment_to_editeurDetailFragment">
+                            <entry key="action_editeurs_to_editeurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeursFragment_to_serieDetailFragment">
+                            <entry key="action_editeurs_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeursFragment_to_seriesFragment">
+                            <entry key="action_editeurs_to_series">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeursFragment_to_tomeDetailFragment">
+                            <entry key="action_editeurs_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editeursFragment_to_tomesFragment">
+                            <entry key="action_editeurs_to_tomes">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -327,9 +302,33 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-992" />
-                            <option name="y" value="48" />
+                            <option name="x" value="-1188" />
+                            <option name="y" value="2270" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_searchResultFragment_to_auteurDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_searchResultFragment_to_editeurDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_searchResultFragment_to_serieDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_searchResultFragment_to_tomeDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -345,17 +344,17 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_serieDetailFragment_to_auteurDetailFragment">
+                            <entry key="action_serieDetail_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_serieDetailFragment_to_editeurDetailFragment">
+                            <entry key="action_serieDetail_to_editeurDetai">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_serieDetailFragment_to_tomeDetailFragment">
+                            <entry key="action_serieDetail_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -376,37 +375,37 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_seriesFragment_to_auteurDetailFragment">
+                            <entry key="action_series_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_seriesFragment_to_auteursFragment">
+                            <entry key="action_series_to_auteurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_seriesFragment_to_editeurDetailFragment">
+                            <entry key="action_series_to_editeurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_seriesFragment_to_editeursFragment">
+                            <entry key="action_series_to_editeurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_seriesFragment_to_serieDetailFragment">
+                            <entry key="action_series_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_seriesFragment_to_tomeDetailFragment">
+                            <entry key="action_series_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_seriesFragment_to_tomesFragment">
+                            <entry key="action_series_to_tomes">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -427,17 +426,17 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_tomeDetailFragment_to_auteurDetailFragment">
+                            <entry key="action_tomeDetail_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomeDetailFragment_to_editeurDetailFragment">
+                            <entry key="action_tomeDetail_to_editeurDetai">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomeDetailFragment_to_serieDetailFragment">
+                            <entry key="action_tomeDetail_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -458,37 +457,37 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_tomesFragment_to_auteurDetailFragment">
+                            <entry key="action_tomes_to_auteurDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomesFragment_to_auteursFragment">
+                            <entry key="action_tomes_to_auteurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomesFragment_to_editeurDetailFragment">
+                            <entry key="action_tomes_to_editeurDetai">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomesFragment_to_editeursFragment">
+                            <entry key="action_tomes_to_editeurs">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomesFragment_to_serieDetailFragment">
+                            <entry key="action_tomes_to_serieDetail">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomesFragment_to_seriesFragment">
+                            <entry key="action_tomes_to_series">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_tomesFragment_to_tomeDetailFragment">
+                            <entry key="action_tomes_to_tomeDetail">
                               <value>
                                 <LayoutPositions />
                               </value>

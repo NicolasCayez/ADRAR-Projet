@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.mycomics.R;
 import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.adapters.SeriesNbListAdapter;
 import com.example.mycomics.beans.SerieBean;
 import com.example.mycomics.databinding.FragmentSeriesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
@@ -94,6 +96,17 @@ public class SeriesFragment extends Fragment {
         afficherListeSeries();
         binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
+        // Clic Bouton Chercher
+        /* -------------------------------------- */
+        binding.sbSearch.btSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("filtre", binding.sbSearch.svSearch.getQuery().toString());
+                findNavController(SeriesFragment.this).navigate(R.id.searchResultFragment, bundle);
+            }
+        });
+        /* -------------------------------------- */
         // saisie searchBar
         /* -------------------------------------- */
         binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -126,14 +139,17 @@ public class SeriesFragment extends Fragment {
                         try {
                             serieBean = new SerieBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
-//                            Toast.makeText(ReglagesActivity.this, "Erreur création série", Toast.LENGTH_SHORT).show();
                             serieBean = new SerieBean(-1, "error" );
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
-                        //Appel DataBaseHelper
-                        dataBaseHelper = new DataBaseHelper(getActivity());
-
-                        boolean success = dataBaseHelper.insertIntoSeries(serieBean);
+                        if(dataBaseHelper.verifDoublonSerie(serieBean.getSerie_nom())){
+                            Toast.makeText(getActivity(), "Série déjà existante, enregistrement annulé", Toast.LENGTH_LONG).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
+                        } else {
+                            //Appel DataBaseHelper
+                            boolean success = dataBaseHelper.insertIntoSeries(serieBean);
+                            Toast.makeText(getActivity(), "Série créée", Toast.LENGTH_SHORT).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
+                        }
                         afficherListeSeries();
                     }
                 });
@@ -172,9 +188,9 @@ public class SeriesFragment extends Fragment {
 
     private void afficherListeSeries(){
         if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
-            seriesArrayAdapter = new SeriesListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeSeriesFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+            seriesArrayAdapter = new SeriesNbListAdapter(getActivity() , R.layout.listview_row_2col_reverse, dataBaseHelper.listeSeriesFiltre(binding.sbSearch.svSearch.getQuery().toString()));
         } else {
-            seriesArrayAdapter = new SeriesListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeSeries());
+            seriesArrayAdapter = new SeriesNbListAdapter(getActivity() , R.layout.listview_row_2col_reverse, dataBaseHelper.listeSeries());
         }
         binding.lvSeriesListeSeries.setAdapter(seriesArrayAdapter);
     }

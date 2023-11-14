@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.mycomics.R;
 import com.example.mycomics.adapters.AuteursListAdapter;
 import com.example.mycomics.adapters.EditeursListAdapter;
+import com.example.mycomics.adapters.EditeursNbListAdapter;
 import com.example.mycomics.beans.EditeurBean;
 import com.example.mycomics.databinding.FragmentEditeursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
@@ -96,6 +98,17 @@ public class EditeursFragment extends Fragment {
         afficherListeEditeurs();
         binding.sbSearch.svSearch.setQueryHint("Filtrer ou rechercher");
         /* -------------------------------------- */
+        // Clic Bouton Chercher
+        /* -------------------------------------- */
+        binding.sbSearch.btSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("filtre", binding.sbSearch.svSearch.getQuery().toString());
+                findNavController(EditeursFragment.this).navigate(R.id.searchResultFragment, bundle);
+            }
+        });
+        /* -------------------------------------- */
         // saisie searchBar
         /* -------------------------------------- */
         binding.sbSearch.svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -127,14 +140,17 @@ public class EditeursFragment extends Fragment {
                         try {
                             editeurBean = new EditeurBean(-1, popupAddDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
-//                            Toast.makeText(ReglagesActivity.this, "Erreur création éditeur", Toast.LENGTH_SHORT).show();
                             editeurBean = new EditeurBean(-1, "error" );
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
-                        //Appel DataBaseHelper
-                        dataBaseHelper = new DataBaseHelper(getActivity());
-
-                        boolean success = dataBaseHelper.insertIntoEditeurs(editeurBean);
+                        if(dataBaseHelper.verifDoublonEditeur(editeurBean.getEditeur_nom())){
+                            Toast.makeText(getActivity(), "Editeur déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
+                        } else {
+                            //Appel DataBaseHelper
+                            boolean success = dataBaseHelper.insertIntoEditeurs(editeurBean);
+                            Toast.makeText(getActivity(), "Série créée", Toast.LENGTH_SHORT).show();
+                            popupAddDialog.dismiss(); // Fermeture Popup
+                        }
                         afficherListeEditeurs();
                     }
                 });
@@ -171,9 +187,9 @@ public class EditeursFragment extends Fragment {
     }
     private void afficherListeEditeurs(){
         if (binding.sbSearch.svSearch.getQuery().toString().length() > 0) {
-            editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeEditeursFiltre(binding.sbSearch.svSearch.getQuery().toString()));
+            editeursArrayAdapter = new EditeursNbListAdapter(getActivity() , R.layout.listview_row_2col_reverse, dataBaseHelper.listeEditeursFiltre(binding.sbSearch.svSearch.getQuery().toString()));
         } else {
-            editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeEditeurs());
+            editeursArrayAdapter = new EditeursNbListAdapter(getActivity() , R.layout.listview_row_2col_reverse, dataBaseHelper.listeEditeurs());
         }
         binding.lvEditeursListeEditeurs.setAdapter(editeursArrayAdapter);
     }

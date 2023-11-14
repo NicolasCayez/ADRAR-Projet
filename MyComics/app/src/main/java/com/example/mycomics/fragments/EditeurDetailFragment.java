@@ -19,7 +19,9 @@ import com.example.mycomics.R;
 import com.example.mycomics.adapters.AuteursListAdapter;
 import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.adapters.SeriesListAdapter;
+import com.example.mycomics.adapters.SeriesNbListAdapter;
 import com.example.mycomics.adapters.TomesListAdapter;
+import com.example.mycomics.adapters.TomesNumeroListAdapter;
 import com.example.mycomics.adapters.TomesSerieListAdapter;
 import com.example.mycomics.beans.AuteurBean;
 import com.example.mycomics.beans.EditeurBean;
@@ -208,10 +210,10 @@ public class EditeurDetailFragment extends Fragment {
     private void afficherDetailEditeur(EditeurBean editeurBean){
         binding.tvDetailEditeurNom.setText(editeurBean.getEditeur_nom());
 
-        seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeSeriesSelonEditeurId(editeurBean.getEditeur_id()));
+        seriesArrayAdapter = new SeriesNbListAdapter(getActivity(), R.layout.listview_row_2col_reverse, dataBaseHelper.listeSeriesSelonEditeurId(editeurBean.getEditeur_id()));
         binding.lvDetailEditeurListeSeries.setAdapter(seriesArrayAdapter);
 
-        tomesArrayAdapter = new TomesListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.listeTomesSelonEditeurIdSansSerie(editeurBean.getEditeur_id()));
+        tomesArrayAdapter = new TomesNumeroListAdapter(getActivity(), R.layout.listview_row_2col, dataBaseHelper.listeTomesSelonEditeurIdSansSerie(editeurBean.getEditeur_id()));
         binding.lvDetailEditeurListeTomes.setAdapter(tomesArrayAdapter);
 
         auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeAuteursSelonEditeurId(editeurBean.getEditeur_id()));
