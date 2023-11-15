@@ -2,6 +2,8 @@ package com.example.mycomics.fragments;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +20,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.mycomics.R;
-import com.example.mycomics.adapters.AuteursListAdapter;
-import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.adapters.EditeursNbListAdapter;
 import com.example.mycomics.beans.EditeurBean;
 import com.example.mycomics.databinding.FragmentEditeursBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddDialog;
+import com.example.mycomics.popups.PopupTextDialog;
 
 public class EditeursFragment extends Fragment {
     FragmentEditeursBinding binding;
@@ -130,31 +131,68 @@ public class EditeursFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-                popupAddDialog.setTitre("Entrez le nom de l'éditeur");
-                popupAddDialog.setHint("Nom de l'éditeur");
-                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre("Entrez le nom de l'éditeur");
+                popupTextDialog.setHint("Nom de l'éditeur");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         EditeurBean editeurBean;
                         try {
-                            editeurBean = new EditeurBean(-1, popupAddDialog.getEtPopupText().getText().toString());
+                            editeurBean = new EditeurBean(-1, popupTextDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
                             editeurBean = new EditeurBean(-1, "error" );
                         }
                         if(dataBaseHelper.verifDoublonEditeur(editeurBean.getEditeur_nom())){
                             Toast.makeText(getActivity(), "Editeur déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
-                            popupAddDialog.dismiss(); // Fermeture Popup
+                            popupTextDialog.dismiss(); // Fermeture Popup
                         } else {
                             //Appel DataBaseHelper
                             boolean success = dataBaseHelper.insertIntoEditeurs(editeurBean);
-                            Toast.makeText(getActivity(), "Série créée", Toast.LENGTH_SHORT).show();
-                            popupAddDialog.dismiss(); // Fermeture Popup
+                            Toast.makeText(getActivity(), "Editeur créé", Toast.LENGTH_SHORT).show();
+                            popupTextDialog.dismiss(); // Fermeture Popup
                         }
                         afficherListeEditeurs();
                     }
                 });
-                popupAddDialog.build();
+
+                popupTextDialog.getEtPopupText().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+                            EditeurBean editeurBean;
+                            try {
+                                editeurBean = new EditeurBean(-1, popupTextDialog.getEtPopupText().getText().toString());
+                            } catch (Exception e) {
+                                editeurBean = new EditeurBean(-1, "error" );
+                            }
+                            if(dataBaseHelper.verifDoublonEditeur(editeurBean.getEditeur_nom())){
+                                Toast.makeText(getActivity(), "Editeur déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
+                                popupTextDialog.dismiss(); // Fermeture Popup
+                            } else {
+                                //Appel DataBaseHelper
+                                boolean success = dataBaseHelper.insertIntoEditeurs(editeurBean);
+                                Toast.makeText(getActivity(), "Editeur créé", Toast.LENGTH_SHORT).show();
+                                popupTextDialog.dismiss(); // Fermeture Popup
+                            }
+                            afficherListeEditeurs();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupTextDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+
+                popupTextDialog.build();
                 afficherListeEditeurs();
             }
         });

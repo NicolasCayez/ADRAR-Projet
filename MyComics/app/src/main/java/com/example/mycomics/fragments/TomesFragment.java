@@ -2,7 +2,8 @@ package com.example.mycomics.fragments;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +20,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.mycomics.R;
-import com.example.mycomics.adapters.AuteursListAdapter;
-import com.example.mycomics.adapters.TomesListAdapter;
 import com.example.mycomics.adapters.TomesSerieListAdapter;
 import com.example.mycomics.beans.TomeBean;
 import com.example.mycomics.beans.TomeSerieBean;
 import com.example.mycomics.databinding.FragmentTomesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddDialog;
+import com.example.mycomics.popups.PopupTextDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -139,35 +139,76 @@ public class TomesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-                popupAddDialog.setTitre("Entrez le nom du tome");
-                popupAddDialog.setHint("Nom du tome");
-                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre("Entrez le nom du tome");
+                popupTextDialog.setHint("Nom du tome");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TomeBean tomeBean;
                         try {
-                            tomeBean = new TomeBean(-1, popupAddDialog.getEtPopupText().getText().toString());
+                            tomeBean = new TomeBean(-1, popupTextDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
                             tomeBean = new TomeBean(-1, "error" );
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         if (dataBaseHelper.verifDoublonTome(tomeBean.getTome_titre())) {
                             // Tome déjà existant
                             Toast.makeText(TomesFragment.super.getContext(), "Tome déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
-                            popupAddDialog.dismiss(); // Fermeture Popup
+                            popupTextDialog.dismiss(); // Fermeture Popup
                         } else {
                             // on enregiste
                             boolean successInsertTomes = dataBaseHelper.insertIntoTomes(tomeBean);
                             boolean successInsertDetenir = dataBaseHelper.insertIntoDetenir(dataBaseHelper.selectDernierTomeAjoute(tomeBean));
                             Toast.makeText(getActivity(), "Tome créé", Toast.LENGTH_SHORT).show();
-                            popupAddDialog.dismiss(); // Fermeture Popup
+                            popupTextDialog.dismiss(); // Fermeture Popup
                         }
                         afficherListeTomes();
                     }
                 });
-                popupAddDialog.build();
+
+                popupTextDialog.getEtPopupText().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+                            TomeBean tomeBean;
+                            try {
+                                tomeBean = new TomeBean(-1, popupTextDialog.getEtPopupText().getText().toString());
+                            } catch (Exception e) {
+                                tomeBean = new TomeBean(-1, "error" );
+                            }
+                            popupTextDialog.dismiss(); // Fermeture Popup
+                            //Appel DataBaseHelper
+                            if (dataBaseHelper.verifDoublonTome(tomeBean.getTome_titre())) {
+                                // Tome déjà existant
+                                Toast.makeText(TomesFragment.super.getContext(), "Tome déjà existant, enregistrement annulé", Toast.LENGTH_LONG).show();
+                                popupTextDialog.dismiss(); // Fermeture Popup
+                            } else {
+                                // on enregiste
+                                boolean successInsertTomes = dataBaseHelper.insertIntoTomes(tomeBean);
+                                boolean successInsertDetenir = dataBaseHelper.insertIntoDetenir(dataBaseHelper.selectDernierTomeAjoute(tomeBean));
+                                Toast.makeText(getActivity(), "Tome créé", Toast.LENGTH_SHORT).show();
+                                popupTextDialog.dismiss(); // Fermeture Popup
+                            }
+                            afficherListeTomes();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupTextDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+
+                popupTextDialog.build();
                 afficherListeTomes();
             }
         });

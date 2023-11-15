@@ -3,6 +3,8 @@ package com.example.mycomics.fragments;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,16 +24,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.mycomics.R;
 import com.example.mycomics.adapters.ProfilsListAdapter;
-import com.example.mycomics.beans.ProfilActifBean;
 import com.example.mycomics.beans.ProfilBean;
-import com.example.mycomics.beans.TomeBean;
 import com.example.mycomics.databinding.FragmentReglagesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddDialog;
+import com.example.mycomics.popups.PopupTextDialog;
 import com.example.mycomics.popups.PopupListDialog;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -146,33 +145,34 @@ public class ReglagesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-                popupAddDialog.setTitre("Entrez un nom de profil");
-                popupAddDialog.setHint("Nom de profil");
-                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre("Entrez un nom de profil");
+                popupTextDialog.setHint("Nom de profil");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ProfilBean profilBean;
                         try {
-                            profilBean = new ProfilBean(-1, popupAddDialog.getEtPopupText().getText().toString());
+                            profilBean = new ProfilBean(-1, popupTextDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création profil", Toast.LENGTH_SHORT).show();
                             profilBean = new ProfilBean(-1, "error" );
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(getActivity());
                         boolean success = dataBaseHelper.insertIntoProfils(profilBean);
 //                        afficherListeProfils();
                     }
                 });
-                popupAddDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                     }
                 });
-                popupAddDialog.build();
+                popupTextDialog.build();
                 afficherProfilActif();
             }
         });
@@ -211,6 +211,7 @@ public class ReglagesFragment extends Fragment {
                 //Création Popup
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez un profil dans la liste");
+                popupListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
                 profilsArrayAdapter = new ProfilsListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeProfils());
                 listView.setAdapter(profilsArrayAdapter);

@@ -29,7 +29,7 @@ public class PopupAddListDialog extends Dialog {
 
     public PopupAddListDialog(@NonNull Context context) {
         super(context, androidx.appcompat.R.style.Theme_AppCompat_Dialog);
-        setContentView(R.layout.dialog_popup_add_list);
+        setContentView(R.layout.dialog_popup_txt_list);
         this.titre = "Mon titre";
         this.tvPopupTitle = findViewById(R.id.tvPopupTitle);
         this.etPopupText = findViewById(R.id.etPopupText);

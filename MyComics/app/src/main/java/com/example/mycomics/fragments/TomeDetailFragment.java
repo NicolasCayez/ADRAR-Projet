@@ -3,12 +3,15 @@ package com.example.mycomics.fragments;
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +22,18 @@ import android.widget.Toast;
 
 import com.example.mycomics.R;
 import com.example.mycomics.adapters.AuteursListAdapter;
+import com.example.mycomics.adapters.AuteursNbListAdapter;
 import com.example.mycomics.adapters.EditeursListAdapter;
 import com.example.mycomics.adapters.SeriesListAdapter;
 import com.example.mycomics.beans.AuteurBean;
 import com.example.mycomics.beans.EditeurBean;
 import com.example.mycomics.beans.SerieBean;
 import com.example.mycomics.beans.TomeBean;
+import com.example.mycomics.beans.TomeSerieBean;
 import com.example.mycomics.databinding.FragmentTomeDetailBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddDialog;
+import com.example.mycomics.popups.PopupConfirmDialog;
+import com.example.mycomics.popups.PopupTextDialog;
 import com.example.mycomics.popups.PopupAddListDialog;
 import com.example.mycomics.popups.PopupListDialog;
 
@@ -139,7 +145,6 @@ public class TomeDetailFragment extends Fragment {
             }
         });
 
-
         /* -------------------------------------- */
         // Clic sur bouton AddAuteur
         /* -------------------------------------- */
@@ -152,6 +157,8 @@ public class TomeDetailFragment extends Fragment {
                 PopupAddListDialog popupAddListDialog = new PopupAddListDialog(getActivity());
                 popupAddListDialog.setTitre("Choisissez un Auteur dans la liste ou créez-en un nouveau");
                 popupAddListDialog.setHint("Pseudo nouvel auteur");
+                popupAddListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
                 ListView listView = popupAddListDialog.findViewById(R.id.lvPopupList);
                 auteursArrayAdapter = new AuteursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeAuteurs());
                 listView.setAdapter(auteursArrayAdapter);
@@ -216,7 +223,7 @@ public class TomeDetailFragment extends Fragment {
         });
 
         /* -------------------------------------- */
-        // Clic sur l'éditeur' pour voir le détail
+        // Clic sur l'éditeur pour voir le détail
         /* -------------------------------------- */
         binding.tvDetailTomeEditeur.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,6 +255,8 @@ public class TomeDetailFragment extends Fragment {
                 //Création Popup
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez un Editeur dans la liste");
+                popupListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
                 editeursArrayAdapter = new EditeursListAdapter(getActivity() , R.layout.listview_row_1col, dataBaseHelper.listeEditeurs());
                 listView.setAdapter(editeursArrayAdapter);
@@ -290,22 +299,24 @@ public class TomeDetailFragment extends Fragment {
                 //sauvegarde modifications non enregistrées
                 saveTome(tome_id);
                 //Création Popup
-                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-                popupAddDialog.setTitre("Entrez un nouvel éditeur");
-                popupAddDialog.setHint("Nom de l'éditeur");
-                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre("Entrez un nouvel éditeur");
+                popupTextDialog.setHint("Nom de l'éditeur");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         EditeurBean editeurBean;
                         boolean success = true;
                         try {
-                            editeurBean = new EditeurBean(-1, popupAddDialog.getEtPopupText().getText().toString());
+                            editeurBean = new EditeurBean(-1, popupTextDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création Editeur", Toast.LENGTH_SHORT).show();
                             editeurBean = new EditeurBean(-1, "error");
                             success = false;
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(getActivity());
                         if (dataBaseHelper.verifDoublonEditeur(editeurBean.getEditeur_nom()) && !success) {
@@ -320,13 +331,13 @@ public class TomeDetailFragment extends Fragment {
                         afficherDetailTome(tome_id);
                     }
                 });
-                popupAddDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                     }
                 });
-                popupAddDialog.build();
+                popupTextDialog.build();
                 afficherDetailTome(tome_id);
             }
         });
@@ -354,7 +365,7 @@ public class TomeDetailFragment extends Fragment {
         });
 
         /* -------------------------------------- */
-        // Clic sur chhanger la série pour avoir la liste
+        // Clic sur changer la série pour avoir la liste
         /* -------------------------------------- */
         binding.btnDetailTomeChangeSerie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -364,6 +375,7 @@ public class TomeDetailFragment extends Fragment {
                 //Création Popup
                 PopupListDialog popupListDialog = new PopupListDialog(getActivity());
                 popupListDialog.setTitre("Choisissez une série dans la liste");
+                popupListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
                 seriesArrayAdapter = new SeriesListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeSeries());
                 listView.setAdapter(seriesArrayAdapter);
@@ -406,22 +418,23 @@ public class TomeDetailFragment extends Fragment {
                 //sauvegarde modifications non enregistrées
                 saveTome(tome_id);
                 //Création Popup
-                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-                popupAddDialog.setTitre("Entrez une nouvelle série");
-                popupAddDialog.setHint("Nom de la série");
-                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre("Entrez une nouvelle série");
+                popupTextDialog.setHint("Nom de la série");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         SerieBean serieBean;
                         boolean success = true;
                         try {
-                            serieBean = new SerieBean(-1, popupAddDialog.getEtPopupText().getText().toString());
+                            serieBean = new SerieBean(-1, popupTextDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
 //                            Toast.makeText(ReglagesActivity.this, "Erreur création Editeur", Toast.LENGTH_SHORT).show();
                             serieBean = new SerieBean(-1, "error");
                             success = false;
                         }
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                         //Appel DataBaseHelper
                         dataBaseHelper = new DataBaseHelper(getActivity());
                         if (dataBaseHelper.verifDoublonSerie(serieBean.getSerie_nom()) && !success) {
@@ -436,13 +449,13 @@ public class TomeDetailFragment extends Fragment {
                         afficherDetailTome(tome_id);
                     }
                 });
-                popupAddDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        popupAddDialog.dismiss(); // Fermeture Popup
+                        popupTextDialog.dismiss(); // Fermeture Popup
                     }
                 });
-                popupAddDialog.build();
+                popupTextDialog.build();
                 afficherDetailTome(tome_id);
             }
         });
@@ -467,6 +480,187 @@ public class TomeDetailFragment extends Fragment {
 
                 findNavController(TomeDetailFragment.this).navigate(R.id.action_tomeDetail_to_auteurDetail, bundle);
 
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic bouton delete Serie
+        /* -------------------------------------- */
+        binding.btnDetailTomeDeleteSerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
+                //Création Popup
+                PopupConfirmDialog popupConfirmDialog = new PopupConfirmDialog(getActivity());
+                popupConfirmDialog.setTitre( "Tome\n\" " + tome_titre + " \"\nConfirmer le retrait de la série\n\" " + dataBaseHelper.selectSerieSelonTomeId(tome_id).getSerie_nom() + " \"");
+                popupConfirmDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupConfirmDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupConfirmDialog.dismiss();
+                        boolean successUpdate = dataBaseHelper.deleteSerieDuTome(dataBaseHelper, tome_id);
+                        afficherDetailTome(tome_id);
+                    }
+                });
+                popupConfirmDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupConfirmDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+                popupConfirmDialog.build();
+                afficherDetailTome(tome_id);
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic bouton delete Editeur
+        /* -------------------------------------- */
+        binding.btnDetailTomeDeleteEditeur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
+                //Création Popup
+                PopupConfirmDialog popupConfirmDialog = new PopupConfirmDialog(getActivity());
+                popupConfirmDialog.setTitre( "Tome\n\" " + tome_titre + " \"\nConfirmer le retrait de l'édieur\n\" " + dataBaseHelper.selectEditeurSelonTomeId(tome_id).getEditeur_nom() + " \"");
+                popupConfirmDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupConfirmDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupConfirmDialog.dismiss();
+                        boolean successUpdate = dataBaseHelper.deleteEditeurDuTome(dataBaseHelper, tome_id);
+                        afficherDetailTome(tome_id);
+                    }
+                });
+                popupConfirmDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupConfirmDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+                popupConfirmDialog.build();
+                afficherDetailTome(tome_id);
+            }
+        });
+
+        /* -------------------------------------- */
+        // Clic bouton delete Auteur
+        /* -------------------------------------- */
+        binding.btnDetailTomeDeleteAuteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
+                //Création Popup
+                PopupListDialog popupListDialog = new PopupListDialog(getActivity());
+                popupListDialog.setTitre( "Tome\n\" " + tome_titre + " \"\nChoisissez l'auteur à retirer");
+                popupListDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                ListView listView = (ListView) popupListDialog.findViewById(R.id.lvPopupList);
+                auteursArrayAdapter = new AuteursListAdapter(getActivity(), R.layout.listview_row_1col, dataBaseHelper.listeAuteursSelonTomeId(tome_id));
+                listView.setAdapter(auteursArrayAdapter);
+                //Clic Editeur choisi pour modification
+                popupListDialog.getLvPopupListe().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        AuteurBean auteurBean;
+                        try {
+                            auteurBean = (AuteurBean) popupListDialog.getLvPopupListe().getItemAtPosition(position);
+                            boolean successUpdate = dataBaseHelper.deleteAuteurDuTome(dataBaseHelper, auteurBean.getAuteur_id(), tome_id);
+                        } catch (Exception e) {
+                            auteurBean = new AuteurBean(-1, "error");
+                        }
+                        popupListDialog.dismiss(); // Fermeture Popup
+                        afficherDetailTome(tome_id);
+                    }
+                });
+                popupListDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupListDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+                popupListDialog.Build();
+                afficherDetailTome(tome_id);
+            }
+        });
+
+
+        /* -------------------------------------- */
+        // Clic bouton delete Tome
+        /* -------------------------------------- */
+        binding.btnDetailTomeDeleteTome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //sauvegarde modifications non enregistrées
+                saveTome(tome_id);
+                //Création Popup
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre( "Tome\n\" " + tome_titre + " \"\nOpération irréversible, confirmer la suppression");
+                popupTextDialog.setHint("Nom du tome à supprimer");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TomeBean tomeBean;
+                        boolean success = true;
+                        try {
+                            tomeBean = new TomeBean(-1, popupTextDialog.getEtPopupText().getText().toString());
+                        } catch (Exception e) {
+                            tomeBean = new TomeBean(-1, "error");
+                            success = false;
+                        }
+                        popupTextDialog.dismiss(); // Fermeture Popup
+                        //Appel DataBaseHelper
+                        dataBaseHelper = new DataBaseHelper(getActivity());
+                        if (!dataBaseHelper.selectTomeSelonTomeId(tome_id).getTome_titre().equals(popupTextDialog.getEtPopupText().getText().toString())) {
+                            // Titre saisi différent
+                            Toast.makeText(TomeDetailFragment.super.getActivity(), "Le nom ne correspond pas", Toast.LENGTH_LONG).show();
+                        } else {
+                            // on enlève le tome et ses contraintes dans ECRIRE et DETENIR
+                            boolean successUpdate = dataBaseHelper.deleteTome(dataBaseHelper, tome_id);
+                            findNavController(TomeDetailFragment.this).navigate(R.id.tomesFragment);
+                        }
+                    }
+                });
+                popupTextDialog.getEtPopupText().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+                            TomeBean tomeBean;
+                            boolean success = true;
+                            try {
+                                tomeBean = new TomeBean(-1, popupTextDialog.getEtPopupText().getText().toString());
+                            } catch (Exception e) {
+                                tomeBean = new TomeBean(-1, "error");
+                                success = false;
+                            }
+                            popupTextDialog.dismiss(); // Fermeture Popup
+                            //Appel DataBaseHelper
+                            dataBaseHelper = new DataBaseHelper(getActivity());
+                            if (!dataBaseHelper.selectTomeSelonTomeId(tome_id).getTome_titre().equals(popupTextDialog.getEtPopupText().getText().toString())) {
+                                // Titre saisi différent
+                                Toast.makeText(TomeDetailFragment.super.getActivity(), "Le nom ne correspond pas", Toast.LENGTH_LONG).show();
+                            } else {
+                                // on enlève le tome et ses contraintes dans ECRIRE et DETENIR
+                                boolean successUpdate = dataBaseHelper.deleteTome(dataBaseHelper, tome_id);
+                                findNavController(TomeDetailFragment.this).navigate(R.id.tomesFragment);
+                            }
+                        }
+                        return false;
+                    }
+                });
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupTextDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+                popupTextDialog.build();
+                afficherDetailTome(tome_id);
             }
         });
 

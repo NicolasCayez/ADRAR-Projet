@@ -2,6 +2,8 @@ package com.example.mycomics.fragments;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +20,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.mycomics.R;
-import com.example.mycomics.adapters.SeriesListAdapter;
 import com.example.mycomics.adapters.SeriesNbListAdapter;
 import com.example.mycomics.beans.SerieBean;
 import com.example.mycomics.databinding.FragmentSeriesBinding;
 import com.example.mycomics.helpers.DataBaseHelper;
-import com.example.mycomics.popups.PopupAddDialog;
+import com.example.mycomics.popups.PopupTextDialog;
 
 public class SeriesFragment extends Fragment {
     FragmentSeriesBinding binding;
@@ -129,31 +131,68 @@ public class SeriesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Création Popup
-                PopupAddDialog popupAddDialog = new PopupAddDialog(getActivity());
-                popupAddDialog.setTitre("Entrez le nom de la série");
-                popupAddDialog.setHint("Nom de la série");
-                popupAddDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
+                PopupTextDialog popupTextDialog = new PopupTextDialog(getActivity());
+                popupTextDialog.setTitre("Entrez le nom de la série");
+                popupTextDialog.setHint("Nom de la série");
+                popupTextDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                popupTextDialog.getBtnPopupValider().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         SerieBean serieBean;
                         try {
-                            serieBean = new SerieBean(-1, popupAddDialog.getEtPopupText().getText().toString());
+                            serieBean = new SerieBean(-1, popupTextDialog.getEtPopupText().getText().toString());
                         } catch (Exception e) {
                             serieBean = new SerieBean(-1, "error" );
                         }
                         if(dataBaseHelper.verifDoublonSerie(serieBean.getSerie_nom())){
                             Toast.makeText(getActivity(), "Série déjà existante, enregistrement annulé", Toast.LENGTH_LONG).show();
-                            popupAddDialog.dismiss(); // Fermeture Popup
+                            popupTextDialog.dismiss(); // Fermeture Popup
                         } else {
                             //Appel DataBaseHelper
                             boolean success = dataBaseHelper.insertIntoSeries(serieBean);
                             Toast.makeText(getActivity(), "Série créée", Toast.LENGTH_SHORT).show();
-                            popupAddDialog.dismiss(); // Fermeture Popup
+                            popupTextDialog.dismiss(); // Fermeture Popup
                         }
                         afficherListeSeries();
                     }
                 });
-                popupAddDialog.build();
+
+                popupTextDialog.getEtPopupText().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+                            SerieBean serieBean;
+                            try {
+                                serieBean = new SerieBean(-1, popupTextDialog.getEtPopupText().getText().toString());
+                            } catch (Exception e) {
+                                serieBean = new SerieBean(-1, "error" );
+                            }
+                            if(dataBaseHelper.verifDoublonSerie(serieBean.getSerie_nom())){
+                                Toast.makeText(getActivity(), "Série déjà existante, enregistrement annulé", Toast.LENGTH_LONG).show();
+                                popupTextDialog.dismiss(); // Fermeture Popup
+                            } else {
+                                //Appel DataBaseHelper
+                                boolean success = dataBaseHelper.insertIntoSeries(serieBean);
+                                Toast.makeText(getActivity(), "Série créée", Toast.LENGTH_SHORT).show();
+                                popupTextDialog.dismiss(); // Fermeture Popup
+                            }
+                            afficherListeSeries();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                popupTextDialog.getBtnPopupAnnuler().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupTextDialog.dismiss(); // Fermeture Popup
+                    }
+                });
+
+                popupTextDialog.build();
                 afficherListeSeries();
             }
         });
